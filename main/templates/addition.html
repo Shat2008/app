@@ -1,0 +1,222 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Навчання веб-розробці</title>
+</head>
+<body>
+    <header>
+        <h1>Додавання кнопки та перевірка її роботи у браузері</h1>
+    </header>
+    
+    <nav>
+        <a href='{% url "sait" %}' onclick="showSection('intro')" class="nav-logo">
+            <img src="{% static 'images/дом.png' %}" alt="Button" style="width: 30px; height: auto;">
+        </a>
+        <div class="nav-links">
+            <a href='{% url "html_page" %}' onclick="showSection('html')">HTML</a>
+        </div>
+        <div class="nav-links">
+            <a href='{% url "cssGlav" %}' onclick="showSection('html')">CSS</a>
+        </div>
+        <div class="nav-links">
+            <a href='{% url "jsGlav" %}' onclick="showSection('html')">JavaScript</a>
+        </div>
+        <div class="nav-links">
+            <a href='{% url "testGlav" %}' onclick="showSection('html')">Тести</a>
+        </div>
+        <div class="nav-links">
+            <a href='{% url "chat" %}' onclick="showSection('html')">Асистент сайту</a>
+        </div>
+        <a href="https://t.me/studuhtml" class="nav-logo1" target="_blank">
+            <img src="{% static 'images/111.png' %}" alt="Головна" style="width: 45px; height: 35px;">
+        </a>
+    </nav>
+
+
+<div class="sidebar"> 
+        <!-- Глава 5 -->
+        <a href="#" class="menu-item">📁 Підготовка</a>
+        <div class="submenu">
+            <a href='{% url 'choice' %}'>Вибір інструментів розробки (редактор коду, браузер, ресурси).</a>
+            <a href='{% url 'definition' %}'>Визначення цілей та структури майбутнього сайту.</a>
+        </div>
+
+        <!-- Глава 6 -->
+        <a href="#" class="menu-item">📁 Як створити сайт HTML</a>
+        <div class="submenu">
+            <a href='{% url 'creation' %}'>Створення базового HTML-файлу (файл із розширенням .html).</a>
+            <a href='{% url 'discovery' %}'>Відкриття файлу HTML у браузері для перегляду.</a>
+        </div>
+
+        <!-- Глава 7 -->
+        <a href="#" class="menu-item">📁 Структури HTML</a>
+        <div class="submenu">
+            <a href='{% url 'study' %}'>Вивчення основних тегів (html, head, body).</a>
+            <a href='{% url 'semantics' %}'>Семантичні елементи (header, main, footer).</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Інформація для сайту</a>
+        <div class="submenu">
+            <a href='{% url 'gathering' %}'>Збір текстового контенту, зображень та медіа.</a>
+            <a href='{% url 'organization' %}'>Організація інформації у логічні розділи.</a>
+        </div>
+
+        <!-- Глава 6 -->
+        <a href="#" class="menu-item">📁 Дизайн сайту</a>
+        <div class="submenu">
+            <a href='{% url 'connection' %}'>Підключення CSS для стилізації HTML елементів.</a>
+            <a href='{% url 'connectionn' %}'>Створення адаптивного дизайну для різних пристроїв.</a>
+            <a href='{% url 'css' %}'>Цікаві приклади оформлення сайту через цсс.</a>
+        </div>
+    
+
+        <!-- Глава 7 -->
+        <a href="#" class="menu-item">📁 Приклади коду та їх результат</a>
+        <div class="submenu">
+            <a href='{% url 'writing' %}'>Написання простого прикладу із заголовком та текстом.</a>
+            <a href='{% url 'addition' %}'>Додавання кнопки та перевірка її роботи у браузері.</a>
+        </div>
+    </div>
+
+<div id="content" class="content">
+    <h1>Детальний приклад створення кнопок в HTML, їх стилізації та функціональності за допомогою JavaScript</h1>
+
+   
+        <h2>1. Створення кнопки в HTML</h2>
+        <p>Кнопка в HTML створюється за допомогою тегу <code>&lt;button&gt;</code>. Ось основний синтаксис для створення кнопки:</p>
+        <pre><code>&lt;button&gt;Натисни мене!&lt;/button&gt;</code></pre>
+        <p>Це проста кнопка без функціональності. Вона просто відображається на сторінці.</p>
+    
+    
+        <h2>2. Додавання кнопки з функціональністю</h2>
+        <p>Щоб кнопка виконувала певну дію при натисканні, ми можемо використати JavaScript. Наприклад, ви можете додати функціональність для відображення повідомлення:</p>
+        <pre><code>&lt;button onclick="showMessage()"&gt;Натисни мене!&lt;/button&gt;</code></pre>
+        <p>Ось приклад, де при натисканні на кнопку виводиться повідомлення:</p>
+
+        <button onclick="showMessage()">Натисни мене!</button>
+
+        <script>
+            // JavaScript функція, яка виконується при натисканні на кнопку
+            function showMessage() {
+                alert("Ви натиснули на кнопку!");
+            }
+        </script>
+
+
+  
+        <h2>3. Стилізація кнопки</h2>
+        <p>Для стилізації кнопок можна використовувати CSS. Ось приклад кнопки з красивою стилізацією:</p>
+        <button>Кнопка з стилізацією</button>
+
+        <p>Кнопка має зелений фон, білий текст і округлені кути. При наведенні курсору колір фону змінюється.</p>
+    
+
+   
+        <h2>4. Перевірка кнопки в браузері</h2>
+        <p>Щоб перевірити роботу кнопки у браузері:</p>
+        <ul>
+            <li>Збережіть код у файл HTML. Наприклад, збережіть його як <code>button_example.html</code>.</li>
+            <li>Відкрийте файл у браузері. Достатньо двічі клацнути на файл, і він відкриється в браузері.</li>
+            <li>Натисніть на кнопку. Після натискання ви побачите вікно повідомлення з текстом "Ви натиснули на кнопку!".</li>
+        </ul>
+
+    
+        <h2>5. Інші варіанти кнопок з різними функціями</h2>
+        <p>Ось ще декілька прикладів кнопок з різними функціями:</p>
+
+        <h3>Кнопка, яка змінює колір фону:</h3>
+        <button onclick="changeBackgroundColor()">Змінити фон</button>
+
+        <script>
+            // Функція для зміни кольору фону
+            function changeBackgroundColor() {
+                document.body.style.backgroundColor = "#f0f0f0"; // Зміна фону на світло-сірий
+            }
+        </script>
+
+        <h3>Кнопка, яка додає новий абзац тексту:</h3>
+        <button onclick="addParagraph()">Додати текст</button>
+        
+
+        <script>
+            function addParagraph() {
+                var para = document.createElement("p");
+                para.textContent = "Це новий абзац тексту, доданий після натискання кнопки!";
+                document.getElementById("content").appendChild(para);
+            }
+        </script>
+
+        <h3>Кнопка для відправки форми:</h3>
+        <form action="https://example.com/submit" method="POST">
+            <input type="text" name="name" placeholder="Введіть ваше ім'я">
+            <button type="submit">Відправити</button>
+        </form>
+
+        <h3>Кнопка для відображення/сховання елементів:</h3>
+        <button onclick="toggleVisibility()">Показати/Сховати текст</button>
+        <p id="hiddenText" style="display: none;">Цей текст можна показати або сховати.</p>
+
+        <script>
+            function toggleVisibility() {
+                var text = document.getElementById("hiddenText");
+                if (text.style.display === "none") {
+                    text.style.display = "block";
+                } else {
+                    text.style.display = "none";
+                }
+            }
+        </script>
+    
+
+   
+        <h2>6. Перевірка кнопки у браузері</h2>
+        <p>Щоб перевірити роботу будь-якої з цих кнопок, достатньо відкрити HTML-файл у браузері. Всі зміни, які ви внесете за допомогою кнопок (наприклад, зміна кольору фону, додавання тексту чи показ/сховання елементів), будуть відображатися без необхідності оновлення сторінки.</p>
+
+
+    
+        <h2>7. Висновок</h2>
+        <p>Основи кнопки в HTML — це просто тег <code>&lt;button&gt;</code>.</p>
+        <p>Додавання JavaScript дозволяє кнопці виконувати функції, такі як показ повідомлення, зміна кольору або додавання нового контенту на сторінку.</p>
+        <p>Стилізація кнопки через CSS робить її більш привабливою і зручною для користувачів.</p>
+        <p>Перевірка в браузері є основним кроком для перевірки функціональності кнопки.</p>
+        <p>Цей підхід дозволяє реалізувати кнопки з найрізноманітнішими функціями на вашому веб-сайті.</p>
+   
+
+<div class="comment-form">
+    <h2>Залиште коментар</h2>
+    {% if user.is_authenticated %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Відправити</button>
+    </form>
+    {% else %}
+    <p><strong>Щоб залишити коментар, необхідно <a href="{% url 'user_login' %}">увійти</a> в систему або <a href="{% url 'user_register' %}">зареєструватись</a></strong></p>
+    {% endif %}
+</div>
+
+<div class="comments-section">
+    <h2>Коментарі</h2>
+    {% for comment in comments %}
+        <div class="comment">
+            <div>
+                <strong>{{ comment.user.username }}</strong>
+                <p>{{ comment.text }}</p>
+                
+            </div>
+        </div>
+    {% empty %}
+        <p>Поки немає коментарів.</p>
+    {% endfor %}
+</div>
+    </div>
+<script src="{% static 'js/script.js' %}"></script>
+<script src="{% static 'js/sidebar.js' %}"></script>
+<script src="{% static 'js/anim.js' %}"></script>
+</body>
+</html>

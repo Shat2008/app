@@ -1,0 +1,246 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Випускна робота</title>
+
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            background: radial-gradient(circle at center, #0a0a1f, #000);
+            background-image: url("{% static 'images/fon.jpg' %}");
+            background-size: cover;
+            background-attachment: fixed;
+            background-blend-mode: overlay;
+            color: #f1f1f1;
+            text-align: center;
+            height: 100vh;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 100%;
+            height: 85%;
+            perspective: 1200px;
+            position: relative;
+            margin-top: 35px;
+        }
+
+        .flipper {
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.2);
+            border-radius: 20px;
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: 0.8s ease-in-out;
+        }
+
+        .front, .back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            background: rgba(15, 15, 40, 0.7);
+            backdrop-filter: blur(10px);
+            box-shadow: inset 0 0 20px rgba(0, 255, 255, 0.2);
+            backface-visibility: hidden;
+            overflow: hidden;
+        }
+
+        .front {
+            z-index: 2;
+            transform: rotateX(0deg);
+        }
+
+        .back {
+            transform: rotateX(-180deg);
+            color: #e0e0ff;
+        }
+
+        .flipper:target {
+            transform: rotateX(180deg);
+        }
+
+        .home, .button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: #00ffff;
+            text-decoration: none;
+            font-size: 1.2em;
+            font-weight: 600;
+            transition: 0.3s ease;
+            text-shadow: 0 0 10px rgba(0,255,255,0.6);
+        }
+
+        .home:hover, .button:hover {
+            color: #fff;
+            text-shadow: 0 0 20px rgba(0,255,255,0.9);
+            transform: scale(1.1);
+        }
+
+        .header {
+    font-size: 3em;
+    font-weight: 700;
+    margin-top: 80px; /* Було 20px — тепер нижче */
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #00ffff;
+    text-shadow: 0 0 20px rgba(0,255,255,0.6);
+    animation: fadeIn 2s ease-in-out;
+}
+
+
+        .info {
+            font-size: 1.3em;
+            font-weight: bold;
+            position: absolute;
+            top: 80%;
+            transform: translateY(-50%);
+            width: max-content;
+            padding: 10px 20px;
+            border-radius: 10px;
+            background: rgba(0, 255, 255, 0.1);
+            box-shadow: 0 0 10px rgba(0,255,255,0.3);
+            color: #e0ffff;
+        }
+
+        .left {
+            left: 30px;
+            text-align: left;
+        }
+
+        .right {
+            right: 30px;
+            text-align: right;
+        }
+
+        .theme {
+            font-size: 2.2em;
+            font-weight: bold;
+            margin: 240px 0;
+            padding: 20px;
+            background: rgba(0, 255, 255, 0.15);
+            border: 1px solid rgba(0,255,255,0.3);
+            border-radius: 15px;
+            text-shadow: 0 0 15px rgba(0,255,255,0.5);
+        }
+
+        .btn {
+            padding: 16px 35px;
+            background: linear-gradient(135deg, rgba(0,255,255,0.4), rgba(0,150,255,0.3));
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 1.3em;
+            font-weight: bold;
+            border: 2px solid rgba(0,255,255,0.6);
+            margin-bottom: 0px;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 0 20px rgba(0,255,255,0.4);
+            position: absolute;
+            bottom: 10px; /* кнопка станет немного ниже */
+
+        }
+
+        .btn:hover {
+            background: rgba(0,255,255,0.8);
+            color: #0a0a1f;
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(0,255,255,0.9);
+        }
+
+        h2 {
+            color: #00ffff;
+            text-shadow: 0 0 15px rgba(0,255,255,0.6);
+        }
+
+        p {
+            font-size: 1.1em;
+            line-height: 1.8;
+            text-align: justify;
+            padding: 20px;
+        }
+
+        .inner {
+            padding: 20px 40px;
+            text-align: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .header { font-size: 2em; }
+            .theme { font-size: 1.6em; margin: 100px 0; }
+            .info { font-size: 1em; }
+            .btn { font-size: 1em; }
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            font-size: 1.1em;
+            color: #e0ffff;
+            text-shadow: 0 0 10px rgba(0,255,255,0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="flipper" id="target">
+            <div class="front">
+
+                <div class="footer">
+                    <div>Дніпро</div>
+                    <div>2026</div>
+                </div>
+                <a href="#target" class="home">Анотація</a>
+
+                <div class="header">Дніпровський науковий ліцей інформаційних технологій<br>Дніпровської міської ради</div>
+                <div class="info left">
+                    Виконавець учень 11-В класу:<br> Шатохін Гліб
+                </div>
+                <div class="info right">Куратор: Лавренюк І. В.</div>
+
+                <div class="theme">
+                    Випускна робота<br>Навчальний сайт з Web-розробки
+                </div>
+            </div>
+
+            <div class="back">
+                <a href="#close" class="button">Титульна</a>
+                <div class="inner">
+                    <h2>Навчальна платформа з веб-розробки</h2>
+                    <p>
+                        Цей сайт — це сучасна інтерактивна платформа, створена для всіх, хто хоче опанувати основи веб-розробки з нуля.
+                        Тут зібрано все необхідне, щоб крок за кроком навчитися створювати повноцінні сайти — від структури HTML до візуальної магії CSS і логіки JavaScript.
+                        <br><br>
+                        Навчання побудоване у зручній та практичній формі: кожен розділ містить теоретичні матеріали, приклади коду та <b>вбудований онлайн-редактор</b>.
+                        Завдяки цьому процес навчання стає захопливим і максимально ефективним.
+                        <br><br>
+                        Також є <b>тести</b> для перевірки знань та <b>AI-помічник</b>, який підказує та допомагає з кодом.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a href="{% url 'login' %}" class="btn">Перейти до входу</a>
+</body>
+</html>

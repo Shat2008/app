@@ -1,0 +1,235 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Навчання веб-розробці</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Підключення CSS для стилізації HTML елементів</h1>
+    </header>
+    
+    <nav>
+        <a href='{% url "sait" %}' onclick="showSection('intro')" class="nav-logo">
+            <img src="{% static 'images/дом.png' %}" alt="Button" style="width: 30px; height: auto;">
+        </a>
+        <div class="nav-links">
+            <a href='{% url "html_page" %}' onclick="showSection('html')">HTML</a>
+        </div>
+        <div class="nav-links">
+            <a href='{% url "cssGlav" %}' onclick="showSection('html')">CSS</a>
+        </div>
+        <div class="nav-links">
+            <a href='{% url "jsGlav" %}' onclick="showSection('html')">JavaScript</a>
+        </div>
+        <div class="nav-links">
+            <a href='{% url "testGlav" %}' onclick="showSection('html')">Тести</a>
+        </div>
+        <div class="nav-links">
+            <a href='{% url "chat" %}' onclick="showSection('html')">Асистент сайту</a>
+        </div>
+        <a href="https://t.me/studuhtml" class="nav-logo1" target="_blank">
+            <img src="{% static 'images/111.png' %}" alt="Головна" style="width: 45px; height: 35px;">
+        </a>
+    </nav>
+
+
+<div class="sidebar"> 
+    <!-- Глава 5 -->
+    <a href="#" class="menu-item">📁 Підготовка</a>
+    <div class="submenu">
+        <a href='{% url 'choice' %}'>Вибір інструментів розробки (редактор коду, браузер, ресурси).</a>
+        <a href='{% url 'definition' %}'>Визначення цілей та структури майбутнього сайту.</a>
+    </div>
+
+    <!-- Глава 6 -->
+    <a href="#" class="menu-item">📁 Як створити сайт HTML</a>
+    <div class="submenu">
+        <a href='{% url 'creation' %}'>Створення базового HTML-файлу (файл із розширенням .html).</a>
+        <a href='{% url 'discovery' %}'>Відкриття файлу HTML у браузері для перегляду.</a>
+    </div>
+
+    <!-- Глава 7 -->
+    <a href="#" class="menu-item">📁 Структури HTML</a>
+    <div class="submenu">
+        <a href='{% url 'study' %}'>Вивчення основних тегів (html, head, body).</a>
+        <a href='{% url 'semantics' %}'>Семантичні елементи (header, main, footer).</a>
+    </div>
+
+    <a href="#" class="menu-item">📁 Інформація для сайту</a>
+    <div class="submenu">
+        <a href='{% url 'gathering' %}'>Збір текстового контенту, зображень та медіа.</a>
+        <a href='{% url 'organization' %}'>>Організація інформації у логічні розділи.</a>
+    </div>
+
+    <!-- Глава 6 -->
+    <a href="#" class="menu-item">📁 Дизайн сайту</a>
+    <div class="submenu">
+        <a href='{% url 'connection' %}'>Підключення CSS для стилізації HTML елементів.</a>
+        <a href='{% url 'connectionn' %}'>Створення адаптивного дизайну для різних пристроїв.</a>
+        <a href='{% url 'css' %}'>Цікаві приклади оформлення сайту через цсс.</a>
+    </div>
+
+    <!-- Глава 7 -->
+    <a href="#" class="menu-item">📁 Приклади коду та їх результат</a>
+    <div class="submenu">
+        <a href='{% url 'writing' %}'>Написання простого прикладу із заголовком та текстом.</a>
+        <a href='{% url 'addition' %}'>Додавання кнопки та перевірка її роботи у браузері.</a>
+    </div>
+
+</div>   
+    <div class="content">
+    <h1>Заголовок сторінки</h1>
+    <p>Це параграф з вбудованими стилями.</p>
+</body>
+</html>
+        </code>
+    </pre>
+
+    <h3>Пояснення:</h3>
+    <ul>
+        <li>У тегі <code>&lt;style&gt;</code> визначаються стилі, які будуть застосовуватися тільки до цієї сторінки.</li>
+        <li>Всі правила CSS, записані всередині <code>&lt;style&gt;</code>, діють лише для поточного HTML-документа.</li>
+    </ul>
+
+    <h3>Переваги:</h3>
+    <ul>
+        <li>Зручний для невеликих веб-сторінок, де потрібно застосувати специфічні стилі до однієї сторінки.</li>
+        <li>Легко вбудовувати зміни без створення окремих файлів.</li>
+    </ul>
+
+    <h3>Недоліки:</h3>
+    <ul>
+        <li>Якщо потрібно змінити стиль на кількох сторінках, доведеться редагувати кожну сторінку окремо.</li>
+        <li>Це може збільшити розмір HTML-файлу.</li>
+    </ul>
+
+    <h2>2.3 Інлайн стилі (Inline Styles)</h2>
+    <p>Інлайн стилі застосовуються безпосередньо до конкретних елементів HTML за допомогою атрибута <code>style</code>.</p>
+
+    <h3>Як це працює:</h3>
+    <ul>
+        <li>Стиль додається до елемента через атрибут <code>style</code>.</li>
+    </ul>
+
+    <h3>Приклад:</h3>
+    <pre>
+        <code>
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Інлайн стилі</title>
+</head>
+<body>
+    <h1 style="color: blue;">Це заголовок з інлайн стилем</h1>
+    <p style="font-size: 20px; color: #555;">Це параграф з інлайн стилем.</p>
+</body>
+</html>
+        </code>
+    </pre>
+
+    <h3>Пояснення:</h3>
+    <ul>
+        <li>У цьому випадку стиль додається безпосередньо до HTML-елементів через атрибут <code>style</code>.</li>
+        <li>Це дозволяє застосувати стиль лише до конкретного елемента на сторінці.</li>
+    </ul>
+
+    <h3>Переваги:</h3>
+    <ul>
+        <li>Швидке застосування стилю до окремих елементів.</li>
+        <li>Може бути корисно для тестування або в якості тимчасових змін.</li>
+    </ul>
+
+    <h3>Недоліки:</h3>
+    <ul>
+        <li>Важко підтримувати великий проект, використовуючи тільки інлайн стилі.</li>
+        <li>Немає можливості централізовано керувати стилями для кількох елементів.</li>
+        <li>Збільшує розмір HTML-коду.</li>
+    </ul>
+
+    <h2>2.4 Імпорт стилів через @import</h2>
+    <p>Цей метод дозволяє імпортувати зовнішні стилі всередину інших CSS-файлів. Це зручно для організації стилів у модулі.</p>
+
+    <h3>Як це працює:</h3>
+    <ul>
+        <li>Ви використовуєте директиву <code>@import</code> у CSS-файлі для підключення інших стилів.</li>
+    </ul>
+
+    <h3>Приклад:</h3>
+    <pre>
+        <code>
+@import url('styles.css');
+body {
+    background-color: #f0f0f0;
+}
+        </code>
+    </pre>
+
+    <h3>Пояснення:</h3>
+    <ul>
+        <li>За допомогою директиви <code>@import</code> вказується шлях до іншого CSS-файлу, який буде імпортований і застосований до поточного стилю.</li>
+    </ul>
+
+    <h3>Переваги:</h3>
+    <ul>
+        <li>Допомагає організувати стилі в окремі файли, що спрощує їх підтримку.</li>
+        <li>Легко структурувати стилі для великих проектів.</li>
+    </ul>
+
+    <h3>Недоліки:</h3>
+    <ul>
+        <li>Використання <code>@import</code> може збільшити час завантаження сторінки, оскільки браузер повинен зробити додаткові запити для завантаження імпортованих файлів.</li>
+    </ul>
+
+    <h1>3. Як вибирати метод підключення CSS?</h1>
+    <p>Вибір методу підключення CSS залежить від таких факторів:</p>
+    <ul>
+        <li><strong>Розмір проекту:</strong> Для великих проектів найкраще використовувати зовнішні стилі (external styles), оскільки це дозволяє централізовано керувати стилями для всього сайту.</li>
+        <li><strong>Зручність у підтримці:</strong> Зовнішні стилі також простіші для обслуговування, адже зміни можна внести в один файл, і ці зміни будуть застосовані до всіх сторінок.</li>
+        <li><strong>Швидкість завантаження:</strong> Якщо потрібно, щоб сторінка швидко завантажувалася, краще використовувати зовнішні стилі, оскільки вони кешуються браузером.</li>
+        <li><strong>Масштабованість:</strong> Для масштабованих проектів слід використовувати зовнішні файли CSS, що дозволяють зберігати модульність і організованість.</li>
+    </ul>
+
+    <h1>4. Висновок</h1>
+    <p>Підключення CSS до HTML — важливий аспект веб-розробки, який дозволяє створювати ефективні, зручні та привабливі інтерфейси для користувачів. Використовуючи різні методи підключення стилів, можна організувати стилізацію сайту відповідно до його потреб і розміру. Для великих проектів рекомендується використовувати зовнішні стилі, для невеликих — вбудовані або інлайн стилі.</p>
+    
+
+<div class="comment-form">
+    <h2>Залиште коментар</h2>
+    {% if user.is_authenticated %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Відправити</button>
+    </form>
+    {% else %}
+    <p><strong>Щоб залишити коментар, необхідно <a href="{% url 'user_login' %}">увійти</a> в систему або <a href="{% url 'user_register' %}">зареєструватись</a></strong></p>
+    {% endif %}
+</div>
+
+<div class="comments-section">
+    <h2>Коментарі</h2>
+    {% for comment in comments %}
+        <div class="comment">
+            <div>
+                <strong>{{ comment.user.username }}</strong>
+                <p>{{ comment.text }}</p>
+                
+            </div>
+        </div>
+    {% empty %}
+        <p>Поки немає коментарів.</p>
+    {% endfor %}
+</div>
+    </div>
+
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/sidebar.js' %}"></script>
+    <script src="{% static 'js/anim.js' %}"></script>
+</body>
+</html>

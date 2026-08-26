@@ -1,0 +1,151 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Збір та оптимізація контенту</h1>
+    </header>
+    
+            <nav>
+                <a href='{% url "sait" %}' onclick="showSection('intro')" class="nav-logo">
+                    <img src="{% static 'images/дом.png' %}" alt="Button" style="width: 30px; height: auto;">
+                </a>
+                <div class="nav-links">
+                    <a href='{% url "html_page" %}' onclick="showSection('html')">HTML</a>
+                </div>
+                <div class="nav-links">
+                    <a href='{% url "cssGlav" %}' onclick="showSection('html')">CSS</a>
+                </div>
+                <div class="nav-links">
+                    <a href='{% url "jsGlav" %}' onclick="showSection('html')">JavaScript</a>
+                </div>
+                <div class="nav-links">
+                    <a href='{% url "testGlav" %}' onclick="showSection('html')">Тести</a>
+                </div>
+                <div class="nav-links">
+                    <a href='{% url "chat" %}' onclick="showSection('html')">Асистент сайту</a>
+                </div>
+                <a href="https://t.me/studuhtml" class="nav-logo1" target="_blank">
+                    <img src="{% static 'images/111.png' %}" alt="Головна" style="width: 45px; height: 35px;">
+                </a>
+            </nav>
+
+        <div class="sidebar"> 
+        <!-- Глава 5 -->
+        <a href="#" class="menu-item">📁 Підготовка</a>
+        <div class="submenu">
+            <a href='{% url 'choice' %}'>Вибір інструментів розробки (редактор коду, браузер, ресурси).</a>
+            <a href='{% url 'definition' %}'>Визначення цілей та структури майбутнього сайту.</a>
+        </div>
+
+        <!-- Глава 6 -->
+        <a href="#" class="menu-item">📁 Як створити сайт HTML</a>
+        <div class="submenu">
+            <a href='{% url 'creation' %}'>Створення базового HTML-файлу (файл із розширенням .html).</a>
+            <a href='{% url 'discovery' %}'>Відкриття файлу HTML у браузері для перегляду.</a>
+        </div>
+
+        <!-- Глава 7 -->
+        <a href="#" class="menu-item">📁 Структури HTML</a>
+        <div class="submenu">
+            <a href='{% url 'study' %}'>Вивчення основних тегів (html, head, body).</a>
+            <a href='{% url 'semantics' %}'>Семантичні елементи (header, main, footer).</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Інформація для сайту</a>
+        <div class="submenu">
+            <a href='{% url 'gathering' %}'>Збір текстового контенту, зображень та медіа.</a>
+            <a href='{% url 'organization' %}'>>Організація інформації у логічні розділи.</a>
+        </div>
+
+        <!-- Глава 6 -->
+        <a href="#" class="menu-item">📁 Дизайн сайту</a>
+        <div class="submenu">
+            <a href='{% url 'connection' %}'>Підключення CSS для стилізації HTML елементів.</a>
+            <a href='{% url 'connectionn' %}'>Створення адаптивного дизайну для різних пристроїв.</a>
+            <a href='{% url 'css' %}'>Цікаві приклади оформлення сайту через цсс.</a>
+        </div>
+    
+
+        <!-- Глава 7 -->
+        <a href="#" class="menu-item">📁 Приклади коду та їх результат</a>
+        <div class="submenu">
+            <a href='{% url 'writing' %}'>Написання простого прикладу із заголовком та текстом.</a>
+            <a href='{% url 'addition' %}'>Додавання кнопки та перевірка її роботи у браузері.</a>
+        </div>
+    </div>   
+    <div class="content">
+    <h1>Збір та оптимізація текстового контенту, зображень та медіа для HTML-сайту</h1>
+    <p>Є ключовими етапами у створенні ефективного та привабливого веб-ресурсу. Ось детальніші рекомендації для кожного з цих аспектів:</p>
+    
+    <h2>1. Збір текстового контенту</h2>
+    <ul>
+        <li><strong>Аналіз цільової аудиторії:</strong> Визначте потреби, інтереси та проблеми вашої аудиторії, щоб створити релевантний та корисний контент.</li>
+        <li><strong>Планування структури контенту:</strong> Розробіть план розміщення інформації на сайті, включаючи заголовки, підзаголовки та основні блоки тексту.</li>
+        <li><strong>Створення якісного контенту:</strong> Пишіть тексти, які є інформативними, читабельними та оптимізованими для пошукових систем. Уникайте надмірного використання ключових слів; натомість зосередьтеся на наданні цінної інформації для користувачів.</li>
+    </ul>
+    
+    <h2>2. Збір та оптимізація зображень та медіа</h2>
+    <ul>
+        <li><strong>Вибір відповідних форматів зображень:</strong> Для фотографій зазвичай використовують JPEG, для графіки з прозорістю — PNG, а для анімацій — GIF. Нові формати, такі як WebP, забезпечують кращу компресію без втрати якості.</li>
+        <li><strong>Стиснення зображень:</strong> Використовуйте онлайн-інструменти, такі як <a href="https://tinypng.com/" target="_blank">TinyPNG</a> або <a href="https://imagecompressor.com/uk/" target="_blank">Optimizilla</a>, для зменшення розміру файлів без помітної втрати якості.</li>
+        <li><strong>Використання атрибутів alt та title:</strong> Додавайте описові альтернативні тексти до зображень для покращення SEO та доступності сайту.</li>
+        <li><strong>Lazy Loading:</strong> Реалізуйте відкладене завантаження зображень, щоб вони завантажувалися лише тоді, коли користувач прокручує сторінку до них. Це покращує швидкість завантаження сторінки.</li>
+    </ul>
+    
+    <h2>3. Інтеграція контенту на сайт</h2>
+    <ul>
+        <li><strong>HTML-розмітка:</strong> Використовуйте семантичні теги HTML для структурування контенту, такі як <code>&lt;header&gt;</code>, <code>&lt;article&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;figure&gt;</code> та <code>&lt;figcaption&gt;</code>.</li>
+        <li><strong>CSS для стилізації:</strong> Застосовуйте CSS для налаштування вигляду тексту та зображень, забезпечуючи узгодженість дизайну на всіх сторінках.</li>
+        <li><strong>JavaScript для інтерактивності:</strong> Додавайте інтерактивні елементи за допомогою JavaScript, такі як слайдери зображень або модальні вікна для відео.</li>
+    </ul>
+    
+    <h2>4. Тестування та оптимізація</h2>
+    <ul>
+        <li><strong>Перевірка швидкості завантаження:</strong> Використовуйте інструменти, такі як <a href="https://pagespeed.web.dev/" target="_blank">Google PageSpeed Insights</a>, для аналізу швидкості завантаження сторінок та отримання рекомендацій щодо покращення.</li>
+        <li><strong>Адаптивний дизайн:</strong> Переконайтеся, що ваш сайт коректно відображається на різних пристроях та екранах різного розміру.</li>
+        <li><strong>SEO-оптимізація:</strong> Оптимізуйте мета-теги, URL-адреси та внутрішні посилання для покращення видимості сайту в пошукових системах.</li>
+    </ul>
+    
+    <p>Дотримуючись цих рекомендацій, ви зможете створити HTML-сайт з якісним контентом та оптимізованими медіа, що забезпечить позитивний досвід для користувачів та покращить позиції сайту в пошукових системах.</p>
+    
+
+<div class="comment-form">
+    <h2>Залиште коментар</h2>
+    {% if user.is_authenticated %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Відправити</button>
+    </form>
+    {% else %}
+    <p><strong>Щоб залишити коментар, необхідно <a href="{% url 'user_login' %}">увійти</a> в систему або <a href="{% url 'user_register' %}">зареєструватись</a></strong></p>
+    {% endif %}
+</div>
+
+<div class="comments-section">
+    <h2>Коментарі</h2>
+    {% for comment in comments %}
+                <div class="comment">
+                    <div>
+                        <strong>{{ comment.user.username }}:</strong>
+                        <p>{{ comment.text }}</p>
+                        
+                    </div>
+                </div>
+    {% empty %}
+        <p>Поки немає коментарів.</p>
+    {% endfor %}
+</div>
+    </div>
+
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/sidebar.js' %}"></script>
+    <script src="{% static 'js/anim.js' %}"></script>
+</body>
+</html>

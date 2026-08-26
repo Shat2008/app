@@ -1,0 +1,268 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Міні-проєкт: калькулятор</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Міні-проєкт: калькулятор</h1>
+    </header>
+
+<nav>
+        <a href='{% url "sait" %}' onclick="showSection('intro')" class="nav-logo">
+            <img src="{% static 'images/дом.png' %}" alt="Button" style="width: 30px; height: auto;">
+        </a>
+        <div class="nav-links">
+            <a href='{% url "html_page" %}' onclick="showSection('html')">HTML</a>
+        </div>
+        <div class="nav-links">
+            <a href='{% url "cssGlav" %}' onclick="showSection('html')">CSS</a>
+        </div>
+                <div class="nav-links">
+            <a href='{% url "jsGlav" %}' onclick="showSection('html')">JavaScript</a>
+        </div>
+       </div>
+                <div class="nav-links">
+            <a href='{% url "testGlav" %}' onclick="showSection('html')">Тести</a>
+        </div>
+        </div>
+                <div class="nav-links">
+            <a href='{% url "chat" %}' onclick="showSection('html')">Асистент сайту</a>
+        </div>
+        <a href="https://t.me/studuhtml" class="nav-logo1" target="_blank">
+            <img src="{% static 'images/111.png' %}" alt="Головна" style="width: 45px; height: 35px;">
+        </a>
+    </nav>
+
+    <div class="sidebar"> 
+        <!-- Меню JavaScript -->
+        <a href="#" class="menu-item">📁 Вступ до JavaScript</a>
+        <div class="submenu">
+            <a href="{% url 'vstypOneJs' %}">Що таке JavaScript і для чого він потрібен.</a>
+            <a href="{% url 'vstypTwoJs' %}">Як підключити JavaScript до HTML.</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Основи мови</a>
+        <div class="submenu">
+            <a href="{% url 'osnoviOneJs' %}">Змінні, типи даних і оператори.</a>
+            <a href="{% url 'osnoviTwoJs' %}">Умови if, else, switch.</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Цикли та функції</a>
+        <div class="submenu">
+            <a href="{% url 'cyclesOneJs' %}">Цикли в JavaScript</a>
+            <a href="{% url 'functionsOneJs' %}">Функції та передача параметрів</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Робота з DOM</a>
+        <div class="submenu">
+            <a href="{% url 'domOneJs' %}">Пошук і зміна елементів сторінки</a>
+            <a href="{% url 'domTwoJs' %}">Обробка подій (click, input, mouseover)</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Масиви та об’єкти</a>
+        <div class="submenu">
+            <a href="{% url 'arrayOneJs' %}">Створення та методи масивів</a>
+            <a href="{% url 'objectOneJs' %}">Об’єкти та робота з ними</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Практика JavaScript</a>
+        <div class="submenu">
+            <a href="{% url 'practiceOneJs' %}">Міні-проєкт: калькулятор</a>
+            <a href="{% url 'practiceTwoJs' %}">Міні-проєкт: інтерактивна форма</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Розширені можливості</a>
+        <div class="submenu">
+            <a href="{% url 'advancedOneJs' %}">LocalStorage, JSON, Fetch API.</a>
+            <a href="{% url 'advancedTwoJs' %}">Асинхронність і проміси.</a>
+        </div>
+    </div>
+
+    <div class="content">
+        <h1>Міні-проєкт: калькулятор</h1>
+        <p>У цьому проєкті ми створимо простий калькулятор для додавання, віднімання, множення та ділення чисел.</p>
+
+        <h2>� Як це працює - Приклад коду</h2>
+        
+        <h3>HTML структура:</h3>
+        <div class="code-box">
+            <pre><code>&lt;div class="calculator"&gt;
+    &lt;input type="number" id="num1" placeholder="Перше число"&gt;
+    &lt;select id="operation"&gt;
+        &lt;option value="add"&gt;+&lt;/option&gt;
+        &lt;option value="subtract"&gt;-&lt;/option&gt;
+        &lt;option value="multiply"&gt;×&lt;/option&gt;
+        &lt;option value="divide"&gt;÷&lt;/option&gt;
+    &lt;/select&gt;
+    &lt;input type="number" id="num2" placeholder="Друге число"&gt;
+    &lt;button onclick="calculate()"&gt;Обчислити&lt;/button&gt;
+    &lt;p id="result"&gt;Результат: —&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+
+        <h3>JavaScript функція:</h3>
+        <div class="code-box">
+            <pre><code>function calculate() {
+    const n1 = Number(document.getElementById('num1').value);
+    const n2 = Number(document.getElementById('num2').value);
+    const op = document.getElementById('operation').value;
+    let res;
+
+    if(op === "add") res = n1 + n2;
+    else if(op === "subtract") res = n1 - n2;
+    else if(op === "multiply") res = n1 * n2;
+    else if(op === "divide") {
+        res = n2 !== 0 ? n1 / n2 : "Помилка: ділення на 0";
+    }
+
+    document.getElementById('result').innerText = "Результат: " + res;
+}</code></pre>
+        </div>
+
+        <h2>🎮 Спробуй калькулятор прямо зараз!</h2>
+        <div class="calc">
+            <input type="number" id="num1" placeholder="Перше число">
+            <input type="number" id="num2" placeholder="Друге число">
+            <select id="operation">
+                <option value="add">Додати</option>
+                <option value="subtract">Відняти</option>
+                <option value="multiply">Помножити</option>
+                <option value="divide">Поділити</option>
+            </select>
+            <button onclick="calculate()">Порахувати</button>
+            <p id="result">Результат: —</p>
+        </div>
+
+        <h2>🔹 JavaScript для калькулятора</h2>
+        <script>
+            function calculate() {
+                const n1 = Number(document.getElementById('num1').value);
+                const n2 = Number(document.getElementById('num2').value);
+                const op = document.getElementById('operation').value;
+                let res;
+
+                if(op === "add") res = n1 + n2;
+                else if(op === "subtract") res = n1 - n2;
+                else if(op === "multiply") res = n1 * n2;
+                else if(op === "divide") res = n2 !== 0 ? n1 / n2 : "Помилка: ділення на 0";
+
+                document.getElementById('result').innerText = "Результат: " + res;
+            }
+        </script>
+
+        <style>
+            .code-box {
+                background: #1e1e1e;
+                color: #d4d4d4;
+                padding: 15px;
+                border-radius: 8px;
+                overflow-x: auto;
+                margin: 15px 0;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            }
+            .code-box pre {
+                margin: 0;
+                font-family: 'Courier New', monospace;
+                font-size: 13px;
+                line-height: 1.6;
+            }
+            .code-box code {
+                color: #720d0d;
+            }
+
+            .calc {
+                background: linear-gradient(135deg, #667eea 0%, #3a5ed6 100%);
+                color: white;
+                padding: 25px;
+                border-radius: 12px;
+                margin: 25px 0;
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+                max-width: 500px;
+            }
+            .calc input, .calc select {
+                width: 100%;
+                padding: 12px;
+                margin: 10px 0;
+                border: none;
+                border-radius: 6px;
+                font-size: 16px;
+                box-sizing: border-box;
+            }
+            .calc button {
+                width: 100%;
+                padding: 14px;
+                margin-top: 15px;
+                background: #28a745;
+                color: white;
+                border: none;
+                border-radius: 6px;
+                font-size: 16px;
+                font-weight: bold;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+            .calc button:hover {
+                background: #218838;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            }
+            .calc button:active {
+                transform: translateY(0);
+            }
+            .calc p {
+                margin-top: 20px;
+                font-size: 20px;
+                font-weight: bold;
+                text-align: center;
+                background: rgba(255, 255, 255, 0.1);
+                padding: 15px;
+                border-radius: 6px;
+            }
+        </style>
+
+        <h2>💡 Висновок:</h2>
+        <ul>
+            <li>✔ Використовуємо input для введення чисел.</li>
+            <li>✔ Використовуємо select для вибору операції.</li>
+            <li>✔ JavaScript виконує обчислення та виводить результат на сторінку.</li>
+        </ul>
+
+        <div class="comment-form">
+            <h2>Залиште коментар</h2>
+            {% if user.is_authenticated %}
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Відправити</button>
+            </form>
+            {% else %}
+            <p><strong>Щоб залишити коментар, необхідно <a href="{% url 'user_login' %}">увійти</a> в систему або <a href="{% url 'user_register' %}">зареєструватись</a></strong></p>
+            {% endif %}
+        </div>
+
+        <div class="comments-section">
+            <h2>Коментарі</h2>
+            {% for comment in comments %}
+                <div class="comment">
+                    <div>
+                        <strong>{{ comment.user.username }}</strong>
+                        <p>{{ comment.text }}</p>
+                    </div>
+                </div>
+            {% empty %}
+                <p>Поки немає коментарів.</p>
+            {% endfor %}
+        </div>
+
+    </div>
+
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/sidebar.js' %}"></script>
+    <script src="{% static 'js/anim.js' %}"></script>
+</body>
+</html>

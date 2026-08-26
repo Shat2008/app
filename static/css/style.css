@@ -1,0 +1,309 @@
+:root {
+    --bg: linear-gradient(135deg, #e6f4ff 0%, #d6ecff 40%, #eaf6ff 100%);
+    --surface: linear-gradient(180deg, #ffffff 0%, #eaf6ff 100%);
+    --text: #102033;
+    --primary-1: #0033cc;
+    --primary-2: #4f8cff;
+    --accent: #0044aa;
+    --muted: #eaf3ff;
+    --highlight: #1e90ff;
+    --shadow: rgba(0,68,255,0.16);
+}
+
+body {
+    font-family: 'Dancing Script', cursive;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    background: var(--bg);
+    color: var(--text);
+}
+
+header {
+    background: linear-gradient(to right, var(--primary-1), var(--primary-2));
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    height: 100px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+.star {
+    position: fixed;
+    color: blue ; 
+    font-size: 20px;
+    pointer-events: none;
+    user-select: none;
+    z-index: 9999;
+   
+}
+
+@keyframes fallStar {
+    from {
+        transform: translateY(-5%);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(110vh);
+        opacity: 0;
+    }
+}
+header h1 {
+    margin: 0;
+    font-size: 36px;
+    font-weight: bold;
+    text-align: center;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between; /* Раздвигает элементы по краям */
+    align-items: center;
+    background: linear-gradient(to right, rgba(191,225,255,0.9), var(--primary-2));
+    padding: 10px;
+    position: fixed;
+    top: 100px;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    height: 50px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s;
+}
+
+.nav-logo {
+    margin-left: 10px; /* Отступ слева */
+}
+
+.nav-links {
+    display: flex;
+    gap: 15px;
+}
+
+
+nav a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 10px;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+nav a.active {
+    background: #003366;
+    color: #fff;
+}
+
+nav a:hover {
+    background: #003366;
+    transform: scale(1.1);
+}
+
+.sidebar {
+    width: 180px;
+    position: fixed;
+    top: 160px;
+    left: 0;
+    height: calc(100% - 160px);
+    background: linear-gradient(to bottom, var(--surface), var(--primary-2));
+    overflow-y: auto;
+    padding-top: 10px;
+    box-shadow: 2px 0 4px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar a {
+    display: block;
+    padding: 10px 15px;
+    color: white;
+    text-decoration: none;
+    background: blue;
+    margin-bottom: 5px;
+    border-radius: 8px;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.sidebar a:hover {
+    background-color:#003366;
+    transform: translateX(5px);
+}
+
+.sidebar a.active {
+    background-color: #003366;
+}
+
+.submenu {
+    display: none;
+    margin-left: 15px;
+}
+
+.submenu a {
+    padding: 5px 15px;
+    font-size: 14px;
+    background-color: #003366;
+    margin-bottom: 5px;
+    border-radius: 4px;
+}
+
+.submenu.active {
+    display: block;
+}
+
+.content {
+    margin-left: 200px;
+    margin-top: 170px;
+    padding: 20px;
+    background: var(--surface);
+    border-radius: 15px;
+    box-shadow: 2px 4px 8px var(--shadow);
+    font-size: 1.2em;
+    transition: transform 0.2s, box-shadow 0.3s;
+}
+
+/* Make content columns constrained for better balance */
+.content {
+    max-width: calc(100% - 240px);
+    margin-right: 20px;
+}
+
+/* Remove extra gap before headings inside content */
+.content h1, .content h2 {
+    margin-top: 0.2em;
+}
+
+/* Modifier: smaller top offset for certain pages */
+.content.content--short {
+    margin-top: 150px; /* adjusted to avoid overlap with header/nav */
+}
+
+.content:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+.slider-container {
+    position: relative;
+    max-width: 600px;
+    margin: 40px auto;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.slider {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.slide {
+    min-width: 100%;
+    box-sizing: border-box;
+}
+
+.slide img {
+    width: 100%;
+    display: block;
+}
+
+button.prev, button.next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+button.prev {
+    left: 10px;
+}
+
+button.next {
+    right: 10px;
+}
+
+button:hover {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+pre {
+    position: relative;
+    padding: 10px;
+    background: var(--muted);
+    color: var(--text);
+    border: 3px solid var(--highlight);
+    border-radius: 12px;
+    margin: 15px 0;
+}
+
+pre::before {
+    content: 'Приклад';
+    position: absolute;
+    top: -14px;
+    left: 20px;
+    background-color: var(--highlight);
+    color: white;
+    padding: 2px 8px;
+    font-size: 14px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+pre .inner-frame {
+    padding: 10px;
+    border: 2px solid var(--primary-2);
+    border-radius: 8px;
+    background: var(--surface);
+    overflow-x: auto;
+}
+
+/* === Global controls: buttons, inputs, forms === */
+.custom-button, button {
+    display: inline-block;
+    background: linear-gradient(90deg, var(--primary-1), var(--primary-2));
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 14px 36px rgba(0, 68, 255, 0.18);
+    transition: transform 0.18s, box-shadow 0.18s;
+}
+
+.custom-button:hover, button:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 22px 48px rgba(0, 68, 255, 0.22);
+}
+
+input[type="text"], input[type="email"], input[type="password"], textarea, select {
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(0,0,0,0.06);
+    background: var(--muted);
+    color: var(--text);
+    box-shadow: inset 0 2px 6px rgba(0,0,0,0.03);
+    outline: none;
+}
+
+input:focus, textarea:focus, select:focus {
+    box-shadow: 0 6px 18px rgba(30,144,255,0.12);
+    border-color: var(--highlight);
+}
+
+/* Sidebar links use primary accent */
+.sidebar a { background: linear-gradient(90deg, var(--primary-1), var(--primary-2)); }
+

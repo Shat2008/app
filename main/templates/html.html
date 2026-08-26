@@ -1,0 +1,173 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Навчання веб-розробці</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>HTML</h1>
+    </header>
+    
+<nav>
+        <a href='{% url "sait" %}' onclick="showSection('intro')" class="nav-logo">
+            <img src="{% static 'images/дом.png' %}" alt="Button" style="width: 30px; height: auto;">
+        </a>
+        <div class="nav-links">
+            <a href='{% url "html_page" %}' onclick="showSection('html')">HTML</a>
+        </div>
+        <div class="nav-links">
+            <a href='{% url "cssGlav" %}' onclick="showSection('html')">CSS</a>
+        </div>
+                <div class="nav-links">
+            <a href='{% url "jsGlav" %}' onclick="showSection('html')">JavaScript</a>
+        </div>
+       </div>
+                <div class="nav-links">
+            <a href='{% url "testGlav" %}' onclick="showSection('html')">Тести</a>
+        </div>
+        </div>
+                <div class="nav-links">
+            <a href='{% url "chat" %}' onclick="showSection('html')">Асистент сайту</a>
+        </div>
+        <a href="https://t.me/studuhtml" class="nav-logo1" target="_blank">
+            <img src="{% static 'images/111.png' %}" alt="Головна" style="width: 45px; height: 35px;">
+        </a>
+    </nav>
+
+    <div class="sidebar"> 
+        <!-- Глава 5 -->
+        <a href="#" class="menu-item">📁 Підготовка</a>
+        <div class="submenu">
+            <a href='{% url 'choice' %}'>Вибір інструментів розробки (редактор коду, браузер, ресурси).</a>
+            <a href='{% url 'definition' %}'>Визначення цілей та структури майбутнього сайту.</a>
+        </div>
+
+        <!-- Глава 6 -->
+        <a href="#" class="menu-item">📁 Як створити сайт HTML</a>
+        <div class="submenu">
+            <a href='{% url 'creation' %}'>Створення базового HTML-файлу (файл із розширенням .html).</a>
+            <a href='{% url 'discovery' %}'>Відкриття файлу HTML у браузері для перегляду.</a>
+        </div>
+
+        <!-- Глава 7 -->
+        <a href="#" class="menu-item">📁 Структури HTML</a>
+        <div class="submenu">
+            <a href='{% url 'study' %}'>Вивчення основних тегів (html, head, body).</a>
+            <a href='{% url 'semantics' %}'>Семантичні елементи (header, main, footer).</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Інформація для сайту</a>
+        <div class="submenu">
+            <a href='{% url 'gathering' %}'>Збір текстового контенту, зображень та медіа.</a>
+            <a href='{% url 'organization' %}'>>Організація інформації у логічні розділи.</a>
+        </div>
+
+        <!-- Глава 6 -->
+        <a href="#" class="menu-item">📁 Дизайн сайту</a>
+        <div class="submenu">
+            <a href='{% url 'connection' %}'>Підключення CSS для стилізації HTML елементів.</a>
+            <a href='{% url 'connectionn' %}'>Створення адаптивного дизайну для різних пристроїв.</a>
+            <a href='{% url 'css' %}'>Цікаві приклади оформлення сайту через цсс.</a>
+        </div>
+    
+
+        <!-- Глава 7 -->
+        <a href="#" class="menu-item">📁 Приклади коду та їх результат</a>
+        <div class="submenu">
+            <a href='{% url 'writing' %}'>Написання простого прикладу із заголовком та текстом.</a>
+            <a href='{% url 'addition' %}'>Додавання кнопки та перевірка її роботи у браузері.</a>
+        </div>
+    </div>   
+    
+    <div class="content">
+        <h1>Вся основна інформація про HTML</h1>
+    
+        <main>
+            <section>
+                <h2>Що таке HTML?</h2>
+                <p><strong>HTML (HyperText Markup Language)</strong> – це мова розмітки, яка використовується для створення та структурування веб-сторінок. За допомогою HTML можна визначати заголовки, текст, зображення, посилання, таблиці, форми та інші елементи веб-інтерфейсу.</p>
+            </section>
+            
+            <section>
+                <h2>Коротка історія HTML</h2>
+                <ul>
+                    <li><strong>HTML 2.0 (1995)</strong> – перший офіційний стандарт.</li>
+                    <li><strong>HTML 3.2 (1997)</strong> – додано підтримку таблиць та скриптів.</li>
+                    <li><strong>HTML 4.01 (1999)</strong> – з’явилася можливість застосування CSS та інших стилів.</li>
+                    <li><strong>XHTML (2000-2010)</strong> – спроба зробити HTML більш суворим і відповідним XML.</li>
+                    <li><strong>HTML5 (2014)</strong> – найсучасніша версія з підтримкою мультимедіа, відео, аудіо та інтерактивних елементів.</li>
+                </ul>
+            </section>
+            
+            <section>
+                <h2>Основні особливості HTML</h2>
+                <ul>
+                    <li><strong>Простота</strong> – легка для вивчення та використання мова.</li>
+                    <li><strong>Гнучкість</strong> – працює у всіх сучасних браузерах і підтримується будь-яким пристроєм.</li>
+                    <li><strong>Розширюваність</strong> – легко інтегрується з CSS, JavaScript та іншими технологіями.</li>
+                    <li><strong>Семантичність</strong> – сучасний HTML містить спеціальні елементи для структурування контенту (наприклад, <code>header</code>, <code>main</code>, <code>footer</code>).</li>
+                    <li><strong>Адаптивність</strong> – завдяки поєднанню з CSS та медіа-запитами, HTML дозволяє створювати сайти, що добре відображаються на різних пристроях.</li>
+                </ul>
+            </section>
+            
+            <section>
+                <h2>Як працює HTML?</h2>
+                <p>Браузери читають HTML-код, аналізують його та відображають користувачеві у вигляді веб-сторінки. HTML-файл може містити текст, посилання, зображення, форми та інші елементи, які допомагають взаємодіяти з користувачем.</p>
+            </section>
+            
+            <section>
+                <h2>Де використовується HTML?</h2>
+                <ul>
+                    <li><strong>Веб-сайти</strong> – створення будь-якого сайту починається з HTML.</li>
+                    <li><strong>Електронні листи</strong> – багато розсилок оформляється у форматі HTML.</li>
+                    <li><strong>Документи</strong> – використовується для збереження та відображення текстів у браузері.</li>
+                    <li><strong>Мобільні додатки</strong> – HTML застосовується разом із технологіями, як-от React Native або Ionic.</li>
+                </ul>
+            </section>
+            
+            <section>
+                <h2>Поєднання HTML з іншими технологіями</h2>
+                <ul>
+                    <li><strong>CSS</strong> – відповідає за візуальне оформлення веб-сторінки.</li>
+                    <li><strong>JavaScript</strong> – додає інтерактивність і динаміку.</li>
+                    <li><strong>Backend-технології (PHP, Node.js, Python)</strong> – обробка даних та взаємодія із сервером.</li>
+                </ul>
+            </section>
+            
+            <section>
+                <h2>Переваги HTML</h2>
+                <ul>
+                    <li>✔ Безкоштовний та відкритий стандарт.</li>
+                    <li>✔ Простий для освоєння.</li>
+                    <li>✔ Підтримується всіма браузерами.</li>
+                    <li>✔ Легко інтегрується з іншими веб-технологіями.</li>
+                </ul>
+            </section>
+            
+            <section>
+                <h2>Недоліки HTML</h2>
+                <ul>
+                    <li>❌ Обмежена функціональність без JavaScript і CSS.</li>
+                    <li>❌ Не підтримує динамічний контент без додаткових технологій.</li>
+                    <li>❌ Верстка складних макетів може бути громіздкою.</li>
+                </ul>
+            </section>
+            
+            <section>
+                <h2>Майбутнє HTML</h2>
+                <p>HTML продовжує розвиватися, з кожним оновленням додаються нові можливості, покращується семантика та підтримка мультимедійного контенту. Наразі HTML є основою веб-розробки та залишатиметься важливим інструментом у майбутньому.</p>
+            </section>
+        </main>
+    </div>
+</head>
+<body>
+    
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/sidebar.js' %}"></script>
+    <script src="{% static 'js/anim.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Селектори, властивості та значення в CSS</title>
+    
+</head>
+<body>
+    <header>
+        <h1>CSS</h1>
+    </header>
+
+<nav>
+        <a href='{% url "sait" %}' onclick="showSection('intro')" class="nav-logo">
+            <img src="{% static 'images/дом.png' %}" alt="Button" style="width: 30px; height: auto;">
+        </a>
+        <div class="nav-links">
+            <a href='{% url "html_page" %}' onclick="showSection('html')">HTML</a>
+        </div>
+        <div class="nav-links">
+            <a href='{% url "cssGlav" %}' onclick="showSection('html')">CSS</a>
+        </div>
+                <div class="nav-links">
+            <a href='{% url "jsGlav" %}' onclick="showSection('html')">JavaScript</a>
+        </div>
+       </div>
+                <div class="nav-links">
+            <a href='{% url "testGlav" %}' onclick="showSection('html')">Тести</a>
+        </div>
+        </div>
+                <div class="nav-links">
+            <a href='{% url "chat" %}' onclick="showSection('html')">Асистент сайту</a>
+        </div>
+        <a href="https://t.me/studuhtml" class="nav-logo1" target="_blank">
+            <img src="{% static 'images/111.png' %}" alt="Головна" style="width: 45px; height: 35px;">
+        </a>
+    </nav>
+
+    <div class="sidebar"> 
+        <!-- Глава 1 -->
+        <a href="#" class="menu-item">📁 Вступ до CSS</a>
+        <div class="submenu">
+            <a href="{% url 'vstypOneCss' %}">Що таке CSS і для чого він потрібен.</a>
+            <a href="{% url 'vstypTwoCss' %}">Основні способи підключення CSS до HTML.</a>
+        </div>
+
+        <!-- Глава 2 -->
+        <a href="#" class="menu-item">📁 Основи синтаксису CSS</a>
+        <div class="submenu">
+            <a href="{% url 'osnoviOneCss' %}">Селектори, властивості та значення.</a>
+            <a href="{% url 'osnoviTwoCss' %}">Коментарі в CSS та структура коду.</a>
+        </div>
+
+        <!-- Глава 3 -->
+        <a href="#" class="menu-item">📁 Робота з кольорами та шрифтами</a>
+        <div class="submenu">
+            <a href="{% url 'workOneCss' %}">Кольори: HEX, RGB, RGBA, HSL.</a>
+            <a href="{% url 'workTwoCss' %}">Шрифти, розмір, товщина, вирівнювання тексту.</a>
+        </div>
+
+        <!-- Глава 4 -->
+        <a href="#" class="menu-item">📁 Розміщення елементів</a>
+        <div class="submenu">
+            <a href="{% url 'blokOneCss' %}">Блокова і стрічкова модель елементів.</a>
+            <a href="{% url 'blokTwoCss' %}">Використання flexbox та grid для макета сторінки.</a>
+        </div>
+
+        <!-- Глава 5 -->
+        <a href="#" class="menu-item">📁 Оформлення сторінки</a>
+        <div class="submenu">
+            <a href="{% url 'oforOneCss' %}">Фони, межі, тіні та закруглення кутів.</a>
+            <a href="{% url 'oforTwoCss' %}">Зображення, прозорість та градієнти.</a>
+        </div>
+
+        <!-- Глава 6 -->
+        <a href="#" class="menu-item">📁 Анімації та переходи</a>
+        <div class="submenu">
+            <a href="{% url 'animOneCss' %}">CSS transitions — плавні зміни властивостей.</a>
+            <a href="{% url 'animTwoCss' %}">CSS animations — створення рухомих ефектів.</a>
+        </div>
+
+        <!-- Глава 7 -->
+        <a href="#" class="menu-item">📁 Адаптивний дизайн</a>
+        <div class="submenu">
+            <a href="{% url 'adapOneCss' %}">Використання медіа-запитів для різних пристроїв.</a>
+            <a href="{% url 'adapTwoCss' %}">Приклади створення адаптивного сайту.</a>
+        </div>
+    </div>   
+
+    <div class="content">
+        <h1>Селектори, властивості та значення в CSS</h1>
+
+        <section>
+            <h2>Що таке селектори?</h2>
+            <p><strong>Селектори</strong> — це частина CSS, яка визначає, до яких елементів HTML застосовуватимуться стилі. Вони «вибирають» елементи для оформлення.</p>
+            <p>Найпростіший приклад:</p>
+            <pre><code>
+p {
+    color: blue;
+}
+            </code></pre>
+            <p>Тут селектором є <code>p</code> — усі абзаци на сторінці стануть синіми.</p>
+        </section>
+
+        <section>
+            <h2>Основні типи селекторів</h2>
+            <ul>
+                <li><strong>За тегом</strong> — впливає на всі елементи певного типу: <code>h1 { color: red; }</code></li>
+                <li><strong>За класом</strong> — використовується з крапкою: <code>.text { font-size: 18px; }</code></li>
+                <li><strong>За ідентифікатором</strong> — починається з решітки: <code>#main { background: yellow; }</code></li>
+                <li><strong>Універсальний селектор</strong> — зірочка <code>*</code> вибирає всі елементи: <code>* { margin: 0; }</code></li>
+                <li><strong>Комбіновані селектори</strong> — кілька умов одночасно: <code>div p { color: green; }</code></li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Що таке властивості?</h2>
+            <p><strong>Властивість</strong> — це характеристика елемента, яку ми змінюємо. Наприклад, колір, розмір шрифту, фон тощо.</p>
+            <p>У CSS властивості пишуться у вигляді пар <strong>«властивість: значення»</strong>:</p>
+            <pre><code>
+h1 {
+    color: red;
+    font-size: 30px;
+    text-align: center;
+}
+            </code></pre>
+            <p>У цьому прикладі елемент <code>&lt;h1&gt;</code> буде червоним, розміром 30px і вирівняний по центру.</p>
+        </section>
+
+        <section>
+            <h2>Значення властивостей</h2>
+            <p><strong>Значення</strong> — це конкретне налаштування властивості. Вони можуть бути різних типів: числа, кольори, ключові слова, відсотки, одиниці вимірювання тощо.</p>
+            <p>Приклади:</p>
+            <pre><code>
+color: #ff0000;        /* колір у HEX */
+font-size: 20px;       /* розмір у пікселях */
+margin: 10%;           /* відступ у відсотках */
+font-weight: bold;     /* товщина шрифту */
+background-color: blue; /* колір фону */
+            </code></pre>
+        </section>
+
+        <section>
+            <h2>Приклад використання селекторів на сторінці</h2>
+            <pre><code>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;style&gt;
+        body { background-color: #f0f0f0; }
+        h1 { color: darkred; }
+        .info { color: green; }
+        #footer { text-align: center; font-size: 14px; }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Приклад селекторів&lt;/h1&gt;
+    &lt;p class="info"&gt;Цей текст зелений, бо має клас "info".&lt;/p&gt;
+    &lt;div id="footer"&gt;Низ сторінки&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+            </code></pre>
+        </section>
+
+        <section>
+            <h2>Висновок</h2>
+            <p>Селектори, властивості та значення — це основа CSS. Селектори визначають, <strong>що</strong> змінювати, властивості — <strong>яку характеристику</strong>, а значення — <strong>на що саме</strong> її замінити.</p>
+            <p>Розуміння цих трьох елементів дозволяє створювати красиві та структуровані вебсторінки.</p>
+        </section>
+
+        <style>
+        .comment-form {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .comment-form h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .comment-form button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .comment-form button:hover {
+            background-color: #0056b3;
+        }
+        .comment {
+            background: #eee;
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+        }
+        .comments-section h2 {
+            color: #333;
+        }
+        </style>
+
+        {% if user.is_authenticated %}
+        <div class="comment-form">
+            <h2>Залиште коментар</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Відправити</button>
+            </form>
+        </div>
+        {% else %}
+        <div class="comment-form">
+            <p><strong>Щоб залишити коментар, необхідно <a href="{% url 'user_login' %}">увійти</a> в систему або <a href="{% url 'user_register' %}">зареєструватись</a></strong></p>
+        </div>
+        {% endif %}
+
+        <div class="comments-section">
+            <h2>Коментарі</h2>
+            {% for comment in comments %}
+                <div class="comment">
+                    <div>
+                        <strong>{{ comment.user.username }}</strong>
+                        <p>{{ comment.text }}</p>
+                    </div>
+                </div>
+            {% empty %}
+                <p>Поки немає коментарів.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/sidebar.js' %}"></script>
+    <script src="{% static 'js/anim.js' %}"></script>
+</body>
+</html>

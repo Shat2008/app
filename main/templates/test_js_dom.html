@@ -1,0 +1,570 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест: Робота з DOM</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        .test-container {
+            max-width: 800px;
+            margin: 100px auto;
+            background: var(--surface);
+            padding: 30px 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .test-container h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .test-container p {
+            text-align: center;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        .question {
+            background: var(--muted);
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            transition: 0.2s;
+            border: 1px solid #ddd;
+        }
+
+        .question:hover {
+            background: rgba(234,243,255,0.95);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .question p {
+            font-weight: bold;
+            color: #222;
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            margin-left: 10px;
+            padding: 3px 0;
+            cursor: pointer;
+        }
+
+        button {
+            display: block;
+            margin: 20px auto 10px auto;
+            padding: 10px 30px;
+            background-color: #2196F3;
+            border: none;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #1976D2;
+            transform: scale(1.05);
+        }
+
+        #result {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h2>Тести</h2>
+    </header>
+
+<nav>
+        <a href='{% url "sait" %}' onclick="showSection('intro')" class="nav-logo">
+            <img src="{% static 'images/дом.png' %}" alt="Button" style="width: 30px; height: auto;">
+        </a>
+        <div class="nav-links">
+            <a href='{% url "html_page" %}' onclick="showSection('html')">HTML</a>
+        </div>
+        <div class="nav-links">
+            <a href='{% url "cssGlav" %}' onclick="showSection('html')">CSS</a>
+        </div>
+                <div class="nav-links">
+            <a href='{% url "jsGlav" %}' onclick="showSection('html')">JavaScript</a>
+        </div>
+       </div>
+                <div class="nav-links">
+            <a href='{% url "testGlav" %}' onclick="showSection('html')">Тести</a>
+        </div>
+        </div>
+                <div class="nav-links">
+            <a href='{% url "chat" %}' onclick="showSection('html')">Асистент сайту</a>
+        </div>
+        <a href="https://t.me/studuhtml" class="nav-logo1" target="_blank">
+            <img src="{% static 'images/111.png' %}" alt="Головна" style="width: 45px; height: 35px;">
+        </a>
+    </nav>
+
+    <div class="sidebar">
+        <!-- Тести HTML -->
+        <a href="#" class="menu-item">📘 Тести HTML</a>
+        <div class="submenu">
+            <a href="{% url 'test_html_basic' %}">Основи HTML</a>
+            <a href="{% url 'test_html_advanced' %}">Просунуті елементи HTML</a>
+        </div>
+
+        <!-- Тести CSS -->
+        <a href="#" class="menu-item">🎨 Тести CSS</a>
+        <div class="submenu">
+            <a href="{% url 'test_css_basic' %}">Основи стилів</a>
+            <a href="{% url 'test_css_layout' %}">Макети, Flexbox, Grid</a>
+        </div>
+
+        <!-- Тести JavaScript -->
+        <a href="#" class="menu-item">💡 Тести JavaScript</a>
+        <div class="submenu">
+            <a href="{% url 'test_js_basic' %}">Основи мови</a>
+            <a href="{% url 'test_js_dom' %}" class="active">Робота з DOM</a>
+        </div>
+
+        <!-- Загальний тест -->
+        <a href="#" class="menu-item">🏆 Підсумковий тест</a>
+        <div class="submenu">
+            <a href="{% url 'test_all' %}">HTML + CSS + JS</a>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="test-container">
+            <h2>Тест: Робота з DOM</h2>
+            <p>Перевір свої знання взаємодії JavaScript із HTML через DOM.</p>
+
+            <form id="jsDomTest">
+                <div id="questions"></div>
+                <div style="display: flex; gap: 10px; margin-top: 20px;">
+                    <button type="button" onclick="checkDomAnswers()" style="flex: 1;">Перевірити</button>
+                    <button type="button" onclick="resetTest()" style="flex: 1; background: #6c757d;">Оновити тест</button>
+                </div>
+            </form>
+
+            <p id="result"></p>
+        </div>
+    </div>
+
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/sidebar.js' %}"></script>
+
+    <script>
+        // Банк вопросов для JS DOM
+        const questionBank = [
+            {
+                question: "Що таке DOM?",
+                options: ["Бібліотека JavaScript", "Модель представлення HTML-документа у вигляді об’єктів", "CSS інтерфейс"],
+                correct: 1
+            },
+            {
+                question: "Який метод використовується для отримання елемента за його ID?",
+                options: ["document.find(\"id\")", "document.getElementById(\"id\")", "get.id(\"id\")"],
+                correct: 1
+            },
+            {
+                question: "Як можна змінити текст всередині HTML-елемента?",
+                options: ["element.textContent = \"Новий текст\";", "element.newText(\"Новий текст\");", "setText(element, \"Новий текст\");"],
+                correct: 0
+            },
+            {
+                question: "Як створити новий елемент у DOM?",
+                options: ["create.element(\"div\")", "document.createElement(\"div\")", "new Element(\"div\")"],
+                correct: 1
+            },
+            {
+                question: "Як додати створений елемент у документ?",
+                options: ["document.add(element)", "document.body.appendChild(element)", "appendToBody(element)"],
+                correct: 1
+            },
+            {
+                question: "Як отримати всі елементи з певним класом?",
+                options: ["document.getElementsByClassName(\"className\")", "document.queryClass(\"className\")", "document.findClass(\"className\")"],
+                correct: 0
+            },
+            {
+                question: "Як змінити стиль елемента через JavaScript?",
+                options: ["element.setStyle(\"color:red\")", "element.style.color = \"red\"", "setColor(element, \"red\")"],
+                correct: 1
+            },
+            {
+                question: "Що робить метод <code>addEventListener</code>?",
+                options: ["Видаляє елемент", "Додає обробник події", "Змінює текст елемента"],
+                correct: 1
+            },
+            {
+                question: "Як отримати значення input поля?",
+                options: ["input.value", "input.text", "input.getValue()"],
+                correct: 0
+            },
+            {
+                question: "Як отримати батьківський елемент?",
+                options: ["element.parentNode", "element.parent", "element.parentElement"],
+                correct: 0
+            },
+            {
+                question: "Як отримати всіх дітей елемента?",
+                options: ["element.children", "element.childs", "element.getChildren()"],
+                correct: 0
+            },
+            {
+                question: "Як видалити елемент з DOM?",
+                options: ["element.delete()", "element.remove()", "element.parentNode.removeChild(element)"],
+                correct: 1
+            },
+            {
+                question: "Як отримати наступний елемент у DOM?",
+                options: ["element.nextElement", "element.nextSibling", "element.next"],
+                correct: 1
+            },
+            {
+                question: "Як отримати попередній елемент у DOM?",
+                options: ["element.previousElement", "element.prevSibling", "element.prev"],
+                correct: 0
+            },
+            {
+                question: "Як встановити HTML у елемент?",
+                options: ["element.html = \"<p>text</p>\"", "element.innerHTML = \"<p>text</p>\"", "setHTML(element, \"<p>text</p>\")"],
+                correct: 1
+            },
+            {
+                question: "Яка різниця між innerHTML та textContent?",
+                options: ["Вони однакові", "innerHTML встановлює HTML, textContent встановлює текст", "textContent встановлює HTML"],
+                correct: 1
+            },
+            {
+                question: "Як добавити клас до елемента?",
+                options: ["element.addClass(\"classname\")", "element.classList.add(\"classname\")", "element.class += \"classname\""],
+                correct: 1
+            },
+            {
+                question: "Як видалити клас з елемента?",
+                options: ["element.removeClass(\"classname\")", "element.classList.remove(\"classname\")", "element.class -= \"classname\""],
+                correct: 1
+            },
+            {
+                question: "Як перевірити, чи має елемент клас?",
+                options: ["element.hasClass(\"classname\")", "element.classList.contains(\"classname\")", "element.class.includes(\"classname\")"],
+                correct: 1
+            },
+            {
+                question: "Що таке event delegation?",
+                options: ["Делегування подій на правителя", "Додавання обробників подій до батьківського елемента для його дітей", "Видалення подій"],
+                correct: 1
+            },
+            {
+                question: "Як отримати елемент, на якому сталася подія?",
+                options: ["event.element", "event.target", "this"],
+                correct: 1
+            },
+            {
+                question: "Як запобігти стандартній поведінці події?",
+                options: ["event.stop()", "event.preventDefault()", "event.cancel()"],
+                correct: 1
+            },
+            {
+                question: "Як зупинити поширення eventi (event bubbling)?",
+                options: ["event.stop()", "event.stopPropagation()", "event.cancel()"],
+                correct: 1
+            },
+            {
+                question: "Як встановити атрибут елемента?",
+                options: ["element.setAttribute(\"name\", \"value\")", "element.name = \"value\"", "setAttr(element, \"name\", \"value\")"],
+                correct: 0
+            },
+            {
+                question: "Як отримати атрибут елемента?",
+                options: ["element.getAttribute(\"name\")", "element.name", "getAttr(element, \"name\")"],
+                correct: 0
+            },
+            {
+                question: "Як видалити атрибут елемента?",
+                options: ["element.removeAttribute(\"name\")", "delete element.name", "element.delAttr(\"name\")"],
+                correct: 0
+            },
+            {
+                question: "Що таке fetch API?",
+                options: ["API для переміщення елементів", "API для виконання HTTP-запитів", "API для пошуку даних"],
+                correct: 1
+            },
+            {
+                question: "Як написати fetch запит?",
+                options: ["fetch('url').then(response => response.json()).then(data => { })", "get('url').then(...)", "request('url')"],
+                correct: 0
+            },
+            {
+                question: "Що таке Promise у JavaScript?",
+                options: ["Обіцянка користувачу", "Об'єкт, який представляє результат асинхронної операції", "Обіцянка браузеру"],
+                correct: 1
+            },
+            {
+                question: "Як використовувати async/await?",
+                options: ["async function name() { await fetch(...) }", "async function name() { await fetch(...) }", "обидва варіанти правильні"],
+                correct: 0
+            },
+            {
+                question: "Як встановити таймер у JavaScript?",
+                options: ["setTimeout(function, milliseconds)", "timer(function, milliseconds)", "delay(function, milliseconds)"],
+                correct: 0
+            },
+            {
+                question: "Як повторити код кожну секунду?",
+                options: ["setInterval(function, 1000)", "repeat(function, 1000)", "loop(function, 1000)"],
+                correct: 0
+            },
+            {
+                question: "Яка різниця між setTimeout та setInterval?",
+                options: ["Вони однакові", "setTimeout - один раз через певний час, setInterval - багато разів", "setInterval - один раз"],
+                correct: 1
+            },
+            {
+                question: "Як отримати координати миші?",
+                options: ["event.mouse.x, event.mouse.y", "event.clientX, event.clientY", "event.x, event.y"],
+                correct: 1
+            },
+            {
+                question: "Як використовувати querySelector?",
+                options: ["document.querySelector('.class')", "document.select('.class')", "document.find('.class')"],
+                correct: 0
+            },
+            {
+                question: "Яка різниця між querySelector та querySelectorAll?",
+                options: ["querySelector повертає перший елемент, querySelectorAll - всі", "Вони однакові", "querySelectorAll повертає один"],
+                correct: 0
+            },
+            {
+                question: "Як отримати власців селектора?",
+                options: ["document.querySelectorAll('.item')", "document.getElementsByClassName('item')", "обидва варіанти правильні"],
+                correct: 2
+            },
+            {
+                question: "Як вибрати елемент по тегу?",
+                options: ["document.getElementsByTagName('div')", "document.querySelectorAll('div')", "обидва варіанти правильні"],
+                correct: 2
+            },
+            {
+                question: "Як отримати вміст текстового вузла?",
+                options: ["element.textContent", "element.innerHTML", "element.text"],
+                correct: 0
+            },
+            {
+                question: "Як очистити весь вміст елемента?",
+                options: ["element.innerHTML = '';", "element.textContent = '';", "обидва варіанти правильні"],
+                correct: 2
+            },
+            {
+                question: "Як скопіювати глибину вузла?",
+                options: ["element.cloneNode(true)", "element.clone()", "copyNode(element)"],
+                correct: 0
+            },
+            {
+                question: "Як отримати найближчого батька з певним класом?",
+                options: ["element.closest('.className')", "element.findParent('.className')", "element.getParent('.className')"],
+                correct: 0
+            },
+            {
+                question: "Як отримати всіх сусідів елемента?",
+                options: ["element.parentElement.children", "element.siblings", "getSiblings(element)"],
+                correct: 0
+            },
+            {
+                question: "Як встановити data-атрибут?",
+                options: ["element.setAttribute('data-id', '5')", "element.dataset.id = '5'", "обидва варіанти правильні"],
+                correct: 2
+            },
+            {
+                question: "Як отримати значення data-атрибута?",
+                options: ["element.getAttribute('data-id')", "element.dataset.id", "обидва варіанти правильні"],
+                correct: 2
+            },
+            {
+                question: "Як встановити множину класів?",
+                options: ["element.classList.add('c1', 'c2', 'c3')", "element.addClass('c1 c2 c3')", "element.classes = ['c1', 'c2', 'c3']"],
+                correct: 0
+            },
+            {
+                question: "Як видалити множину класів?",
+                options: ["element.classList.remove('c1', 'c2')", "element.removeClass('c1 c2')", "element.removeClasses(['c1', 'c2'])"],
+                correct: 0
+            },
+            {
+                question: "Як перемикати клас (toggle)?",
+                options: ["element.classList.toggle('active')", "element.toggleClass('active')", "element.switch('active')"],
+                correct: 0
+            },
+            {
+                question: "Як додати обробник для множини подій?",
+                options: ["element.addEventListener('click keydown', func)", "['click', 'keydown'].forEach(e => element.addEventListener(e, func))", "element.on(['click', 'keydown'], func)"],
+                correct: 1
+            },
+            {
+                question: "Як видалити обробник події?",
+                options: ["element.removeEventListener('click', func)", "element.offClick(func)", "removeListener(element, 'click')"],
+                correct: 0
+            },
+            {
+                question: "Як запустити подію з JavaScript?",
+                options: ["element.dispatchEvent(new Event('click'))", "element.trigger('click')", "element.emit('click')"],
+                correct: 0
+            },
+            {
+                question: "Як запретити стандартну дію для посилання?",
+                options: ["event.preventDefault()", "event.stop()", "event.cancel()"],
+                correct: 0
+            },
+            {
+                question: "Як написати fetch запит з методом POST?",
+                options: ["fetch(url, { method: 'POST', body: JSON.stringify(data) })", "fetch.post(url, data)", "post(url, data)"],
+                correct: 0
+            },
+            {
+                question: "Як обробити помилку у fetch?",
+                options: ["fetch(url).catch(error => { })", "fetch(url).then(r => r.json()).catch(e => { })", "обидва варіанти правильні"],
+                correct: 2
+            },
+            {
+                question: "Як написати async функцію?",
+                options: ["async function myFunc() { }", "function async myFunc() { }", "asyncFunction myFunc() { }"],
+                correct: 0
+            },
+            {
+                question: "Як очікувати результат Promise?",
+                options: ["const result = await promise;", "promise.wait()", "const result = promise.get();"],
+                correct: 0
+            },
+            {
+                question: "Як обробити помилку в async/await?",
+                options: ["try { await func() } catch(e) { }", "await func().catch(e => { })", "обидва варіанти правильні"],
+                correct: 2
+            },
+            {
+                question: "Як встановити глобальний обробник помилок?",
+                options: ["window.addEventListener('error', handler)", "window.onerror = handler", "обидва варіанти правильні"],
+                correct: 2
+            }
+        ];
+
+        // Функция для перемешивания массива
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        let selectedQuestions = [];
+        let correctAnswers = [];
+
+        // Генерировать вопросы
+        function generateQuestions() {
+            // Выбрать случайные вопросы каждый раз
+            selectedQuestions = [...questionBank];
+            shuffle(selectedQuestions);
+            selectedQuestions = selectedQuestions.slice(0, 10); // Выбрать 10 вопросов
+            correctAnswers = [];
+
+            const container = document.getElementById('questions');
+            container.innerHTML = ''; // Очистить старые вопросы
+            selectedQuestions.forEach((q, index) => {
+                // Перемешать варианты
+                let options = [...q.options];
+                shuffle(options);
+                let correctIndex = options.indexOf(q.options[q.correct]);
+
+                correctAnswers.push(correctIndex);
+
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                questionDiv.innerHTML = `<p>${index + 1}. ${q.question}</p>`;
+
+                options.forEach((opt, optIndex) => {
+                    const label = document.createElement('label');
+                    label.innerHTML = `<input type="radio" name="q${index}" value="${optIndex}"> ${opt}`;
+                    questionDiv.appendChild(label);
+                });
+
+                container.appendChild(questionDiv);
+            });
+        }
+
+        // Проверить ответы
+        function checkDomAnswers() {
+            let score = 0;
+
+            selectedQuestions.forEach((q, index) => {
+                const selected = document.querySelector(`input[name="q${index}"]:checked`);
+                const questionDiv = document.querySelectorAll('.question')[index];
+                const labels = questionDiv.querySelectorAll('label');
+
+                if (selected) {
+                    if (parseInt(selected.value) === correctAnswers[index]) {
+                        score++;
+                        questionDiv.style.backgroundColor = '#d4edda'; // Зеленый
+                    } else {
+                        questionDiv.style.backgroundColor = '#f8d7da'; // Красный
+                        // Добавить правильный ответ под вопросом
+                        const correctP = document.createElement('p');
+                        correctP.textContent = `Правильна відповідь: ${q.options[q.correct]}`;
+                        correctP.style.color = 'red';
+                        correctP.style.fontWeight = 'bold';
+                        questionDiv.appendChild(correctP);
+                        // Подсветить правильный вариант
+                        labels[correctAnswers[index]].style.backgroundColor = '#d4edda';
+                        labels[correctAnswers[index]].style.padding = '5px';
+                        labels[correctAnswers[index]].style.borderRadius = '5px';
+                    }
+                } else {
+                    questionDiv.style.backgroundColor = '#f8d7da';
+                    // Добавить правильный ответ под вопросом
+                    const correctP = document.createElement('p');
+                    correctP.textContent = `Правильна відповідь: ${q.options[q.correct]}`;
+                    correctP.style.color = 'red';
+                    correctP.style.fontWeight = 'bold';
+                    questionDiv.appendChild(correctP);
+                    // Подсветить правильный вариант
+                    labels[correctAnswers[index]].style.backgroundColor = '#d4edda';
+                    labels[correctAnswers[index]].style.padding = '5px';
+                    labels[correctAnswers[index]].style.borderRadius = '5px';
+                }
+            });
+
+            const result = document.getElementById("result");
+            result.innerHTML = `<strong>✅ Твій результат: ${score} з ${selectedQuestions.length} правильних відповідей.</strong><br>`;
+            if (score === selectedQuestions.length) {
+                result.innerHTML += "Відмінно! Ти чудово розумієш роботу з DOM!";
+                result.style.color = "green";
+            } else if (score >= selectedQuestions.length * 0.6) {
+                result.innerHTML += "Добре, але повтори методи DOM.";
+                result.style.color = "orange";
+            } else {
+                result.innerHTML += "Потрібно ще трохи практики. Не зупиняйся!";
+                result.style.color = "red";
+            }
+        }
+
+        // Функция для обновления теста
+        function resetTest() {
+            document.getElementById('jsDomTest').reset();
+            document.getElementById('result').innerHTML = '';
+            document.getElementById('questions').innerHTML = '';
+            correctAnswers = [];
+            generateQuestions();
+        }
+
+        // Генерировать при загрузке
+        window.onload = generateQuestions;
+    </script>
+</body>
+</html>

@@ -1,0 +1,740 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Підсумковий тест: HTML + CSS + JS</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        .test-container {
+            max-width: 800px;
+            margin: 100px auto;
+            background: var(--surface);
+            padding: 30px 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .test-container h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .test-container p {
+            text-align: center;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        .question {
+            background: var(--muted);
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            transition: 0.2s;
+            border: 1px solid #ddd;
+        }
+
+        .question:hover {
+            background: rgba(234,243,255,0.95);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .question p {
+            font-weight: bold;
+            color: #222;
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            margin-left: 10px;
+            padding: 3px 0;
+            cursor: pointer;
+        }
+
+        button {
+            display: block;
+            margin: 20px auto 10px auto;
+            padding: 10px 30px;
+            background-color: #2196F3;
+            border: none;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #1976D2;
+            transform: scale(1.05);
+        }
+
+        #result {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h2>Тести</h2>
+    </header>
+
+<nav>
+        <a href='{% url "sait" %}' onclick="showSection('intro')" class="nav-logo">
+            <img src="{% static 'images/дом.png' %}" alt="Button" style="width: 30px; height: auto;">
+        </a>
+        <div class="nav-links">
+            <a href='{% url "html_page" %}' onclick="showSection('html')">HTML</a>
+        </div>
+        <div class="nav-links">
+            <a href='{% url "cssGlav" %}' onclick="showSection('html')">CSS</a>
+        </div>
+                <div class="nav-links">
+            <a href='{% url "jsGlav" %}' onclick="showSection('html')">JavaScript</a>
+        </div>
+       </div>
+                <div class="nav-links">
+            <a href='{% url "testGlav" %}' onclick="showSection('html')">Тести</a>
+        </div>
+        </div>
+                <div class="nav-links">
+            <a href='{% url "chat" %}' onclick="showSection('html')">Асистент сайту</a>
+        </div>
+        <a href="https://t.me/studuhtml" class="nav-logo1" target="_blank">
+            <img src="{% static 'images/111.png' %}" alt="Головна" style="width: 45px; height: 35px;">
+        </a>
+    </nav>
+
+    <div class="sidebar">
+        <!-- Тести HTML -->
+        <a href="#" class="menu-item">📘 Тести HTML</a>
+        <div class="submenu">
+            <a href="{% url 'test_html_basic' %}">Основи HTML</a>
+            <a href="{% url 'test_html_advanced' %}">Просунуті елементи HTML</a>
+        </div>
+
+        <!-- Тести CSS -->
+        <a href="#" class="menu-item">🎨 Тести CSS</a>
+        <div class="submenu">
+            <a href="{% url 'test_css_basic' %}">Основи стилів</a>
+            <a href="{% url 'test_css_layout' %}">Макети, Flexbox, Grid</a>
+        </div>
+
+        <!-- Тести JavaScript -->
+        <a href="#" class="menu-item">💡 Тести JavaScript</a>
+        <div class="submenu">
+            <a href="{% url 'test_js_basic' %}">Основи мови</a>
+            <a href="{% url 'test_js_dom' %}">Робота з DOM</a>
+        </div>
+
+        <!-- Загальний тест -->
+        <a href="#" class="menu-item">🏆 Підсумковий тест</a>
+        <div class="submenu">
+            <a href="{% url 'test_all' %}" class="active">HTML + CSS + JS</a>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="test-container">
+            <h2>Підсумковий тест: HTML + CSS + JS</h2>
+            <p>Цей тест охоплює найважливіші теми з HTML, CSS та JavaScript. Перевір свої загальні знання веб-розробки!</p>
+
+            <form id="allTest">
+                <div id="questions"></div>
+                <div style="display: flex; gap: 10px; margin-top: 20px;">
+                    <button type="button" onclick="checkAllAnswers()" style="flex: 1;">Перевірити</button>
+                    <button type="button" onclick="resetTest()" style="flex: 1; background: #6c757d;">Оновити тест</button>
+                </div>
+            </form>
+
+            <p id="result"></p>
+        </div>
+    </div>
+
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/sidebar.js' %}"></script>
+
+    <script>
+        // Банк вопросов
+        const questionBank = [
+            {
+                question: "Який тег використовується для створення гіперпосилання?",
+                options: ["&lt;link&gt;", "&lt;a&gt;", "&lt;href&gt;"],
+                correct: 1
+            },
+            {
+                question: "Яка властивість CSS змінює колір тексту?",
+                options: ["background-color", "color", "font-color"],
+                correct: 1
+            },
+            {
+                question: "Як вивести повідомлення користувачу у JavaScript?",
+                options: ["console.log()", "alert()", "print()"],
+                correct: 1
+            },
+            {
+                question: "Який тег містить основну частину сайту?",
+                options: ["&lt;body&gt;", "&lt;main&gt;", "&lt;section&gt;"],
+                correct: 0
+            },
+            {
+                question: "Що робить CSS-властивість <code>display: flex;</code>?",
+                options: ["Змінює колір елемента", "Розміщує елементи у гнучкий ряд або стовпець", "Приховує елемент"],
+                correct: 1
+            },
+            {
+                question: "Як створити змінну у JavaScript?",
+                options: ["var name = \"Alex\";", "variable name = \"Alex\";", "name == \"Alex\";"],
+                correct: 0
+            },
+            {
+                question: "Який тег HTML використовується для заголовків?",
+                options: ["&lt;header&gt;", "&lt;h1&gt; - &lt;h6&gt;", "&lt;title&gt;"],
+                correct: 1
+            },
+            {
+                question: "Що означає HTML?",
+                options: ["Hyperlinks and Text Markup Language", "Hyper Text Markup Language", "Home Tool Markup Language"],
+                correct: 1
+            },
+            {
+                question: "Який тег використовується для найважливішого заголовка?",
+                options: ["&lt;heading&gt;", "&lt;h6&gt;", "&lt;h1&gt;"],
+                correct: 2
+            },
+            {
+                question: "Який тег використовується для вставки зображення?",
+                options: ["&lt;img&gt;", "&lt;src&gt;", "&lt;image&gt;"],
+                correct: 0
+            },
+            {
+                question: "Де розміщується вміст, який відображається на сторінці?",
+                options: ["&lt;meta&gt;", "&lt;body&gt;", "&lt;title&gt;"],
+                correct: 1
+            },
+            {
+                question: "Який атрибут використовується для задання посилання у тегу &lt;a&gt;?",
+                options: ["link", "href", "src"],
+                correct: 1
+            },
+            {
+                question: "Що означає CSS?",
+                options: ["Computer Style Sheets", "Cascading Style Sheets", "Creative Style System"],
+                correct: 1
+            },
+            {
+                question: "Як підключити зовнішній CSS-файл до HTML-документа?",
+                options: ["&lt;css src=\"style.css\"&gt;", "&lt;link rel=\"stylesheet\" href=\"style.css\"&gt;", "&lt;style src=\"style.css\"&gt;"],
+                correct: 1
+            },
+            {
+                question: "Як задати червоний колір тексту?",
+                options: ["color: red;", "font-color: red;", "text-color: red;"],
+                correct: 0
+            },
+            {
+                question: "Який селектор вибере елемент з id=\"main\"?",
+                options: [".main", "#main", "main"],
+                correct: 1
+            },
+            {
+                question: "Яка властивість задає колір фону?",
+                options: ["background-color", "color", "bgcolor"],
+                correct: 0
+            },
+            {
+                question: "Яке значення властивості <code>display</code> робить елемент блочним?",
+                options: ["inline", "block", "flex"],
+                correct: 1
+            },
+            {
+                question: "Яка властивість змінює розмір шрифту?",
+                options: ["font-size", "text-size", "font-style"],
+                correct: 0
+            },
+            {
+                question: "Яке ключове слово використовується для оголошення змінної?",
+                options: ["variable", "let", "set"],
+                correct: 1
+            },
+            {
+                question: "Як вивести повідомлення у консоль?",
+                options: ["print(\"Hello\")", "log(\"Hello\")", "console.log(\"Hello\")"],
+                correct: 2
+            },
+            {
+                question: "Який оператор використовується для порівняння з перевіркою типів?",
+                options: ["==", "===", "!="],
+                correct: 1
+            },
+            {
+                question: "Як створити функцію у JavaScript?",
+                options: ["function myFunc() { }", "func myFunc() { }", "create myFunc() { }"],
+                correct: 0
+            },
+            {
+                question: "Як записати однорядковий коментар?",
+                options: ["# коментар", "// коментар", "/* коментар */"],
+                correct: 1
+            },
+            {
+                question: "Який тип даних має значення <code>true</code>?",
+                options: ["Boolean", "String", "Number"],
+                correct: 0
+            },
+            {
+                question: "Як перевірити умову \"a більше 10\"?",
+                options: ["if a > 10", "if (a > 10)", "if: a > 10"],
+                correct: 1
+            },
+            {
+                question: "Що таке DOM?",
+                options: ["Бібліотека JavaScript", "Модель представлення HTML-документа у вигляді об’єктів", "CSS інтерфейс"],
+                correct: 1
+            },
+            {
+                question: "Який метод використовується для отримання елемента за його ID?",
+                options: ["document.find(\"id\")", "document.getElementById(\"id\")", "get.id(\"id\")"],
+                correct: 1
+            },
+            {
+                question: "Як можна змінити текст всередині HTML-елемента?",
+                options: ["element.textContent = \"Новий текст\";", "element.newText(\"Новий текст\");", "setText(element, \"Новий текст\");"],
+                correct: 0
+            },
+            {
+                question: "Як створити новий елемент у DOM?",
+                options: ["create.element(\"div\")", "document.createElement(\"div\")", "new Element(\"div\")"],
+                correct: 1
+            },
+            {
+                question: "Як додати створений елемент у документ?",
+                options: ["document.add(element)", "document.body.appendChild(element)", "appendToBody(element)"],
+                correct: 1
+            },
+            {
+                question: "Як отримати всі елементи з певним класом?",
+                options: ["document.getElementsByClassName(\"className\")", "document.queryClass(\"className\")", "document.findClass(\"className\")"],
+                correct: 0
+            },
+            {
+                question: "Як змінити стиль елемента через JavaScript?",
+                options: ["element.setStyle(\"color:red\")", "element.style.color = \"red\"", "setColor(element, \"red\")"],
+                correct: 1
+            },
+            {
+                question: "Яка властивість робить елемент контейнером Flexbox?",
+                options: ["display: flex;", "display: block;", "flex: container;"],
+                correct: 0
+            },
+            {
+                question: "Як видалити елемент з DOM?",
+                options: ["element.delete()", "element.remove()", "element.parentNode.removeChild(element)"],
+                correct: 1
+            },
+            {
+                question: "Як встановити клас HTML?",
+                options: ["<div class=\"myclass\">", "<div id=\"myclass\">", "<div className=\"myclass\">"],
+                correct: 0
+            },
+            {
+                question: "Як встановити ID HTML елемента?",
+                options: ["<div id=\"myid\">", "<div name=\"myid\">", "<div identifier=\"myid\">"],
+                correct: 0
+            },
+            {
+                question: "Що означає атрибут alt у зображенні?",
+                options: ["Альтернативний колір", "Альтернативний текст для доступності", "Висота зображення"],
+                correct: 1
+            },
+            {
+                question: "Яка властивість CSS задає розмір елемента?",
+                options: ["width та height", "size", "dimension"],
+                correct: 0
+            },
+            {
+                question: "Як встановити фоновий колір у CSS?",
+                options: ["bg-color: red;", "background-color: red;", "back-color: red;"],
+                correct: 1
+            },
+            {
+                question: "Що означає position: absolute?",
+                options: ["Позиціонування від батька", "Позиціонування від точки на сторінці", "Позиціонування від вікна"],
+                correct: 0
+            },
+            {
+                question: "Як створити цикл у JavaScript?",
+                options: ["for (i=0; i<5; i++) { }", "loop (i=0; i<5; i++) { }", "repeat 5 times { }"],
+                correct: 0
+            },
+            {
+                question: "Як написати умову if/else у JavaScript?",
+                options: ["if (x > 5) { } else { }", "if: x > 5 { } else { }", "condition x > 5 { } else { }"],
+                correct: 0
+            },
+            {
+                question: "Що означає typeof у JavaScript?",
+                options: ["Тип змінної", "Назва класу", "Операція преобразования"],
+                correct: 0
+            },
+            {
+                question: "Як підкреслити текст у HTML?",
+                options: ["<u>текст</u>", "<underline>текст</underline>", "<b>текст</b>"],
+                correct: 0
+            },
+            {
+                question: "Який тег створює списки у HTML?",
+                options: ["<list>", "<ul> та <ol>", "<items>"],
+                correct: 1
+            },
+            {
+                question: "Як встановити шрифт у CSS?",
+                options: ["font-family: Arial;", "font: Arial;", "text-font: Arial;"],
+                correct: 0
+            },
+            {
+                question: "Що робить display: inline?",
+                options: ["Робить елемент блочним", "Робить елемент рядковим", "Приховує елемент"],
+                correct: 1
+            },
+            {
+                question: "Як вставити коментар у HTML?",
+                options: ["<!-- коментар -->", "// коментар", "# коментар"],
+                correct: 0
+            },
+            {
+                question: "Як вставити коментар у CSS?",
+                options: ["// коментар", "<!-- коментар -->", "/* коментар */"],
+                correct: 2
+            },
+            {
+                question: "Як вставити коментар у JavaScript?",
+                options: ["<!-- коментар -->", "// коментар", "''' коментар '''"],
+                correct: 1
+            },
+            {
+                question: "Что робить border у CSS?",
+                options: ["Встановлює фон", "Встановлює межу (рамку)", "Встановлює заливку"],
+                correct: 1
+            },
+            {
+                question: "Яка властивість змінює колір тексту?",
+                options: ["text-color", "color", "font-color"],
+                correct: 1
+            },
+            {
+                question: "Як видалити маркери зі списку?",
+                options: ["list-style: none;", "bullets: none;", "marker: none;"],
+                correct: 0
+            },
+            {
+                question: "Яка властивість встановлює тінь тексту?",
+                options: ["text-shadow", "font-shadow", "shadow"],
+                correct: 0
+            },
+            {
+                question: "Як встановити розраховану ширину елемента?",
+                options: ["width: 50%;", "width: calc(100% - 20px);", "обидва варіанти правильні"],
+                correct: 2
+            },
+            {
+                question: "Як зробити сайт адаптивним для мобільних?",
+                options: ["Встановити viewport meta-тег", "Використовувати media queries", "обидва варіанти правильні"],
+                correct: 2
+            },
+            {
+                question: "Як додати обробник клікання у JavaScript?",
+                options: ["element.addEventListener('click', function)", "element.onclick = function", "обидва варіанти правильні"],
+                correct: 2
+            },
+            {
+                question: "Яка властивість задає прозорість елемента?",
+                options: ["opacity", "transparency", "alpha"],
+                correct: 0
+            },
+            {
+                question: "Як встановити медіа-запит у CSS?",
+                options: ["@media (max-width: 768px) { }", "@screen { }", "@query { }"],
+                correct: 0
+            },
+            {
+                question: "Що таке селектор у CSS?",
+                options: ["Инструмент вибору", "Часть CSS-правила, яка вибирає HTML-елементи", "Цвет"],
+                correct: 1
+            },
+            {
+                question: "Як встановити лінію при наведенні на посилання?",
+                options: ["a:hover { text-decoration: underline; }", "a { text-decoration: underline; }", "a:active { text-decoration: underline; }"],
+                correct: 0
+            },
+            {
+                question: "Що означає каскадність у CSS?",
+                options: ["Порядок елементів на сторінці", "Правила для спадкування стилів та пріоритету", "Тип селектора"],
+                correct: 1
+            },
+            {
+                question: "Як встановити мету сайту для SEO?",
+                options: ["&lt;meta name='description' content='...'&gt;", "&lt;meta name='keywords' content='...'&gt;", "обидва варіанти правильні"],
+                correct: 2
+            },
+            {
+                question: "Яка властивість CSS встановлює спосіб обрахування розміру?",
+                options: ["box-sizing: border-box;", "sizing: border;", "box-model: border-box;"],
+                correct: 0
+            },
+            {
+                question: "Як встановити Flexbox контейнер?",
+                options: ["display: flex;", "display: block;", "flex: container;"],
+                correct: 0
+            },
+            {
+                question: "Що означає атрибут 'alt' у зображенні?",
+                options: ["Альтернативний колір", "Альтернативний текст для доступності", "Висота зображення"],
+                correct: 1
+            },
+            {
+                question: "Як написати arrow function?",
+                options: ["const add = (a, b) => a + b;", "const add => (a, b) { a + b };", "arrow add = (a, b) => { a + b };"],
+                correct: 0
+            },
+            {
+                question: "Як вибрати елемент у DOM за селектором?",
+                options: ["document.querySelector('.class')", "document.select('.class')", "document.find('.class')"],
+                correct: 0
+            },
+            {
+                question: "Яка властивість CSS встановлює прозорість?",
+                options: ["transparency", "opacity", "alpha"],
+                correct: 1
+            },
+            {
+                question: "Як встановити радіус кутів у CSS?",
+                options: ["corner-radius: 10px;", "border-radius: 10px;", "radius: 10px;"],
+                correct: 1
+            },
+            {
+                question: "Що робить метод <code>Array.map()</code>?",
+                options: ["Встановлює карту", "Трансформує кожен елемент масиву", "Шукає елемент"],
+                correct: 1
+            },
+            {
+                question: "Як встановити обов'язкове поле форми?",
+                options: ["&lt;input required&gt;", "&lt;input mandatory&gt;", "&lt;input necessary&gt;"],
+                correct: 0
+            },
+            {
+                question: "Як встановити таймер у JavaScript?",
+                options: ["setTimeout(function, milliseconds)", "timer(function, milliseconds)", "delay(function, milliseconds)"],
+                correct: 0
+            },
+            {
+                question: "Як встановити Grid контейнер?",
+                options: ["display: grid;", "display: flex;", "grid: container;"],
+                correct: 0
+            },
+            {
+                question: "Що роблять методи <code>querySelector</code> та <code>querySelectorAll</code>?",
+                options: ["querySelector повертає перший елемент, querySelectorAll - всі", "Вони однакові", "querySelectorAll повертає один"],
+                correct: 0
+            },
+            {
+                question: "Як встановити CSS змінну (custom property)?",
+                options: ["--my-color: red;", "@variable my-color: red;", "var my-color = red;"],
+                correct: 0
+            },
+            {
+                question: "Як написати умову if/else у JavaScript?",
+                options: ["if (x > 5) { } else { }", "if: x > 5 { } else { }", "condition x > 5 { } else { }"],
+                correct: 0
+            },
+            {
+                question: "Яка властивість задає вирівнювання елементів у Flexbox?",
+                options: ["align-items", "justify-content", "align-content"],
+                correct: 0
+            },
+            {
+                question: "Як встановити значення для input поля?",
+                options: ["input.value = '...';", "input.text = '...';", "input.setValue('...');"],
+                correct: 0
+            },
+            {
+                question: "Як визначити тип змінної?",
+                options: ["getType()", "typeof variable", "variable.type"],
+                correct: 1
+            },
+            {
+                question: "Як визначити, чи містить масив елемент?",
+                options: ["arr.includes(element)", "arr.contains(element)", "arr.has(element)"],
+                correct: 0
+            },
+            {
+                question: "Як встановити фоновий колір у CSS?",
+                options: ["bg-color: red;", "background-color: red;", "back-color: red;"],
+                correct: 1
+            },
+            {
+                question: "Як додати обробник клікання на елемент?",
+                options: ["element.addEventListener('click', func)", "element.onclick = func", "обидва варіанти правильні"],
+                correct: 2
+            },
+            {
+                question: "Як перемешувати масив у JavaScript?",
+                options: ["arr.shuffle()", "Використовувати алгоритм Fisher-Yates", "arr.randomize()"],
+                correct: 1
+            },
+            {
+                question: "Як встановити медіа-запит для адаптивного дизайну?",
+                options: ["@media (max-width: 768px) { }", "@screen (max-width: 768px) { }", "@responsive { }"],
+                correct: 0
+            },
+            {
+                question: "Як написати fetch запит?",
+                options: ["fetch(url).then(r => r.json()).then(data => { })", "get(url).then(...)", "request(url)"],
+                correct: 0
+            },
+            {
+                question: "Як запустити скрипт після завантаження сторінки?",
+                options: ["&lt;script src='file.js' defer&gt;&lt;/script&gt;", "&lt;script src='file.js' async&gt;&lt;/script&gt;", "&lt;script src='file.js' onload&gt;&lt;/script&gt;"],
+                correct: 0
+            },
+            {
+                question: "Як встановити відео з контролем у HTML5?",
+                options: ["&lt;video src='video.mp4' controls&gt;&lt;/video&gt;", "&lt;movie src='video.mp4'&gt;&lt;/movie&gt;", "&lt;video controls loop src='video.mp4'&gt;&lt;/video&gt;"],
+                correct: 0
+            },
+            {
+                question: "Як встановити аудіо з контролем у HTML5?",
+                options: ["&lt;audio src='audio.mp3' controls&gt;&lt;/audio&gt;", "&lt;sound src='audio.mp3'&gt;&lt;/sound&gt;", "&lt;music src='audio.mp3'&gt;&lt;/music&gt;"],
+                correct: 0
+            },
+            {
+                question: "Як видалити елемент з DOM?",
+                options: ["element.delete()", "element.remove()", "element.parentNode.removeChild(element)"],
+                correct: 1
+            },
+            {
+                question: "Як встановити клас на HTML елемент?",
+                options: ["&lt;div class='myclass'&gt;", "&lt;div id='myclass'&gt;", "&lt;div className='myclass'&gt;"],
+                correct: 0
+            }
+        ];
+
+        // Функция для перемешивания массива
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        let selectedQuestions = [];
+        let correctAnswers = [];
+
+        // Генерировать вопросы
+        function generateQuestions() {
+            // Выбрать случайные вопросы каждый раз
+            selectedQuestions = [...questionBank];
+            shuffle(selectedQuestions);
+            selectedQuestions = selectedQuestions.slice(0, 10); // Выбрать 10 вопросов
+            correctAnswers = [];
+
+            const container = document.getElementById('questions');
+            container.innerHTML = ''; // Очистить старые вопросы
+            selectedQuestions.forEach((q, index) => {
+                // Перемешать варианты
+                let options = [...q.options];
+                shuffle(options);
+                let correctIndex = options.indexOf(q.options[q.correct]);
+
+                correctAnswers.push(correctIndex);
+
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                questionDiv.innerHTML = `<p>${index + 1}. ${q.question}</p>`;
+
+                options.forEach((opt, optIndex) => {
+                    const label = document.createElement('label');
+                    label.innerHTML = `<input type="radio" name="q${index}" value="${optIndex}"> ${opt}`;
+                    questionDiv.appendChild(label);
+                });
+
+                container.appendChild(questionDiv);
+            });
+        }
+
+        // Проверить ответы
+        function checkAllAnswers() {
+            let score = 0;
+
+            selectedQuestions.forEach((q, index) => {
+                const selected = document.querySelector(`input[name="q${index}"]:checked`);
+                const questionDiv = document.querySelectorAll('.question')[index];
+                const labels = questionDiv.querySelectorAll('label');
+
+                if (selected) {
+                    if (parseInt(selected.value) === correctAnswers[index]) {
+                        score++;
+                        questionDiv.style.backgroundColor = '#d4edda'; // Зеленый
+                    } else {
+                        questionDiv.style.backgroundColor = '#f8d7da'; // Красный
+                        // Добавить правильный ответ под вопросом
+                        const correctP = document.createElement('p');
+                        correctP.textContent = `Правильна відповідь: ${q.options[q.correct]}`;
+                        correctP.style.color = 'red';
+                        correctP.style.fontWeight = 'bold';
+                        questionDiv.appendChild(correctP);
+                        // Подсветить правильный вариант
+                        labels[correctAnswers[index]].style.backgroundColor = '#d4edda';
+                        labels[correctAnswers[index]].style.padding = '5px';
+                        labels[correctAnswers[index]].style.borderRadius = '5px';
+                    }
+                } else {
+                    questionDiv.style.backgroundColor = '#f8d7da';
+                    // Добавить правильный ответ под вопросом
+                    const correctP = document.createElement('p');
+                    correctP.textContent = `Правильна відповідь: ${q.options[q.correct]}`;
+                    correctP.style.color = 'red';
+                    correctP.style.fontWeight = 'bold';
+                    questionDiv.appendChild(correctP);
+                    // Подсветить правильный вариант
+                    labels[correctAnswers[index]].style.backgroundColor = '#d4edda';
+                    labels[correctAnswers[index]].style.padding = '5px';
+                    labels[correctAnswers[index]].style.borderRadius = '5px';
+                }
+            });
+
+            const result = document.getElementById("result");
+            result.innerHTML = `<strong>✅ Твій результат: ${score} з ${selectedQuestions.length} правильних відповідей.</strong><br>`;
+            if (score === selectedQuestions.length) {
+                result.innerHTML += "Чудово! Ти впевнено володієш основами HTML, CSS і JavaScript!";
+                result.style.color = "green";
+            } else if (score >= selectedQuestions.length * 0.6) {
+                result.innerHTML += "Добре! Але варто трохи повторити деякі теми.";
+                result.style.color = "orange";
+            } else {
+                result.innerHTML += "Потрібно ще трохи практики. Не зупиняйся!";
+                result.style.color = "red";
+            }
+        }
+
+        // Функция для обновления теста
+        function resetTest() {
+            document.getElementById('allTest').reset();
+            document.getElementById('result').innerHTML = '';
+            document.getElementById('questions').innerHTML = '';
+            correctAnswers = [];
+            generateQuestions();
+        }
+
+        // Генерировать при загрузке
+        window.onload = generateQuestions;
+    </script>
+</body>
+</html>

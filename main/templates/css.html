@@ -1,0 +1,531 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    
+    <title>Навчання веб-розробці</title>
+</head>
+<body>
+    <header>
+        <h1>Визначення цілей та структури майбутнього сайту.</h1>
+    </header>
+    
+<nav>
+        <a href='{% url "sait" %}' onclick="showSection('intro')" class="nav-logo">
+            <img src="{% static 'images/дом.png' %}" alt="Button" style="width: 30px; height: auto;">
+        </a>
+        <div class="nav-links">
+            <a href='{% url "html_page" %}' onclick="showSection('html')">HTML</a>
+        </div>
+        <div class="nav-links">
+            <a href='{% url "cssGlav" %}' onclick="showSection('html')">CSS</a>
+        </div>
+                <div class="nav-links">
+            <a href='{% url "jsGlav" %}' onclick="showSection('html')">JavaScript</a>
+        </div>
+       </div>
+                <div class="nav-links">
+            <a href='{% url "testGlav" %}' onclick="showSection('html')">Тести</a>
+        </div>
+        </div>
+                <div class="nav-links">
+            <a href='{% url "chat" %}' onclick="showSection('html')">Асистент сайту</a>
+        </div>
+        <a href="https://t.me/studuhtml" class="nav-logo1" target="_blank">
+            <img src="{% static 'images/111.png' %}" alt="Головна" style="width: 45px; height: 35px;">
+        </a>
+    </nav>
+
+
+    <div class="sidebar"> 
+        <!-- Глава 5 -->
+        <a href="#" class="menu-item">📁 Підготовка</a>
+        <div class="submenu">
+            <a href='{% url 'choice' %}'>Вибір інструментів розробки (редактор коду, браузер, ресурси).</a>
+            <a href='{% url 'definition' %}'>Визначення цілей та структури майбутнього сайту.</a>
+        </div>
+
+        <!-- Глава 6 -->
+        <a href="#" class="menu-item">📁 Як створити сайт HTML</a>
+        <div class="submenu">
+            <a href='{% url 'creation' %}'>Створення базового HTML-файлу (файл із розширенням .html).</a>
+            <a href='{% url 'discovery' %}'>Відкриття файлу HTML у браузері для перегляду.</a>
+        </div>
+
+        <!-- Глава 7 -->
+        <a href="#" class="menu-item">📁 Структури HTML</a>
+        <div class="submenu">
+            <a href='{% url 'study' %}'>Вивчення основних тегів (html, head, body).</a>
+            <a href='{% url 'semantics' %}'>Семантичні елементи (header, main, footer).</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Інформація для сайту</a>
+        <div class="submenu">
+            <a href='{% url 'gathering' %}'>Збір текстового контенту, зображень та медіа.</a>
+            <a href='{% url 'gathering' %}'>Організація інформації у логічні розділи.</a>
+        </div>
+
+        <!-- Глава 6 -->
+        <a href="#" class="menu-item">📁 Дизайн сайту</a>
+        <div class="submenu">
+            <a href='{% url 'connection' %}'>Підключення CSS для стилізації HTML елементів.</a>
+            <a href='{% url 'connectionn' %}'>Створення адаптивного дизайну для різних пристроїв.</a>
+            <a href='{% url 'css' %}'>Цікаві приклади оформлення сайту через цсс.</a>
+        </div>
+
+        <!-- Глава 7 -->
+        <a href="#" class="menu-item">📁 Приклади коду та їх результат</a>
+        <div class="submenu">
+            <a href='{% url 'writing' %}'>Написання простого прикладу із заголовком та текстом.</a>
+            <a href='{% url 'addition' %}'>Додавання кнопки та перевірка її роботи у браузері.</a>
+        </div>
+    </div>   
+    <style>
+        .custom-button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+    
+        .custom-button:hover {
+            background-color: #0056b3;
+        }
+    </style> 
+    <div class="content">
+
+        <h1>HTML (структура сторінки)</h1>
+        <pre>
+            <code>
+                &lt;!DOCTYPE html&gt;
+                &lt;html lang="uk"&gt;
+                &lt;head&gt;
+                    &lt;meta charset="UTF-8"&gt; &lt;!-- Встановлює кодування документа --&gt;
+                    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt; &lt;!-- Налаштування адаптивності --&gt;
+                    &lt;title&gt;Документ&lt;/title&gt; &lt;!-- Заголовок сторінки --&gt;
+                    &lt;link rel="stylesheet" href="{% static 'css/task11.css' %}"&gt; &lt;!-- Підключення зовнішнього CSS --&gt;
+                &lt;/head&gt;
+                &lt;body&gt;
+                    &lt;div class="container"&gt;
+                        &lt;div class="flipper" id="target"&gt;
+                          &lt;div class="front"&gt;
+                            &lt;a href="#target" class="home button"&gt;Про мене&lt;/a&gt;
+                            &lt;div class="share-block"&gt;
+                              &lt;a href=""&gt;&lt;i class="fa fa-facebook"&gt;&lt;/i&gt;&lt;/a&gt;
+                              &lt;a href=""&gt;&lt;i class="fa fa-instagram"&gt;&lt;/i&gt;&lt;/a&gt;
+                              &lt;a href=""&gt;&lt;i class="fa fa-twitter"&gt;&lt;/i&gt;&lt;/a&gt;
+                              &lt;a href=""&gt;&lt;i class="fa fa-youtube"&gt;&lt;/i&gt;&lt;/a&gt;
+                              &lt;a href=""&gt;&lt;i class="fa fa-linkedin"&gt;&lt;/i&gt;&lt;/a&gt;
+                            &lt;/div&gt;
+                          &lt;h1&gt;ДИЗАЙН & КОД&lt;/h1&gt;
+                          &lt;/div&gt;
+                          &lt;div class="back"&gt;
+                            &lt;a href="#close" class="close button"&gt;&lt;i class="fa fa-home"&gt;&lt;/i&gt;&lt;/a&gt;
+                            &lt;div class="inner"&gt;
+                              &lt;h2&gt;Про мене&lt;/h2&gt;
+                              &lt;p&gt;Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.&lt;/p&gt;
+                              &lt;/div&gt;
+                            &lt;/div&gt;
+                          &lt;/div&gt;
+                      &lt;/div&gt;
+                &lt;/body&gt;
+                &lt;/html&gt;
+                </code>
+            </pre>
+            <h1>CSS (стилі та анімація)</h1>
+            <pre>
+                <code>
+                @import 'https://fonts.googleapis.com/css?family=Open+Sans:400,700|Playfair+Display:400,700';
+                *{box-sizing:border-box}
+                body {
+                  margin: 0;
+                  background: url(photo-morning-rose.jpg);
+                  background-repeat: no-repeat;
+                  background-position: 50% 50%;
+                  background-size: cover;
+                  height: 100vh;
+                  padding: 20px;
+                  font-size: 16px;
+                  font-family: 'Open Sans', sans-serif;
+                  overflow: hidden;
+                }
+                h1 { 
+                  color: white;
+                  font-size: 4em;
+                  font-family: 'Playfair Display', serif;
+                  margin: 0;
+                  transform: translate(-50%, -50%);
+                  position: absolute; 
+                  top: 50%; 
+                  left: 50%;
+                  white-space: nowrap;
+                  letter-spacing: 5px;
+                }
+                h2 {
+                  font-size: 3em;
+                  font-family: 'Playfair Display', serif;
+                  line-height: 1;
+                }
+                .share-block {
+                  float: right;
+                  padding-right: 15px;
+                  line-height: 50px;
+                }
+                .share-block a {
+                  color: #999;
+                  display: inline-block;
+                  margin-right: 7px;
+                  transition: .4s linear;
+                }
+                .share-block a:hover {
+                  color: white;
+                }
+                .container {  
+                  width: 100%;
+                  height: 100%;
+                  -webkit-perspective: 1200;
+                  perspective: 1200;
+                  -moz-transform: perspective(1200px);
+                  -webkit-transform-style: preserve-3d;
+                  -moz-transform-style: preserve-3d; 
+                  transform-style: preserve-3d;
+                  position: relative;
+                }
+                .button {
+                  text-decoration: none;
+                  width: 120px;
+                  height: 50px;
+                  position: relative;
+                  display: inline-block;
+                  top: 0;
+                  left: 0;
+                  z-index: 3;
+                  line-height: 50px;
+                  padding-left: 30px;
+                  transition: .4s linear;
+                }
+                .button:before {
+                  content: "";
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                  width: 0;
+                  height: 0;
+                  border-top: 20px solid #CE1D5A;
+                  border-right: 20px solid transparent;
+                }
+                .button:after {
+                  content: "";
+                  position: absolute;
+                  top: 8px;
+                  left: 8px;
+                  width: 0;
+                  height: 0;
+                  border-top: 20px solid white;
+                  border-right: 20px solid transparent;
+                }
+                .home:hover, .close:hover {
+                  color: white;
+                }
+                .home, .close {
+                  color: #999;
+                  font-size: 20px;
+                }
+                .flipper {
+                  border: 10px solid rgba(255,255,255,0.2);
+                  position: relative;
+                  width: 100%;
+                  height: 100%;
+                  transform-style: preserve-3d;
+                  transition: .7s linear;  
+                }
+                .front, .back {
+                  font-family: 'Cabin', sans-serif;
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                  width: 100%;
+                  height: 100%;
+                  background: rgba(0,0,0,.5);
+                  backface-visibility: hidden;
+                }
+                .front {
+                  z-index: 2;
+                  transform: rotateX(0deg);
+                }
+                .back {
+                  transform: rotateX(-180deg);
+                  color: white;
+                }
+                .flipper:target {
+                  transform: rotateX(180deg);
+                }
+                .inner {
+                  padding: 20px;
+                  line-height: 2;
+                  letter-spacing: 1px;
+                }
+                @media (max-width: 768px) {
+                  h1 {font-size: 3em; white-space:normal;}
+                  h2 {font-size: 2em}
+                  p {font-size: 14px;}
+                }
+                </code>
+            </pre>
+            <a href="{% url 'task1' %}" target="_blank" class="custom-button">Продивитися результат</a>
+                <h1>HTML (структура сторінки)</h1>
+    <p>У HTML-коді використовується механізм перевертання елементів за допомогою якорів (<code>id="target"</code>). Основні елементи:</p>
+    <ul>
+        <li><code>{% load static %}</code> – підключає статичні файли (наприклад, CSS) у Django.</li>
+        <li><code>&lt;div class="flipper" id="target"&gt;</code> – контейнер, що містить передню (<code>.front</code>) і задню (<code>.back</code>) сторони картки.</li>
+        <li>Кнопка "Про мене" (<code>&lt;a href="#target" class="home button"&gt;</code>) активує перевертання.</li>
+        <li>Соцмережі (<code>.share-block</code>) містять іконки посилань.</li>
+        <li>Заголовок "ДИЗАЙН & КОД" відображається на передній стороні.</li>
+        <li>На зворотній стороні є кнопка close, яка повертає картку у вихідне положення (<code>&lt;a href="#close" class="close button"&gt;</code>).</li>
+        <li>У блоці <code>.inner</code> міститься текстовий опис.</li>
+    </ul>
+
+    <h2>CSS (стилі та анімація)</h2>
+    <p>Цей CSS-код визначає зовнішній вигляд і поведінку сторінки:</p>
+    <ul>
+        <li><code>background: url(photo-morning-rose.jpg);</code> задає фон для всієї сторінки.</li>
+        <li>Анімація перевертання реалізується через <code>transform: rotateX(180deg);</code>.</li>
+        <li><code>.container</code> створює 3D-ефект за допомогою <code>perspective: 1200px;</code>.</li>
+        <li><code>.flipper:target</code> змінює стан елемента <code>.flipper</code>, що викликає перевертання.</li>
+        <li><code>.button</code> оформлює кнопки ("Про мене" та "Закрити").</li>
+        <li>Медіа-запит (<code>@media (max-width: 768px)</code>) адаптує розмітку для мобільних пристроїв, зменшуючи розмір тексту.</li>
+    </ul>
+
+    <h2>Як це працює?</h2>
+    <ol>
+        <li>При завантаженні сторінки видно лише передню частину картки.</li>
+        <li>Натискання на "Про мене" переводить браузер за якорем <code>#target</code>, змінюючи стиль <code>transform: rotateX(180deg);</code>, що перевертає картку.</li>
+        <li>Натискання на кнопку "Закрити" повертає картку назад (<code>#close</code>).</li>
+    </ol>
+    <h1>HTML (структура сторінки)</h1>
+    <p>Цей HTML-код створює сторінку з декількома блоками, до яких застосовані різні 3D-трансформації.</p>
+    <pre>
+        <code>
+            &lt;section&gt;
+                &lt;div class="container"&gt;
+                    &lt;div class="transform translate3d"&gt;&lt;h4&gt;translate3d(20px,20px,20px)&lt;/h4&gt;&lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="container"&gt;
+                    &lt;div class="transform scale3d"&gt;&lt;h4&gt;scale3d(0,0,1)&lt;/h4&gt;&lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="container"&gt;
+                    &lt;div class="transform rotate3d"&gt;&lt;h4&gt;rotate3d(1, .5, 1, -30deg)&lt;/h4&gt;&lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="container"&gt;
+                    &lt;div class="transform rotateX"&gt;&lt;h4&gt;rotateX(180deg)&lt;/h4&gt;&lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="container"&gt;
+                    &lt;div class="transform rotateY"&gt;&lt;h4&gt;rotateY(180deg)&lt;/h4&gt;&lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="container"&gt;
+                    &lt;div class="transform rotateZ"&gt;&lt;h4&gt;rotateZ(180deg)&lt;/h4&gt;&lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/section&gt;
+        </code>
+    </pre>
+
+    <h1>CSS (стилі та анімація)</h1>
+    <p>Цей CSS-код визначає зовнішній вигляд сторінки, стилі блоків і анімації 3D-трансформацій.</p>
+    <pre>
+        <code>
+            body {
+                margin: 0;
+                text-align: center;
+                background: #F4F1F8;
+            }
+            h1 {
+                font-family: Verdana, Geneva, Tahoma, sans-serif, cursive;
+                color: #FFC84D;
+            }
+            .container {
+                position: relative;
+                display: inline-block;
+                height: 120px;
+                margin: 0 2em 2em 0;
+                opacity: .7;
+                border-radius: 5px;
+                background: #E4E1E4;
+                perspective: 400px;
+                transform-style: preserve-3d;
+            }
+            .transform {
+                position: absolute;
+                bottom: 0;
+                background: rgba(65, 245, 254, .5);
+                border-radius: 5px;
+                animation: notransform 5s infinite;
+            }
+            .translate3d {
+                transform: translate3d(20px,20px,20px);
+            }
+            .scale3d {
+                transform: scale3d(0,0,1);
+                animation-delay: .5s;
+            }
+            .rotate3d {
+                transform: rotate3d(1, .5, 1, -30deg);
+                animation-delay: 1s;
+            }
+            .rotateX {
+                transform: rotateX(180deg);
+                animation-delay: 1.5s;
+            }
+            .rotateY {
+                transform: rotateY(180deg);
+                animation-delay: 2s;
+            }
+            .rotateZ {
+                transform: rotateZ(180deg);
+                animation-delay: 2.5s;
+            }
+            @keyframes notransform {
+                50% {transform: none;}
+            }
+        </code>
+    </pre>
+
+    <h2>Як це працює?</h2>
+    <p>Кожен блок <code>.container</code> містить елемент <code>.transform</code>, до якого застосовані 3D-трансформації.</p>
+    <ul>
+        <li>Трансформація <code>translate3d</code> зміщує елемент у тривимірному просторі.</li>
+        <li><code>scale3d</code> змінює розмір елемента у трьох напрямках.</li>
+        <li><code>rotate3d</code>, <code>rotateX</code>, <code>rotateY</code>, <code>rotateZ</code> обертають елементи навколо відповідних осей.</li>
+        <li>Властивість <code>perspective</code> у <code>.container</code> додає ефект глибини.</li>
+        <li>Анімація <code>@keyframes notransform</code> періодично повертає елементи у початковий стан.</li>
+    </ul>
+        <a href="{% url 'task2' %}" target="_blank" class="custom-button">Продивитися результат</a>
+        <h1>HTML (структура сторінки)</h1>
+    <p>Цей HTML-код створює 3D-враження текстових блоків, що обертаються навколо осі.</p>
+    <pre>
+        <code>
+            &lt;div id="outer"&gt;
+                &lt;div id="wrapper"&gt;
+                    &lt;div id="t6"&gt;
+                        &lt;div class="op"&gt;&lt;/div&gt;
+                        &lt;div class="show"&gt;Набор&lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div id="t5"&gt;
+                        &lt;div class="op"&gt;&lt;/div&gt;
+                        &lt;div class="show"&gt;На курсы&lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div id="t4"&gt;
+                        &lt;div class="op"&gt;&lt;/div&gt;
+                        &lt;div class="show"&gt;HTML&lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div id="t3"&gt;
+                        &lt;div class="op"&gt;&lt;/div&gt;
+                        &lt;div class="show"&gt;CSS&lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div id="t2"&gt;
+                        &lt;div class="op"&gt;&lt;/div&gt;
+                        &lt;div class="show"&gt;PHP&lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div id="t1"&gt;
+                        &lt;div class="op"&gt;&lt;/div&gt;
+                        &lt;div class="show"&gt;Звоните&lt;br&gt;&lt;span class="small"&gt;+375 29 817 68 92&lt;/span&gt;&lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        </code>
+    </pre>
+
+    <h1>CSS (стилі та анімація)</h1>
+    <p>Цей CSS-код задає стилі для блоків, визначає 3D-обертання та додає ефекти анімації.</p>
+    <pre>
+        <code>
+            @keyframes anim {
+                from {
+                    transform: rotateY(-120deg);
+                }
+                to {
+                    transform: rotateY(240deg);
+                }
+            }
+            
+            #outer {
+                width: 1000px;
+            }
+            
+            #wrapper {
+                float: right;
+                width: 500px;
+                height: 100px;
+                margin-top: 100px;
+                position: relative;
+                animation: anim 20s infinite linear;
+                transform-origin: left;
+                transform-style: preserve-3d;
+            }
+            
+            #wrapper>div {
+                width: 500px;
+                height: 300px;
+                backface-visibility: visible;
+                position: absolute;
+                transform-origin: left;
+            }
+            
+            .show {
+                width: 300px;
+                height: 100%;
+                color: #ffffff;
+                text-align: center;
+                box-sizing: border-box;
+                padding: 30px;
+                font-size: 33px;
+                float: left;
+                transform: rotateY(180deg);
+            }
+            
+            #t6 { transform: rotateY(300deg); }
+            #t5 { transform: rotateY(240deg); }
+            #t4 { transform: rotateY(180deg); }
+            #t3 { transform: rotateY(120deg); }
+            #t2 { transform: rotateY(60deg); }
+            #t1 { transform: rotateY(0deg); }
+            
+            #t6 div.show { background-color: #8e3a09; }
+            #t5 div.show { background-color: #6d2176; }
+            #t4 div.show { background-color: #b58224; }
+            #t3 div.show { background-color: #83890e; }
+            #t2 div.show { background-color: #ff0000; }
+            #t1 div.show { background-color: #0000ff; }
+            
+            #wrapper .small {
+                font-size: 19px;
+            }
+        </code>
+    </pre>
+
+    <h2>Як це працює?</h2>
+    <ul>
+        <li>Блок <code>#wrapper</code> містить кілька внутрішніх блоків <code>#t1 - #t6</code>, які представляють різні текстові елементи.</li>
+        <li>Анімація <code>@keyframes anim</code> здійснює обертання <code>#wrapper</code> навколо осі Y.</li>
+        <li>Кожен текстовий блок має свою позицію завдяки <code>transform: rotateY()</code>.</li>
+        <li>Для створення 3D-ефекту використовується <code>transform-style: preserve-3d;</code> та <code>perspective</code>.</li>
+        <li>Кольори кожного блока задаються індивідуально через класи <code>#t1 div.show</code> - <code>#t6 div.show</code>.</li>
+    </ul>
+        <a href="{% url 'task3' %}" target="_blank" class="custom-button">Продивитися результат</a>
+    </div>
+</head>
+<body>
+
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/sidebar.js' %}"></script>
+    <script src="{% static 'js/anim.js' %}"></script>
+</body>
+</html>

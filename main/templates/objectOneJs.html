@@ -1,0 +1,177 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Об’єкти та робота з ними</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Об’єкти в JavaScript</h1>
+    </header>
+
+<nav>
+        <a href='{% url "sait" %}' onclick="showSection('intro')" class="nav-logo">
+            <img src="{% static 'images/дом.png' %}" alt="Button" style="width: 30px; height: auto;">
+        </a>
+        <div class="nav-links">
+            <a href='{% url "html_page" %}' onclick="showSection('html')">HTML</a>
+        </div>
+        <div class="nav-links">
+            <a href='{% url "cssGlav" %}' onclick="showSection('html')">CSS</a>
+        </div>
+                <div class="nav-links">
+            <a href='{% url "jsGlav" %}' onclick="showSection('html')">JavaScript</a>
+        </div>
+       </div>
+                <div class="nav-links">
+            <a href='{% url "testGlav" %}' onclick="showSection('html')">Тести</a>
+        </div>
+        </div>
+                <div class="nav-links">
+            <a href='{% url "chat" %}' onclick="showSection('html')">Асистент сайту</a>
+        </div>
+        <a href="https://t.me/studuhtml" class="nav-logo1" target="_blank">
+            <img src="{% static 'images/111.png' %}" alt="Головна" style="width: 45px; height: 35px;">
+        </a>
+    </nav>
+
+    <div class="sidebar"> 
+        <!-- Меню JavaScript -->
+        <a href="#" class="menu-item">📁 Вступ до JavaScript</a>
+        <div class="submenu">
+            <a href="{% url 'vstypOneJs' %}">Що таке JavaScript і для чого він потрібен.</a>
+            <a href="{% url 'vstypTwoJs' %}">Як підключити JavaScript до HTML.</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Основи мови</a>
+        <div class="submenu">
+            <a href="{% url 'osnoviOneJs' %}">Змінні, типи даних і оператори.</a>
+            <a href="{% url 'osnoviTwoJs' %}">Умови if, else, switch.</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Цикли та функції</a>
+        <div class="submenu">
+            <a href="{% url 'cyclesOneJs' %}">Цикли в JavaScript</a>
+            <a href="{% url 'functionsOneJs' %}">Функції та передача параметрів</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Робота з DOM</a>
+        <div class="submenu">
+            <a href="{% url 'domOneJs' %}">Пошук і зміна елементів сторінки</a>
+            <a href="{% url 'domTwoJs' %}">Обробка подій (click, input, mouseover)</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Масиви та об’єкти</a>
+        <div class="submenu">
+            <a href="{% url 'arrayOneJs' %}">Створення та методи масивів</a>
+            <a href="{% url 'objectOneJs' %}">Об’єкти та робота з ними</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Практика JavaScript</a>
+        <div class="submenu">
+            <a href="{% url 'practiceOneJs' %}">Міні-проєкт: калькулятор.</a>
+            <a href="{% url 'practiceTwoJs' %}">Міні-проєкт: інтерактивна форма.</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Розширені можливості</a>
+        <div class="submenu">
+            <a href="{% url 'advancedOneJs' %}">LocalStorage, JSON, Fetch API.</a>
+            <a href="{% url 'advancedTwoJs' %}">Асинхронність і проміси.</a>
+        </div>
+    </div>
+
+    <div class="content">
+        <h1>Об’єкти та робота з ними</h1>
+        <p>Об’єкти дозволяють зберігати дані у вигляді пар <strong>ключ-значення</strong> і працювати з ними структуровано.</p>
+
+        <h2>🔹 Створення об’єкта</h2>
+        <pre><code>let person = {
+    name: "Оля",
+    age: 25,
+    isStudent: true
+};</code></pre>
+
+        <h2>🔹 Доступ до властивостей</h2>
+        <p>Можна отримати або змінити значення властивості:</p>
+        <pre><code>console.log(person.name); 
+person.age = 17;
+console.log(person.age); // 26</code></pre>
+
+        <h2>🔹 Додавання та видалення властивостей</h2>
+        <pre><code>person.city = "Дніпро"; // додаємо
+delete person.isStudent; // видаляємо</code></pre>
+
+        <h2>🔹 Методи об’єкта</h2>
+        <p>Функції можна зберігати як методи об’єкта:</p>
+        <pre><code>let person = {
+    name: "Оля",
+    greet: function() {
+        console.log("Привіт, я " + this.name);
+    }
+};
+
+person.greet(); // Привіт, я Гліб</code></pre>
+
+        <h2>🎮 Міні-практика</h2>
+        <p>Створимо об’єкт та виведемо його дані:</p>
+        <div class="calc">
+            <button onclick="showPerson()">Показати дані</button>
+            <p id="personOutput">Тут будуть дані</p>
+        </div>
+
+        <script>
+            let person = {
+                name: "Гліб",
+                age: 17,
+                city: "Дніпро"
+            };
+            function showPerson() {
+                document.getElementById("personOutput").innerText =
+                    "Ім'я: " + person.name + ", Вік: " + person.age + ", Місто: " + person.city;
+            }
+        </script>
+
+        <h2>💡 Висновок:</h2>
+        <ul>
+            <li>✔ Об’єкти зберігають дані у парі ключ-значення.</li>
+            <li>✔ До властивостей можна звертатися через точку або квадратні дужки.</li>
+            <li>✔ Можна додавати, видаляти та використовувати методи для об’єктів.</li>
+        </ul>
+
+        <div class="comment-form">
+            <h2>Залиште коментар</h2>
+            {% if user.is_authenticated %}
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Відправити</button>
+            </form>
+            {% else %}
+            <p><strong>Щоб залишити коментар, необхідно <a href="{% url 'user_login' %}">увійти</a> в систему або <a href="{% url 'user_register' %}">зареєструватись</a></strong></p>
+            {% endif %}
+        </div>
+
+        <div class="comments-section">
+            <h2>Коментарі</h2>
+            {% for comment in comments %}
+                <div class="comment">
+                    <div>
+                        <strong>{{ comment.user.username }}</strong>
+                        <p>{{ comment.text }}</p>
+                    </div>
+                </div>
+            {% empty %}
+                <p>Поки немає коментарів.</p>
+            {% endfor %}
+        </div>
+
+    </div>
+
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/sidebar.js' %}"></script>
+    <script src="{% static 'js/anim.js' %}"></script>
+</body>
+</html>

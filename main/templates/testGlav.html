@@ -1,0 +1,130 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тести з HTML, CSS, JS</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Тести</h1>
+    </header>
+
+<nav>
+        <a href='{% url "sait" %}' onclick="showSection('intro')" class="nav-logo">
+            <img src="{% static 'images/дом.png' %}" alt="Button" style="width: 30px; height: auto;">
+        </a>
+        <div class="nav-links">
+            <a href='{% url "html_page" %}' onclick="showSection('html')">HTML</a>
+        </div>
+        <div class="nav-links">
+            <a href='{% url "cssGlav" %}' onclick="showSection('html')">CSS</a>
+        </div>
+                <div class="nav-links">
+            <a href='{% url "jsGlav" %}' onclick="showSection('html')">JavaScript</a>
+        </div>
+       </div>
+                <div class="nav-links">
+            <a href='{% url "testGlav" %}' onclick="showSection('html')">Тести</a>
+        </div>
+        </div>
+                <div class="nav-links">
+            <a href='{% url "chat" %}' onclick="showSection('html')">Асистент сайту</a>
+        </div>
+        <a href="https://t.me/studuhtml" class="nav-logo1" target="_blank">
+            <img src="{% static 'images/111.png' %}" alt="Головна" style="width: 45px; height: 35px;">
+        </a>
+    </nav>
+
+    <div class="sidebar">
+        <!-- Тести HTML -->
+        <a href="#" class="menu-item">📘 Тести HTML</a>
+        <div class="submenu">
+            <a href="{% url 'test_html_basic' %}">Основи HTML</a>
+            <a href="{% url 'test_html_advanced' %}">Просунуті елементи HTML</a>
+        </div>
+
+        <!-- Тести CSS -->
+        <a href="#" class="menu-item">🎨 Тести CSS</a>
+        <div class="submenu">
+            <a href="{% url 'test_css_basic' %}">Основи стилів</a>
+            <a href="{% url 'test_css_layout' %}">Макети, Flexbox, Grid</a>
+        </div>
+
+        <!-- Тести JavaScript -->
+        <a href="#" class="menu-item">💡 Тести JavaScript</a>
+        <div class="submenu">
+            <a href="{% url 'test_js_basic' %}">Основи мови</a>
+            <a href="{% url 'test_js_dom' %}">Робота з DOM</a>
+        </div>
+
+        <!-- Загальний тест -->
+        <a href="#" class="menu-item">🏆 Підсумковий тест</a>
+        <div class="submenu">
+            <a href="{% url 'test_all' %}">HTML + CSS + JS</a>
+        </div>
+    </div>
+
+    <div class="content">
+        <h1>Тести з веб-розробки</h1>
+
+        <main>
+            <section>
+                <h2>Вибери розділ для проходження тестів</h2>
+                <p>Перевір свої знання з HTML, CSS та JavaScript. Після проходження тесту отримаєш результат та оцінку.</p>
+                <ul>
+                    <li>📘 <strong>HTML</strong> — структура сторінки, теги, атрибути.</li>
+                    <li>🎨 <strong>CSS</strong> — стилі, селектори, верстка.</li>
+                    <li>💡 <strong>JavaScript</strong> — логіка, DOM, функції.</li>
+                    <li>🏆 <strong>Підсумковий тест</strong> — все разом.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Навіщо потрібні тести?</h2>
+                <p>
+                    Тести — це чудовий спосіб перевірити свої знання й зрозуміти, наскільки добре ти засвоїв матеріал.
+                    Вони допомагають не лише знайти прогалини у вивченому, але й закріпити те, що вже знаєш.
+                    Коли ми просто читаємо або слухаємо інформацію, здається, що все зрозуміло.
+                    Але справжнє розуміння приходить тоді, коли ми намагаємося застосувати знання на практиці.
+                </p>
+                <p>
+                    Тестування розвиває увагу, логіку та здатність аналізувати.
+                    Завдяки регулярним перевіркам знань ти зможеш бачити свій прогрес,
+                    відстежувати помилки та вдосконалювати свої навички веб-розробки.
+                    Це як тренування: чим більше практикуєшся — тим упевненіше почуваєшся.
+                </p>
+                <p>
+                    Крім того, результати тестів допомагають визначити, на які теми варто звернути більше уваги.
+                    Наприклад, якщо ти добре розумієш HTML, але маєш труднощі з CSS, —
+                    це сигнал, що час повторити селектори, властивості чи макети.
+                    Тести — це не покарання, а навпаки, інструмент саморозвитку та самоперевірки.
+                </p>
+            </section>
+
+            <section>
+                <h2>Як проходить тест</h2>
+                <ol>
+                    <li>Обери тему тесту в лівому меню.</li>
+                    <li>Відповідай на питання — кожне має кілька варіантів.</li>
+                    <li>Після завершення натисни «Перевірити» та побач результат.</li>
+                </ol>
+                <p>
+                    Не хвилюйся, якщо одразу не все виходить! Головне — навчатися на своїх помилках.
+                    Кожна спроба зробить тебе ближчим до розуміння того, як створюються сучасні вебсайти.
+                    Тести створені не для оцінок, а для того, щоб допомогти тобі розібратись у темі краще.
+                </p>
+                <p>
+                    Пам’ятай: справжній розробник — це не той, хто все знає, а той, хто постійно вдосконалюється.
+                    Використовуй ці тести як сходинки до впевненого володіння HTML, CSS і JavaScript.
+                </p>
+            </section>
+        </main>
+    </div>
+
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/sidebar.js' %}"></script>
+</body>
+</html>

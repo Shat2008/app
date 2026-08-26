@@ -1,0 +1,540 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест: Макети, Flexbox, Grid</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        .test-container {
+            max-width: 850px;
+            margin: 100px auto;
+            background: var(--surface);
+            padding: 35px 45px;
+            border-radius: 15px;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .test-container h2 {
+            text-align: center;
+            color: #222;
+            margin-bottom: 10px;
+        }
+
+        .test-container p {
+            text-align: center;
+            color: #555;
+            margin-bottom: 25px;
+        }
+
+        .question {
+            background: var(--muted);
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            transition: 0.25s ease;
+            border: 1px solid #ddd;
+        }
+
+        .question:hover {
+            background: rgba(234,243,255,0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .question p {
+            font-weight: bold;
+            color: #111;
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            margin-left: 10px;
+            padding: 3px 0;
+            cursor: pointer;
+        }
+
+        button {
+            display: block;
+            margin: 25px auto 10px auto;
+            padding: 10px 35px;
+            background-color: #007bff;
+            border: none;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        #result {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h2>Тести</h2>
+    </header>
+
+<nav>
+        <a href='{% url "sait" %}' onclick="showSection('intro')" class="nav-logo">
+            <img src="{% static 'images/дом.png' %}" alt="Button" style="width: 30px; height: auto;">
+        </a>
+        <div class="nav-links">
+            <a href='{% url "html_page" %}' onclick="showSection('html')">HTML</a>
+        </div>
+        <div class="nav-links">
+            <a href='{% url "cssGlav" %}' onclick="showSection('html')">CSS</a>
+        </div>
+                <div class="nav-links">
+            <a href='{% url "jsGlav" %}' onclick="showSection('html')">JavaScript</a>
+        </div>
+       </div>
+                <div class="nav-links">
+            <a href='{% url "testGlav" %}' onclick="showSection('html')">Тести</a>
+        </div>
+        </div>
+                <div class="nav-links">
+            <a href='{% url "chat" %}' onclick="showSection('html')">Асистент сайту</a>
+        </div>
+        <a href="https://t.me/studuhtml" class="nav-logo1" target="_blank">
+            <img src="{% static 'images/111.png' %}" alt="Головна" style="width: 45px; height: 35px;">
+        </a>
+    </nav>
+
+    <div class="sidebar">
+        <!-- Тести HTML -->
+        <a href="#" class="menu-item">📘 Тести HTML</a>
+        <div class="submenu">
+            <a href="{% url 'test_html_basic' %}">Основи HTML</a>
+            <a href="{% url 'test_html_advanced' %}">Просунуті елементи HTML</a>
+        </div>
+
+        <!-- Тести CSS -->
+        <a href="#" class="menu-item">🎨 Тести CSS</a>
+        <div class="submenu">
+            <a href="{% url 'test_css_basic' %}">Основи стилів</a>
+            <a href="{% url 'test_css_layout' %}" class="active">Макети, Flexbox, Grid</a>
+        </div>
+
+        <!-- Тести JavaScript -->
+        <a href="#" class="menu-item">💡 Тести JavaScript</a>
+        <div class="submenu">
+            <a href="{% url 'test_js_basic' %}">Основи мови</a>
+            <a href="{% url 'test_js_dom' %}">Робота з DOM</a>
+        </div>
+
+        <!-- Загальний тест -->
+        <a href="#" class="menu-item">🏆 Підсумковий тест</a>
+        <div class="submenu">
+            <a href="{% url 'test_all' %}">HTML + CSS + JS</a>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="test-container">
+            <h2>Тест: Макети, Flexbox, Grid</h2>
+            <p>Перевір свої знання про сучасні методи побудови макетів у CSS.</p>
+
+            <form id="layoutTest">
+                <div id="questions"></div>
+                <div style="display: flex; gap: 10px; margin-top: 20px;">
+                    <button type="button" onclick="checkAnswers()" style="flex: 1;">Перевірити</button>
+                    <button type="button" onclick="resetTest()" style="flex: 1; background: #6c757d;">Оновити тест</button>
+                </div>
+            </form>
+
+            <p id="result"></p>
+        </div>
+    </div>
+
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/sidebar.js' %}"></script>
+
+    <script>
+        // Банк вопросов для CSS Layout
+        const questionBank = [
+            {
+                question: "Яка властивість робить елемент контейнером Flexbox?",
+                options: ["display: flex;", "display: block;", "flex: container;"],
+                correct: 0
+            },
+            {
+                question: "Яка властивість вирівнює елементи по головній осі у Flexbox?",
+                options: ["align-items", "justify-content", "align-content"],
+                correct: 1
+            },
+            {
+                question: "Що робить властивість <code>flex-wrap</code>?",
+                options: ["Встановлює колір фону", "Дозволяє перенос елементів на новий рядок", "Встановлює напрямок потоку"],
+                correct: 1
+            },
+            {
+                question: "Як оголосити контейнер Grid?",
+                options: ["display: grid;", "display: flex;", "grid: container;"],
+                correct: 0
+            },
+            {
+                question: "Яка властивість задає кількість стовпців у Grid?",
+                options: ["grid-template-columns", "grid-columns", "columns"],
+                correct: 0
+            },
+            {
+                question: "Яке значення властивості <code>justify-content</code> розташовує елементи рівномірно?",
+                options: ["space-between", "center", "flex-start"],
+                correct: 0
+            },
+            {
+                question: "Яка перевага Grid над Flexbox?",
+                options: ["Grid працює з двома вимірами — рядки та стовпці", "Grid швидший за Flexbox", "Grid не потребує медіа-запитів"],
+                correct: 0
+            },
+            {
+                question: "Що робить властивість <code>align-items</code> у Flexbox?",
+                options: ["Вирівнює елементи по вертикалі", "Вирівнює елементи по горизонталі", "Змінює порядок елементів"],
+                correct: 0
+            },
+            {
+                question: "Як задати автоматичне заповнення Grid?",
+                options: ["grid-auto-fill", "grid-fill", "auto-grid"],
+                correct: 0
+            },
+            {
+                question: "Що означає 'flex-direction'?",
+                options: ["Напрямок потоку flex-елементів (row, column, row-reverse, column-reverse)", "Вирівнювання елементів", "Розмір flex-елементу"],
+                correct: 0
+            },
+            {
+                question: "Як встановити розмір flex-елемента відносно інших?",
+                options: ["flex-basis", "flex: 1;", "flex-size"],
+                correct: 1
+            },
+            {
+                question: "Що таке gap у Flexbox та Grid?",
+                options: ["Розриз між елементами", "Простір між flex/grid-елементами", "Величина контейнера"],
+                correct: 1
+            },
+            {
+                question: "Яка властивість встановлює ширину колонок у Grid?",
+                options: ["grid-template-columns: 100px 200px;", "grid-width: 100px;", "columns: 2;"],
+                correct: 0
+            },
+            {
+                question: "Як встановити мінімальний розмір flex-елемента?",
+                options: ["min-width: 100px;", "flex-min: 100px;", "min-flex-width"],
+                correct: 0
+            },
+            {
+                question: "Що означає 'justify-self' у Grid?",
+                options: ["Вирівнювання всього контейнера", "Вирівнювання окремого grid-елемента по горизонталі", "Напрямок елемента"],
+                correct: 1
+            },
+            {
+                question: "Яка властивість встановлює простір між стовпцями та рядками у Grid?",
+                options: ["gap", "column-gap та row-gap", "обидва варіанти правильні"],
+                correct: 2
+            },
+            {
+                question: "Як встановити фіксовану ширину стовпців у Grid?",
+                options: ["grid-template-columns: repeat(3, 1fr);", "grid-template-columns: repeat(3, 200px);", "grid-columns: 3;"],
+                correct: 1
+            },
+            {
+                question: "Що робить властивість <code>flex-grow</code>?",
+                options: ["Зменшує елемент", "Дозволяє елементу рости та займати вільний простір", "Встановлює висоту"],
+                correct: 1
+            },
+            {
+                question: "Яка властивість робить елемент Inline-Flex контейнером?",
+                options: ["display: inline-flex;", "display: flex-inline;", "display: inline-block;"],
+                correct: 0
+            },
+            {
+                question: "Як встановити вирівнювання контенту у контейнері Flex?",
+                options: ["content-align", "align-content", "flex-align"],
+                correct: 1
+            },
+            {
+                question: "Що означає 'Subgrid' у CSS Grid?",
+                options: ["Мала сітка", "Grid всередину grid-елемента, яка має те ж саме визначення треків", "Додатковий вид grid"],
+                correct: 1
+            },
+            {
+                question: "Як встановити простір у контейнері за допомогою 'gap'?",
+                options: ["gap: 10px 20px;", "row-gap: 10px; column-gap: 20px;", "обидва варіанти правильні"],
+                correct: 2
+            },
+            {
+                question: "Яка властивість встановлює розмір контейнера Flex по головній осі?",
+                options: ["main-size", "basis", "flex-basis"],
+                correct: 2
+            },
+            {
+                question: "Як встановити float у CSS Grid?",
+                options: ["grid-float: left;", "float: left;", "Grid ігнорує float"],
+                correct: 2
+            },
+            {
+                question: "Що таке 'responsive design' у контексті Flexbox та Grid?",
+                options: ["Дизайн, що адаптується до різних розмірів екрану", "Швидкий дизайн", "Дизайн з анімаціями"],
+                correct: 0
+            },
+            {
+                question: "Як встановити медіа-запит для адаптивного дизайну?",
+                options: ["@media (max-width: 768px) { }", "@screen (max-width: 768px) { }", "@responsive { }"],
+                correct: 0
+            },
+            {
+                question: "Що робить властивість <code>object-fit</code>?",
+                options: ["Встановлює розмір контейнера", "Визначає, як замінений вміст (img, video) повинен заповнити контейнер", "Встановлює позицію"],
+                correct: 1
+            },
+            {
+                question: "Як встановити рівні розміри колонок у Grid?",
+                options: ["grid-template-columns: repeat(3, 1fr);", "grid-template-columns: equal;", "grid-auto-columns: 1fr;"],
+                correct: 0
+            },
+            {
+                question: "Яка властивість встановлює мінімальний розмір Grid-елемента?",
+                options: ["min-width", "grid-min-width", "min-track"],
+                correct: 0
+            },
+            {
+                question: "Як встановити автоматичне заповнення колонок у Grid?",
+                options: ["grid-template-columns: auto-fit", "grid-template-columns: repeat(auto-fit, minmax(100px, 1fr))", "grid-auto-fit"],
+                correct: 1
+            },
+            {
+                question: "Яка різниця між auto-fit та auto-fill у Grid?",
+                options: ["Вони однакові", "auto-fit схлопує пусті доріжки, auto-fill залишає їх", "auto-fill схлопує доріжки"],
+                correct: 1
+            },
+            {
+                question: "Як встановити проміжок між стовпцями у Grid?",
+                options: ["column-gap: 20px;", "columns-gap: 20px;", "grid-column-gap: 20px;"],
+                correct: 0
+            },
+            {
+                question: "Як встановити проміжок між рядками у Grid?",
+                options: ["row-gap: 20px;", "rows-gap: 20px;", "grid-row-gap: 20px;"],
+                correct: 0
+            },
+            {
+                question: "Що робить властивість <code>flex-shrink</code>?",
+                options: ["Дозволяє елементу рости", "Дозволяє елементу зменшуватися коли нема місця", "Встановлює розмір"],
+                correct: 1
+            },
+            {
+                question: "Як встановити порядок flex-елементів?",
+                options: ["position-order: 2;", "order: 2;", "flex-order: 2;"],
+                correct: 1
+            },
+            {
+                question: "Що означає значення <code>flex: 1</code>?",
+                options: ["Елемент займає 1 пікселю", "Елемент займає рівну частину вільного простору", "Елемент займає 1 відсоток"],
+                correct: 1
+            },
+            {
+                question: "Як встановити максимальну ширину контейнера?",
+                options: ["max-width: 1200px;", "width-max: 1200px;", "max-container-width: 1200px;"],
+                correct: 0
+            },
+            {
+                question: "Як встановити мінімальну ширину контейнера?",
+                options: ["min-width: 320px;", "width-min: 320px;", "min-container-width: 320px;"],
+                correct: 0
+            },
+            {
+                question: "Для чого використовується <code>mobile-first</code> підхід?",
+                options: ["Спочатку проектувати для мобільних, потім розширювати для великих екранів", "Спочатку для ПК, потім для мобільних", "Одночасно для всіх пристроїв"],
+                correct: 0
+            },
+            {
+                question: "Як встановити адаптивний шрифт?",
+                options: ["font-size: clamp(1rem, 5vw, 2rem);", "font-size: responsive;", "font-adaptive: true;"],
+                correct: 0
+            },
+            {
+                question: "Що означає <code>1fr</code> у Grid?",
+                options: ["1 фрейм", "1 фракція вільного простору", "1 файл"],
+                correct: 1
+            },
+            {
+                question: "Як встановити ресивлений контейнер з контрольною точкою 768px?",
+                options: ["@media (min-width: 768px) { }", "@responsive 768px { }", "@breakpoint 768px { }"],
+                correct: 0
+            },
+            {
+                question: "Як встановити елемент на весь viewport?",
+                options: ["height: 100vh; width: 100vw;", "height: 100%; width: 100%;", "fullscreen: true;"],
+                correct: 0
+            },
+            {
+                question: "Що робить властивість <code>place-items</code>?",
+                options: ["Встановлює позицію", "Скорочення для align-items та justify-items", "Розміщує елементи"],
+                correct: 1
+            },
+            {
+                question: "Як встановити неявні доріжки у Grid?",
+                options: ["grid-auto-rows: 200px;", "grid-rows: auto;", "grid-implicit-rows: 200px;"],
+                correct: 0
+            },
+            {
+                question: "Що означає <code>grid-auto-flow</code>?",
+                options: ["Напрямок автоматичного розташування елементів у Grid", "Автоматичне заповнення сітки", "Напрямок потоку"],
+                correct: 0
+            },
+            {
+                question: "Як встановити ширину елемента у відсотках?",
+                options: ["width: 50%;", "width: 50rem;", "width: 50vw;"],
+                correct: 0
+            },
+            {
+                question: "Як встановити ширину елемента в 50% ширини viewport?",
+                options: ["width: 50%;", "width: 50vw;", "width: 50rem;"],
+                correct: 1
+            },
+            {
+                question: "Яка різниця між vh та %?",
+                options: ["Одного й те ж", "vh - відсоток viewport, % - відсоток батька", "% - відсоток viewport"],
+                correct: 1
+            },
+            {
+                question: "Як встановити контейнер запиту?",
+                options: ["@container { }", "@query-container { }", "container-query: true;"],
+                correct: 0
+            },
+            {
+                question: "Що робить властивість <code>gap</code> у CSS?",
+                options: ["Встановлює визначення", "Встановлює простір між flex/grid-елементами", "Встановлює розміри"],
+                correct: 1
+            },
+            {
+                question: "Як встановити білий простір відносно viewport?",
+                options: ["margin: 10vw;", "margin: 10rem;", "margin: 10%;"],
+                correct: 0
+            }
+        ];
+
+        // Функция для перемешивания массива
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        let selectedQuestions = [];
+        let correctAnswers = [];
+
+        // Генерировать вопросы
+        function generateQuestions() {
+            // Выбрать случайные вопросы каждый раз
+            selectedQuestions = [...questionBank];
+            shuffle(selectedQuestions);
+            selectedQuestions = selectedQuestions.slice(0, 10); // Выбрать 10 вопросов
+            correctAnswers = [];
+
+            const container = document.getElementById('questions');
+            container.innerHTML = ''; // Очистить старые вопросы
+            selectedQuestions.forEach((q, index) => {
+                // Перемешать варианты
+                let options = [...q.options];
+                shuffle(options);
+                let correctIndex = options.indexOf(q.options[q.correct]);
+
+                correctAnswers.push(correctIndex);
+
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                questionDiv.innerHTML = `<p>${index + 1}. ${q.question}</p>`;
+
+                options.forEach((opt, optIndex) => {
+                    const label = document.createElement('label');
+                    label.innerHTML = `<input type="radio" name="q${index}" value="${optIndex}"> ${opt}`;
+                    questionDiv.appendChild(label);
+                });
+
+                container.appendChild(questionDiv);
+            });
+        }
+
+        // Проверить ответы
+        function checkAnswers() {
+            let score = 0;
+
+            selectedQuestions.forEach((q, index) => {
+                const selected = document.querySelector(`input[name="q${index}"]:checked`);
+                const questionDiv = document.querySelectorAll('.question')[index];
+                const labels = questionDiv.querySelectorAll('label');
+
+                if (selected) {
+                    if (parseInt(selected.value) === correctAnswers[index]) {
+                        score++;
+                        questionDiv.style.backgroundColor = '#d4edda'; // Зеленый
+                    } else {
+                        questionDiv.style.backgroundColor = '#f8d7da'; // Красный
+                        // Добавить правильный ответ под вопросом
+                        const correctP = document.createElement('p');
+                        correctP.textContent = `Правильна відповідь: ${q.options[q.correct]}`;
+                        correctP.style.color = 'red';
+                        correctP.style.fontWeight = 'bold';
+                        questionDiv.appendChild(correctP);
+                        // Подсветить правильный вариант
+                        labels[correctAnswers[index]].style.backgroundColor = '#d4edda';
+                        labels[correctAnswers[index]].style.padding = '5px';
+                        labels[correctAnswers[index]].style.borderRadius = '5px';
+                    }
+                } else {
+                    questionDiv.style.backgroundColor = '#f8d7da';
+                    // Добавить правильный ответ под вопросом
+                    const correctP = document.createElement('p');
+                    correctP.textContent = `Правильна відповідь: ${q.options[q.correct]}`;
+                    correctP.style.color = 'red';
+                    correctP.style.fontWeight = 'bold';
+                    questionDiv.appendChild(correctP);
+                    // Подсветить правильный вариант
+                    labels[correctAnswers[index]].style.backgroundColor = '#d4edda';
+                    labels[correctAnswers[index]].style.padding = '5px';
+                    labels[correctAnswers[index]].style.borderRadius = '5px';
+                }
+            });
+
+            const result = document.getElementById("result");
+            result.innerHTML = `<strong>✅ Твій результат: ${score} з ${selectedQuestions.length} правильних відповідей.</strong><br>`;
+            if (score === selectedQuestions.length) {
+                result.innerHTML += "Відмінно! Ти справжній майстер CSS-макетів!";
+                result.style.color = "green";
+            } else if (score >= selectedQuestions.length * 0.6) {
+                result.innerHTML += "Непогано! Але потренуйся ще з Flexbox і Grid.";
+                result.style.color = "orange";
+            } else {
+                result.innerHTML += "Треба попрактикуватися у верстці макетів.";
+                result.style.color = "red";
+            }
+        }
+
+        // Функция для обновления теста
+        function resetTest() {
+            document.getElementById('layoutTest').reset();
+            document.getElementById('result').innerHTML = '';
+            document.getElementById('questions').innerHTML = '';
+            correctAnswers = [];
+            generateQuestions();
+        }
+
+        // Генерировать при загрузке
+        window.onload = generateQuestions;
+    </script>
+</body>
+</html>

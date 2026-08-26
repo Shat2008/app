@@ -1,0 +1,176 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Обробка подій (click, input, mouseover)</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Обробка подій у JavaScript</h1>
+    </header>
+
+<nav>
+        <a href='{% url "sait" %}' onclick="showSection('intro')" class="nav-logo">
+            <img src="{% static 'images/дом.png' %}" alt="Button" style="width: 30px; height: auto;">
+        </a>
+        <div class="nav-links">
+            <a href='{% url "html_page" %}' onclick="showSection('html')">HTML</a>
+        </div>
+        <div class="nav-links">
+            <a href='{% url "cssGlav" %}' onclick="showSection('html')">CSS</a>
+        </div>
+                <div class="nav-links">
+            <a href='{% url "jsGlav" %}' onclick="showSection('html')">JavaScript</a>
+        </div>
+       </div>
+                <div class="nav-links">
+            <a href='{% url "testGlav" %}' onclick="showSection('html')">Тести</a>
+        </div>
+        </div>
+                <div class="nav-links">
+            <a href='{% url "chat" %}' onclick="showSection('html')">Асистент сайту</a>
+        </div>
+        <a href="https://t.me/studuhtml" class="nav-logo1" target="_blank">
+            <img src="{% static 'images/111.png' %}" alt="Головна" style="width: 45px; height: 35px;">
+        </a>
+    </nav>
+
+    <div class="sidebar"> 
+        <!-- Меню JavaScript -->
+        <a href="#" class="menu-item">📁 Вступ до JavaScript</a>
+        <div class="submenu">
+            <a href="{% url 'vstypOneJs' %}">Що таке JavaScript і для чого він потрібен.</a>
+            <a href="{% url 'vstypTwoJs' %}">Як підключити JavaScript до HTML.</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Основи мови</a>
+        <div class="submenu">
+            <a href="{% url 'osnoviOneJs' %}">Змінні, типи даних і оператори.</a>
+            <a href="{% url 'osnoviTwoJs' %}">Умови if, else, switch.</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Цикли та функції</a>
+        <div class="submenu">
+            <a href="{% url 'cyclesOneJs' %}">Цикли в JavaScript</a>
+            <a href="{% url 'functionsOneJs' %}">Функції та передача параметрів</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Робота з DOM</a>
+        <div class="submenu">
+            <a href="{% url 'domOneJs' %}">Пошук і зміна елементів сторінки</a>
+            <a href="{% url 'domTwoJs' %}">Обробка подій (click, input, mouseover)</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Масиви та об’єкти</a>
+        <div class="submenu">
+            <a href="{% url 'arrayOneJs' %}">Створення та методи масивів.</a>
+            <a href="{% url 'objectOneJs' %}">Об’єкти та робота з ними.</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Практика JavaScript</a>
+        <div class="submenu">
+            <a href="{% url 'practiceOneJs' %}">Міні-проєкт: калькулятор.</a>
+            <a href="{% url 'practiceTwoJs' %}">Міні-проєкт: інтерактивна форма.</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Розширені можливості</a>
+        <div class="submenu">
+            <a href="{% url 'advancedOneJs' %}">LocalStorage, JSON, Fetch API.</a>
+            <a href="{% url 'advancedTwoJs' %}">Асинхронність і проміси.</a>
+        </div>
+    </div>
+
+    <div class="content">
+        <h1>Обробка подій (Events)</h1>
+        <p>Події дозволяють реагувати на дії користувача: кліки, введення тексту, рух миші тощо.</p>
+
+        <h2>🔹 Подія click</h2>
+        <p>Виконується при натисканні на елемент:</p>
+        <div class="calc">
+            <button id="btnClick">Натисни мене</button>
+            <p id="clickOutput">Тут з’явиться результат</p>
+        </div>
+
+        <script>
+            document.getElementById("btnClick").onclick = function() {
+                document.getElementById("clickOutput").innerText = "Кнопку натиснуто!";
+            };
+        </script>
+
+        <h2>🔹 Подія input</h2>
+        <p>Виконується при введенні тексту у поле:</p>
+        <div class="calc">
+            <input type="text" id="nameInput" placeholder="Введи своє ім'я">
+            <p id="nameOutput">Привіт, —</p>
+        </div>
+
+        <script>
+            document.getElementById("nameInput").addEventListener("input", function() {
+                document.getElementById("nameOutput").innerText = "Привіт, " + this.value;
+            });
+        </script>
+
+        <h2>🔹 Подія mouseover</h2>
+        <p>Виконується, коли курсор наводиться на елемент:</p>
+        <div class="calc">
+            <p id="hoverText" style="padding:10px; background:#f0f0f0;">Наведи на мене мишкою</p>
+        </div>
+
+        <script>
+            document.getElementById("hoverText").addEventListener("mouseover", function() {
+                this.style.background = "#007bff";
+                this.style.color = "white";
+                this.innerText = "Курсор тут!";
+            });
+            document.getElementById("hoverText").addEventListener("mouseout", function() {
+                this.style.background = "#f0f0f0";
+                this.style.color = "black";
+                this.innerText = "Наведи на мене мишкою";
+            });
+        </script>
+
+        <h2>💡 Висновок:</h2>
+        <ul>
+            <li>✔ Події дозволяють взаємодіяти з користувачем.</li>
+            <li>✔ click — натискання на елемент.</li>
+            <li>✔ input — введення тексту.</li>
+            <li>✔ mouseover / mouseout — наведення та відведення курсора.</li>
+        </ul>
+
+        <div class="comment-form">
+            <h2>Залиште коментар</h2>
+            {% if user.is_authenticated %}
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Відправити</button>
+            </form>
+            {% else %}
+            <p><strong>Щоб залишити коментар, необхідно <a href="{% url 'user_login' %}">увійти</a> в систему або <a href="{% url 'user_register' %}">зареєструватись</a></strong></p>
+            {% endif %}
+        </div>
+
+        <div class="comments-section">
+            <h2>Коментарі</h2>
+            {% for comment in comments %}
+                <div class="comment">
+                    <div>
+                        <strong>{{ comment.user.username }}</strong>
+                        <p>{{ comment.text }}</p>
+                    </div>
+                </div>
+            {% empty %}
+                <p>Поки немає коментарів.</p>
+            {% endfor %}
+        </div>
+
+    </div>
+
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/sidebar.js' %}"></script>
+    <script src="{% static 'js/anim.js' %}"></script>
+</body>
+</html>

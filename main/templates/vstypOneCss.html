@@ -1,0 +1,236 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Що таке CSS і для чого він потрібен</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>CSS</h1>
+    </header>
+    
+<nav>
+        <a href='{% url "sait" %}' onclick="showSection('intro')" class="nav-logo">
+            <img src="{% static 'images/дом.png' %}" alt="Button" style="width: 30px; height: auto;">
+        </a>
+        <div class="nav-links">
+            <a href='{% url "html_page" %}' onclick="showSection('html')">HTML</a>
+        </div>
+        <div class="nav-links">
+            <a href='{% url "cssGlav" %}' onclick="showSection('html')">CSS</a>
+        </div>
+                <div class="nav-links">
+            <a href='{% url "jsGlav" %}' onclick="showSection('html')">JavaScript</a>
+        </div>
+       </div>
+                <div class="nav-links">
+            <a href='{% url "testGlav" %}' onclick="showSection('html')">Тести</a>
+        </div>
+        </div>
+                <div class="nav-links">
+            <a href='{% url "chat" %}' onclick="showSection('html')">Асистент сайту</a>
+        </div>
+        <a href="https://t.me/studuhtml" class="nav-logo1" target="_blank">
+            <img src="{% static 'images/111.png' %}" alt="Головна" style="width: 45px; height: 35px;">
+        </a>
+    </nav>
+
+    <div class="sidebar"> 
+        <!-- Глава 1 -->
+        <a href="#" class="menu-item">📁 Вступ до CSS</a>
+        <div class="submenu">
+            <a href="{% url 'vstypOneCss' %}">Що таке CSS і для чого він потрібен.</a>
+            <a href="{% url 'vstypTwoCss' %}">Основні способи підключення CSS до HTML.</a>
+        </div>
+
+        <!-- Глава 2 -->
+        <a href="#" class="menu-item">📁 Основи синтаксису CSS</a>
+        <div class="submenu">
+            <a href="{% url 'osnoviOneCss' %}">Селектори, властивості та значення.</a>
+            <a href="{% url 'osnoviTwoCss' %}">Коментарі в CSS та структура коду.</a>
+        </div>
+
+        <!-- Глава 3 -->
+        <a href="#" class="menu-item">📁 Робота з кольорами та шрифтами</a>
+        <div class="submenu">
+            <a href="{% url 'workOneCss' %}">Кольори: HEX, RGB, RGBA, HSL.</a>
+            <a href="{% url 'workTwoCss' %}">Шрифти, розмір, товщина, вирівнювання тексту.</a>
+        </div>
+
+        <!-- Глава 4 -->
+        <a href="#" class="menu-item">📁 Розміщення елементів</a>
+        <div class="submenu">
+            <a href="{% url 'blokOneCss' %}">Блокова і стрічкова модель елементів.</a>
+            <a href="{% url 'blokTwoCss' %}">Використання flexbox та grid для макета сторінки.</a>
+        </div>
+
+        <!-- Глава 5 -->
+        <a href="#" class="menu-item">📁 Оформлення сторінки</a>
+        <div class="submenu">
+            <a href="{% url 'oforOneCss' %}">Фони, межі, тіні та закруглення кутів.</a>
+            <a href="{% url 'oforTwoCss' %}">Зображення, прозорість та градієнти.</a>
+        </div>
+
+        <!-- Глава 6 -->
+        <a href="#" class="menu-item">📁 Анімації та переходи</a>
+        <div class="submenu">
+            <a href="{% url 'animOneCss' %}">CSS transitions — плавні зміни властивостей.</a>
+            <a href="{% url 'animTwoCss' %}">CSS animations — створення рухомих ефектів.</a>
+        </div>
+
+        <!-- Глава 7 -->
+        <a href="#" class="menu-item">📁 Адаптивний дизайн</a>
+        <div class="submenu">
+            <a href="{% url 'adapOneCss' %}">Використання медіа-запитів для різних пристроїв.</a>
+            <a href="{% url 'adapTwoCss' %}">Приклади створення адаптивного сайту.</a>
+        </div>
+    </div>   
+    
+    <div class="content content--short">
+        <h1>Що таке CSS і для чого він потрібен</h1>
+
+        <section>
+            <h2>Вступ</h2>
+            <p><strong>CSS (Cascading Style Sheets)</strong> — це каскадні таблиці стилів, які визначають зовнішній вигляд вебсторінок. Вони працюють разом з HTML, щоб надати сайту кольори, шрифти, відступи, вирівнювання, а також створити адаптивний та привабливий дизайн.</p>
+        </section>
+
+        <section>
+            <h2>Навіщо потрібен CSS?</h2>
+            <p>Без CSS усі вебсторінки виглядали б майже однаково — як звичайний текст із простими посиланнями. CSS дозволяє перетворити звичайну HTML-структуру у професійно оформлений вебсайт.</p>
+            <ul>
+                <li><strong>Керує зовнішнім виглядом елементів:</strong> кольори, розміри, шрифти, межі, фони.</li>
+                <li><strong>Відокремлює структуру від дизайну:</strong> HTML відповідає за зміст, а CSS — за оформлення.</li>
+                <li><strong>Покращує зручність редагування:</strong> змінивши один CSS-файл, можна оновити дизайн усього сайту.</li>
+                <li><strong>Створює адаптивний дизайн:</strong> сторінки виглядають добре на комп’ютерах, планшетах і телефонах.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Як працює CSS?</h2>
+            <p>Кожне CSS-правило складається з <strong>селектора</strong> (який вказує, до яких елементів HTML застосовуються стилі) та <strong>властивостей</strong> із відповідними значеннями.</p>
+            <pre><code>
+p {
+    color: blue;
+    font-size: 18px;
+}
+            </code></pre>
+            <p>Це правило зробить усі абзаци (<code>&lt;p&gt;</code>) синіми і встановить розмір шрифту 18 пікселів.</p>
+        </section>
+
+        <section>
+            <h2>Приклад використання</h2>
+            <p>HTML + CSS разом:</p>
+            <pre><code>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Привіт, CSS!&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+            </code></pre>
+
+            <p><strong>style.css:</strong></p>
+            <pre><code>
+h1 {
+    color: green;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+            </code></pre>
+
+            <p>У результаті заголовок «Привіт, CSS!» буде зеленим, по центру, зі шрифтом Arial.</p>
+        </section>
+
+        <section>
+            <h2>Переваги CSS</h2>
+            <ul>
+                <li>✅ Можливість створювати єдиний стиль для всіх сторінок.</li>
+                <li>✅ Спрощує внесення змін у дизайн.</li>
+                <li>✅ Робить сайт швидшим у завантаженні.</li>
+                <li>✅ Дозволяє створювати складні ефекти, анімації та макети.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Висновок</h2>
+            <p>CSS — це основа сучасного вебдизайну. Завдяки йому сайти стають не лише зручними, але й привабливими для користувача. Без знання CSS неможливо створити красивий, гармонійний та професійний вебсайт.</p>
+        </section>
+
+        <style>
+        .comment-form {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .comment-form h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .comment-form button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .comment-form button:hover {
+            background-color: #0056b3;
+        }
+        .comment {
+            background: #eee;
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+        }
+        .comments-section h2 {
+            color: #333;
+        }
+        </style>
+
+        {% if user.is_authenticated %}
+        <div class="comment-form">
+            <h2>Залиште коментар</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Відправити</button>
+            </form>
+        </div>
+        {% else %}
+        <div class="comment-form">
+            <p><strong>Щоб залишити коментар, необхідно <a href="{% url 'user_login' %}">увійти</a> в систему або <a href="{% url 'user_register' %}">зареєструватись</a></strong></p>
+        </div>
+        {% endif %}
+
+        <div class="comments-section">
+            <h2>Коментарі</h2>
+            {% for comment in comments %}
+                <div class="comment">
+                    <div>
+                        <strong>{{ comment.user.username }}</strong>
+                        <p>{{ comment.text }}</p>
+                    </div>
+                </div>
+            {% empty %}
+                <p>Поки немає коментарів.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/sidebar.js' %}"></script>
+    <script src="{% static 'js/anim.js' %}"></script>
+</body>
+</html>

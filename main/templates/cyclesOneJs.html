@@ -1,0 +1,187 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Цикли в JavaScript</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Цикли в JavaScript</h1>
+    </header>
+
+<nav>
+        <a href='{% url "sait" %}' onclick="showSection('intro')" class="nav-logo">
+            <img src="{% static 'images/дом.png' %}" alt="Button" style="width: 30px; height: auto;">
+        </a>
+        <div class="nav-links">
+            <a href='{% url "html_page" %}' onclick="showSection('html')">HTML</a>
+        </div>
+        <div class="nav-links">
+            <a href='{% url "cssGlav" %}' onclick="showSection('html')">CSS</a>
+        </div>
+                <div class="nav-links">
+            <a href='{% url "jsGlav" %}' onclick="showSection('html')">JavaScript</a>
+        </div>
+       </div>
+                <div class="nav-links">
+            <a href='{% url "testGlav" %}' onclick="showSection('html')">Тести</a>
+        </div>
+        </div>
+                <div class="nav-links">
+            <a href='{% url "chat" %}' onclick="showSection('html')">Асистент сайту</a>
+        </div>
+        <a href="https://t.me/studuhtml" class="nav-logo1" target="_blank">
+            <img src="{% static 'images/111.png' %}" alt="Головна" style="width: 45px; height: 35px;">
+        </a>
+    </nav>
+
+    <div class="sidebar"> 
+        <!-- Меню JavaScript -->
+        <a href="#" class="menu-item">📁 Вступ до JavaScript</a>
+        <div class="submenu">
+            <a href="{% url 'vstypOneJs' %}">Що таке JavaScript і для чого він потрібен.</a>
+            <a href="{% url 'vstypTwoJs' %}">Як підключити JavaScript до HTML.</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Основи мови</a>
+        <div class="submenu">
+            <a href="{% url 'osnoviOneJs' %}">Змінні, типи даних і оператори.</a>
+            <a href="{% url 'osnoviTwoJs' %}">Умови if, else, switch.</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Цикли та функції</a>
+        <div class="submenu">
+            <a href="{% url 'cyclesOneJs' %}">Цикли в JavaScript</a>
+            <a href="{% url 'functionsOneJs' %}">Функції та передача параметрів.</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Робота з DOM</a>
+        <div class="submenu">
+            <a href="{% url 'domOneJs' %}">Пошук і зміна елементів сторінки.</a>
+            <a href="{% url 'domTwoJs' %}">Обробка подій (click, input, mouseover).</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Масиви та об’єкти</a>
+        <div class="submenu">
+            <a href="{% url 'arrayOneJs' %}">Створення та методи масивів.</a>
+            <a href="{% url 'objectOneJs' %}">Об’єкти та робота з ними.</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Практика JavaScript</a>
+        <div class="submenu">
+            <a href="{% url 'practiceOneJs' %}">Міні-проєкт: калькулятор.</a>
+            <a href="{% url 'practiceTwoJs' %}">Міні-проєкт: інтерактивна форма.</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Розширені можливості</a>
+        <div class="submenu">
+            <a href="{% url 'advancedOneJs' %}">LocalStorage, JSON, Fetch API.</a>
+            <a href="{% url 'advancedTwoJs' %}">Асинхронність і проміси.</a>
+        </div>
+    </div>
+
+    <div class="content">
+        <h1>Цикли в JavaScript</h1>
+        <p>Цикли дозволяють повторювати виконання коду багато разів. Це зручно, коли потрібно працювати з масивами, рахувати значення або повторювати дії за певними умовами.</p>
+
+        <h2>🔹 Цикл for</h2>
+        <p>Використовується, коли відома кількість повторів:</p>
+        <pre><code>for (let i = 1; i <= 5; i++) {
+    console.log("Номер:", i);
+}</code></pre>
+
+        <h2>🔹 Цикл while</h2>
+        <p>Виконується, доки умова <code>true</code>:</p>
+        <pre><code>let i = 1;
+while (i <= 5) {
+    console.log("Число:", i);
+    i++;
+}</code></pre>
+
+        <h2>🔹 Цикл do...while</h2>
+        <p>Спочатку виконує код, потім перевіряє умову — виконується хоча б один раз:</p>
+        <pre><code>let num = 1;
+do {
+    console.log("num =", num);
+    num++;
+} while (num <= 5);</code></pre>
+
+        <h2>🔹 Цикл for...of</h2>
+        <p>Перебирає елементи масиву:</p>
+        <pre><code>let fruits = ["яблуко", "банан", "вишня"];
+for (let fruit of fruits) {
+    console.log(fruit);
+}</code></pre>
+
+        <h2>🔹 Цикл for...in</h2>
+        <p>Перебирає властивості об'єкта:</p>
+        <pre><code>let person = {name: "Гліб", age: 16};
+for (let key in person) {
+    console.log(key + ":", person[key]);
+}</code></pre>
+
+        <h2>🎮 Міні-практика</h2>
+        <p>Введіть число, і цикл виведе всі числа від 1 до введеного:</p>
+        <div class="calc">
+            <input type="number" id="num" placeholder="Введіть число">
+            <button onclick="showNumbers()">Показати числа</button>
+            <p id="output">Результат: —</p>
+        </div>
+
+        <script>
+            function showNumbers() {
+                const n = Number(document.getElementById('num').value);
+                let result = "";
+                for (let i = 1; i <= n; i++) {
+                    result += i + " ";
+                }
+                document.getElementById('output').innerText = "Результат: " + result;
+            }
+        </script>
+
+        <h2>💡 Висновок:</h2>
+        <ul>
+            <li>✔ Цикли дозволяють автоматизувати повторювані дії.</li>
+            <li>✔ <code>for</code> — коли відома кількість повторів.</li>
+            <li>✔ <code>while</code> — поки умова <code>true</code>.</li>
+            <li>✔ <code>do...while</code> — завжди виконується хоча б один раз.</li>
+            <li>✔ <code>for...of</code> і <code>for...in</code> — для масивів і об’єктів.</li>
+        </ul>
+
+        <div class="comment-form">
+            <h2>Залиште коментар</h2>
+            {% if user.is_authenticated %}
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Відправити</button>
+            </form>
+            {% else %}
+            <p><strong>Щоб залишити коментар, необхідно <a href="{% url 'user_login' %}">увійти</a> в систему або <a href="{% url 'user_register' %}">зареєструватись</a></strong></p>
+            {% endif %}
+        </div>
+
+        <div class="comments-section">
+            <h2>Коментарі</h2>
+            {% for comment in comments %}
+                <div class="comment">
+                    <div>
+                        <strong>{{ comment.user.username }}</strong>
+                        <p>{{ comment.text }}</p>
+                    </div>
+                </div>
+            {% empty %}
+                <p>Поки немає коментарів.</p>
+            {% endfor %}
+        </div>
+
+    </div>
+
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/sidebar.js' %}"></script>
+    <script src="{% static 'js/anim.js' %}"></script>
+</body>
+</html>

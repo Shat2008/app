@@ -1,0 +1,174 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Створення та методи масивів</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Масиви в JavaScript</h1>
+    </header>
+
+<nav>
+        <a href='{% url "sait" %}' onclick="showSection('intro')" class="nav-logo">
+            <img src="{% static 'images/дом.png' %}" alt="Button" style="width: 30px; height: auto;">
+        </a>
+        <div class="nav-links">
+            <a href='{% url "html_page" %}' onclick="showSection('html')">HTML</a>
+        </div>
+        <div class="nav-links">
+            <a href='{% url "cssGlav" %}' onclick="showSection('html')">CSS</a>
+        </div>
+                <div class="nav-links">
+            <a href='{% url "jsGlav" %}' onclick="showSection('html')">JavaScript</a>
+        </div>
+       </div>
+                <div class="nav-links">
+            <a href='{% url "testGlav" %}' onclick="showSection('html')">Тести</a>
+        </div>
+        </div>
+                <div class="nav-links">
+            <a href='{% url "chat" %}' onclick="showSection('html')">Асистент сайту</a>
+        </div>
+        <a href="https://t.me/studuhtml" class="nav-logo1" target="_blank">
+            <img src="{% static 'images/111.png' %}" alt="Головна" style="width: 45px; height: 35px;">
+        </a>
+    </nav>
+
+    <div class="sidebar"> 
+        <!-- Меню JavaScript -->
+        <a href="#" class="menu-item">📁 Вступ до JavaScript</a>
+        <div class="submenu">
+            <a href="{% url 'vstypOneJs' %}">Що таке JavaScript і для чого він потрібен.</a>
+            <a href="{% url 'vstypTwoJs' %}">Як підключити JavaScript до HTML.</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Основи мови</a>
+        <div class="submenu">
+            <a href="{% url 'osnoviOneJs' %}">Змінні, типи даних і оператори.</a>
+            <a href="{% url 'osnoviTwoJs' %}">Умови if, else, switch.</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Цикли та функції</a>
+        <div class="submenu">
+            <a href="{% url 'cyclesOneJs' %}">Цикли в JavaScript</a>
+            <a href="{% url 'functionsOneJs' %}">Функції та передача параметрів</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Робота з DOM</a>
+        <div class="submenu">
+            <a href="{% url 'domOneJs' %}">Пошук і зміна елементів сторінки</a>
+            <a href="{% url 'domTwoJs' %}">Обробка подій (click, input, mouseover)</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Масиви та об’єкти</a>
+        <div class="submenu">
+            <a href="{% url 'arrayOneJs' %}">Створення та методи масивів</a>
+            <a href="{% url 'objectOneJs' %}">Об’єкти та робота з ними</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Практика JavaScript</a>
+        <div class="submenu">
+            <a href="{% url 'practiceOneJs' %}">Міні-проєкт: калькулятор.</a>
+            <a href="{% url 'practiceTwoJs' %}">Міні-проєкт: інтерактивна форма.</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Розширені можливості</a>
+        <div class="submenu">
+            <a href="{% url 'advancedOneJs' %}">LocalStorage, JSON, Fetch API.</a>
+            <a href="{% url 'advancedTwoJs' %}">Асинхронність і проміси.</a>
+        </div>
+    </div>
+
+    <div class="content">
+        <h1>Створення та методи масивів</h1>
+        <p>Масиви — це колекції даних, які зберігають кілька значень в одному об'єкті.</p>
+
+        <h2>🔹 Створення масиву</h2>
+        <pre><code>let fruits = ["Яблуко", "Банан", "Апельсин"];
+let numbers = [1, 2, 3, 4, 5];
+let mixed = [1, "Два", true];</code></pre>
+
+        <h2>🔹 Основні методи масивів</h2>
+        <ul>
+            <li><code>push()</code> — додає елемент у кінець</li>
+            <li><code>pop()</code> — видаляє останній елемент</li>
+            <li><code>shift()</code> — видаляє перший елемент</li>
+            <li><code>unshift()</code> — додає елемент на початок</li>
+            <li><code>length</code> — кількість елементів</li>
+            <li><code>forEach()</code> — перебір елементів</li>
+        </ul>
+
+        <pre><code>let fruits = ["Яблуко", "Банан"];
+fruits.push("Апельсин"); // ["Яблуко","Банан","Апельсин"]
+fruits.pop(); // ["Яблуко","Банан"]
+console.log(fruits.length); // 2
+
+fruits.forEach(function(item, index) {
+    console.log(index + ": " + item);
+});</code></pre>
+
+        <h2>🎮 Міні-практика</h2>
+        <p>Додаємо елемент у масив та показуємо результат:</p>
+        <div class="calc">
+            <input type="text" id="fruitInput" placeholder="Введи фрукт">
+            <button onclick="addFruit()">Додати фрукт</button>
+            <p id="fruitList">Масив фруктів: Яблуко, Банан</p>
+        </div>
+
+        <script>
+            let fruits = ["Яблуко", "Банан"];
+            function addFruit() {
+                const newFruit = document.getElementById("fruitInput").value;
+                if(newFruit) {
+                    fruits.push(newFruit);
+                    document.getElementById("fruitList").innerText = "Масив фруктів: " + fruits.join(", ");
+                    document.getElementById("fruitInput").value = "";
+                }
+            }
+        </script>
+
+        <h2>💡 Висновок:</h2>
+        <ul>
+            <li>✔ Масиви зберігають декілька значень у одній змінній.</li>
+            <li>✔ Основні методи: push, pop, shift, unshift, length, forEach.</li>
+            <li>✔ Масиви можна змінювати динамічно за допомогою методів.</li>
+        </ul>
+
+        <div class="comment-form">
+            <h2>Залиште коментар</h2>
+            {% if user.is_authenticated %}
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Відправити</button>
+            </form>
+            {% else %}
+            <p><strong>Щоб залишити коментар, необхідно <a href="{% url 'user_login' %}">увійти</a> в систему або <a href="{% url 'user_register' %}">зареєструватись</a></strong></p>
+            {% endif %}
+        </div>
+
+        <div class="comments-section">
+            <h2>Коментарі</h2>
+            {% for comment in comments %}
+                <div class="comment">
+                    <div>
+                        <strong>{{ comment.user.username }}</strong>
+                        <p>{{ comment.text }}</p>
+                    </div>
+                </div>
+            {% empty %}
+                <p>Поки немає коментарів.</p>
+            {% endfor %}
+        </div>
+
+    </div>
+
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/sidebar.js' %}"></script>
+    <script src="{% static 'js/anim.js' %}"></script>
+</body>
+</html>

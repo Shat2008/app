@@ -1,0 +1,180 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Навчання JavaScript</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<body>
+    <header>
+        <h1>JavaScript — перший крок до створення "живих" сайтів</h1>
+    </header>
+    
+<nav>
+        <a href='{% url "sait" %}' onclick="showSection('intro')" class="nav-logo">
+            <img src="{% static 'images/дом.png' %}" alt="Button" style="width: 30px; height: auto;">
+        </a>
+        <div class="nav-links">
+            <a href='{% url "html_page" %}' onclick="showSection('html')">HTML</a>
+        </div>
+        <div class="nav-links">
+            <a href='{% url "cssGlav" %}' onclick="showSection('html')">CSS</a>
+        </div>
+                <div class="nav-links">
+            <a href='{% url "jsGlav" %}' onclick="showSection('html')">JavaScript</a>
+        </div>
+       </div>
+                <div class="nav-links">
+            <a href='{% url "testGlav" %}' onclick="showSection('html')">Тести</a>
+        </div>
+        </div>
+                <div class="nav-links">
+            <a href='{% url "chat" %}' onclick="showSection('html')">Асистент сайту</a>
+        </div>
+        <a href="https://t.me/studuhtml" class="nav-logo1" target="_blank">
+            <img src="{% static 'images/111.png' %}" alt="Головна" style="width: 45px; height: 35px;">
+        </a>
+    </nav>
+
+    <div class="sidebar"> 
+        <!-- Глава 1 -->
+        <a href="#" class="menu-item">📁 Вступ до JavaScript</a>
+        <div class="submenu">
+            <a href="{% url 'vstypOneJs' %}">Що таке JavaScript і для чого він потрібен.</a>
+            <a href="{% url 'vstypTwoJs' %}">Як підключити JavaScript до HTML.</a>
+        </div>
+
+        <!-- Глава 2 -->
+        <a href="#" class="menu-item">📁 Основи мови</a>
+        <div class="submenu">
+            <a href="{% url 'osnoviOneJs' %}">Змінні, типи даних і оператори.</a>
+            <a href="{% url 'osnoviTwoJs' %}">Умови if, else, switch.</a>
+        </div>
+
+        <!-- Глава 3 -->
+        <a href="#" class="menu-item">📁 Цикли та функції</a>
+        <div class="submenu">
+            <a href="{% url 'cyclesOneJs' %}">Цикли for, while, do...while.</a>
+            <a href="{% url 'functionsOneJs' %}">Функції та передача параметрів.</a>
+        </div>
+
+        <!-- Глава 4 -->
+        <a href="#" class="menu-item">📁 Робота з DOM</a>
+        <div class="submenu">
+            <a href="{% url 'domOneJs' %}">Пошук і зміна елементів сторінки.</a>
+            <a href="{% url 'domTwoJs' %}">Обробка подій (click, input, mouseover).</a>
+        </div>
+
+        <!-- Глава 5 -->
+        <a href="#" class="menu-item">📁 Масиви та об’єкти</a>
+        <div class="submenu">
+            <a href="{% url 'arrayOneJs' %}">Створення та методи масивів.</a>
+            <a href="{% url 'objectOneJs' %}">Об’єкти та робота з ними.</a>
+        </div>
+
+        <!-- Глава 6 -->
+        <a href="#" class="menu-item">📁 Практика JavaScript</a>
+        <div class="submenu">
+            <a href="{% url 'practiceOneJs' %}">Міні-проєкт: калькулятор.</a>
+            <a href="{% url 'practiceTwoJs' %}">Міні-проєкт: інтерактивна форма.</a>
+        </div>
+
+        <!-- Глава 7 -->
+        <a href="#" class="menu-item">📁 Розширені можливості</a>
+        <div class="submenu">
+            <a href="{% url 'advancedOneJs' %}">LocalStorage, JSON, Fetch API.</a>
+            <a href="{% url 'advancedTwoJs' %}">Асинхронність і проміси.</a>
+        </div>
+    </div>
+
+    <div class="content">
+        <h1>Що таке JavaScript і для чого він потрібен?</h1>
+        <p><strong>JavaScript</strong> — це мова програмування, яка оживляє веб-сторінки. Якщо <strong>HTML</strong> відповідає за структуру сайту, а <strong>CSS</strong> — за його зовнішній вигляд, то саме JavaScript додає інтерактивність: реагує на натискання, змінює вміст, запускає анімації та багато іншого.</p>
+
+        <h2>Приклади того, що робить JavaScript:</h2>
+        <ul>
+            <li>✅ Відображає спливаючі вікна, повідомлення або підказки.</li>
+            <li>✅ Перевіряє введені дані у формах (наприклад, чи правильно введено email).</li>
+            <li>✅ Дозволяє створювати слайдери, калькулятори, інтерактивні тести.</li>
+            <li>✅ Реагує на кліки, рух миші або натискання клавіш.</li>
+            <li>✅ Оновлює сторінку без її перезавантаження (технологія AJAX).</li>
+        </ul>
+
+        <h2>Чому JavaScript важливий?</h2>
+        <p>Без JavaScript більшість сучасних сайтів виглядали б як звичайні статичні сторінки. Саме він дозволяє створювати веб-додатки — від простих ігор до складних платформ, як Gmail, YouTube або Instagram.</p>
+
+        <h2>Як підключити JavaScript до HTML?</h2>
+        <p>Є три основні способи:</p>
+        <ol>
+            <li><strong>Вбудований у HTML:</strong> у тегу <code>&lt;script&gt;</code> прямо на сторінці:
+                <pre><code>&lt;script&gt;
+alert('Привіт, світ!');
+&lt;/script&gt;
+                </code></pre>
+            </li>
+            <li><strong>Зовнішній файл:</strong> зберігаєш код у окремому файлі <code>script.js</code> і підключаєш:
+                <pre><code>&lt;script src="script.js"&gt;&lt;/script&gt;</code></pre>
+            </li>
+            <li><strong>В атрибутах HTML:</strong> наприклад:
+                <pre><code>&lt;button onclick="alert('Клік!')"&gt;Натисни мене&lt;/button&gt;</code></pre>
+            </li>
+        </ol>
+
+        <h2>JavaScript у дії</h2>
+        <p>Нижче приклад коду, який реагує на натискання кнопки:</p>
+        <pre><code>&lt;button onclick="changeText()"&gt;Натисни&lt;/button&gt;
+&lt;p id="demo"&gt;Початковий текст&lt;/p&gt;
+
+&lt;script&gt;
+function changeText() {
+    document.getElementById("demo").innerHTML = "Текст змінено!";
+}
+&lt;/script&gt;
+        </code></pre>
+
+        <p>Коли користувач натискає кнопку, JavaScript змінює текст на сторінці — ось так просто!</p>
+
+        <h2>Підсумок:</h2>
+        <ul>
+            <li>✔ JavaScript — серце інтерактивних сайтів.</li>
+            <li>✔ Працює у всіх сучасних браузерах.</li>
+            <li>✔ Його можна поєднувати з HTML, CSS, а також з фреймворками (React, Vue, Angular).</li>
+        </ul>
+
+        <div class="comment-form">
+            <h2>Залиште коментар</h2>
+            {% if user.is_authenticated %}
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Відправити</button>
+            </form>
+            {% else %}
+            <p><strong>Щоб залишити коментар, необхідно <a href="{% url 'user_login' %}">увійти</a> в систему або <a href="{% url 'user_register' %}">зареєструватись</a></strong></p>
+            {% endif %}
+        </div>
+
+        <div class="comments-section">
+            <h2>Коментарі</h2>
+            {% for comment in comments %}
+                <div class="comment">
+                    <div>
+                        <strong>{{ comment.user.username }}</strong>
+                        <p>{{ comment.text }}</p>
+                    </div>
+                </div>
+            {% empty %}
+                <p>Поки немає коментарів.</p>
+            {% endfor %}
+        </div>
+
+    </div>
+
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/sidebar.js' %}"></script>
+    <script src="{% static 'js/anim.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: linear-gradient(to right, #a0d8ff, #0033ff);
+  min-height: 100vh;
+  color: white;
+  overflow-x: hidden;
+}
+
+/* навигация */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(to right, #a0d8ff, #0022ff);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 25px;
+}
+
+.nav-left img,
+.nav-right img {
+  width: 35px;
+  height: 35px;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 12px;
+  padding: 5px;
+  transition: transform 0.3s;
+}
+
+.nav-left img:hover,
+.nav-right img:hover {
+  transform: scale(1.15);
+}
+
+.nav-center {
+  display: flex;
+  gap: 80px;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 16px;
+  transition: all 0.3s;
+}
+
+.nav-link:hover {
+  text-shadow: 0 0 10px white;
+  transform: scale(1.1);
+}
+
+/* контент */
+main {
+  padding-top: 120px;
+  text-align: center;
+}
+
+.content h1 {
+  font-size: 2em;
+  text-shadow: 0 0 10px #fff;
+}
+
+.content p {
+  margin-top: 15px;
+  font-size: 1.1em;
+}
+
+/* звёздочки */
+.stars {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.star {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: white;
+  border-radius: 50%;
+  animation: fallStar 5s linear infinite;
+  box-shadow: 0 0 10px white;
+}
+
+.star:nth-child(1) {
+  left: 20%;
+  animation-delay: 0s;
+}
+
+.star:nth-child(2) {
+  left: 60%;
+  animation-delay: 2s;
+}
+
+.star:nth-child(3) {
+  left: 80%;
+  animation-delay: 4s;
+}
+
+@keyframes fallStar {
+  0% {
+    transform: translateY(-10px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}

@@ -1,0 +1,311 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Адаптивний дизайн</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Адаптивний дизайн</h1>
+    </header>
+    
+    <nav>
+        <a href='{% url "sait" %}' onclick="showSection('intro')" class="nav-logo">
+            <img src="{% static 'images/дом.png' %}" alt="Button" style="width: 30px; height: auto;">
+        </a>
+        <div class="nav-links">
+            <a href='{% url "html_page" %}' onclick="showSection('html')">HTML</a>
+        </div>
+        <div class="nav-links">
+            <a href='{% url "cssGlav" %}' onclick="showSection('html')">CSS</a>
+        </div>
+        <div class="nav-links">
+            <a href='{% url "jsGlav" %}' onclick="showSection('html')">JavaScript</a>
+        </div>
+        <div class="nav-links">
+            <a href='{% url "testGlav" %}' onclick="showSection('html')">Тести</a>
+        </div>
+        <div class="nav-links">
+            <a href='{% url "chat" %}' onclick="showSection('html')">Асистент сайту</a>
+        </div>
+        <a href="https://t.me/studuhtml" class="nav-logo1" target="_blank">
+            <img src="{% static 'images/111.png' %}" alt="Головна" style="width: 45px; height: 35px;">
+        </a>
+    </nav>
+
+<div class="sidebar"> 
+    <!-- Глава 5 -->
+    <a href="#" class="menu-item">📁 Підготовка</a>
+    <div class="submenu">
+        <a href='{% url 'choice' %}'>Вибір інструментів розробки (редактор коду, браузер, ресурси).</a>
+        <a href='{% url 'definition' %}'>Визначення цілей та структури майбутнього сайту.</a>
+    </div>
+
+    <!-- Глава 6 -->
+    <a href="#" class="menu-item">📁 Як створити сайт HTML</a>
+    <div class="submenu">
+        <a href='{% url 'creation' %}'>Створення базового HTML-файлу (файл із розширенням .html).</a>
+        <a href='{% url 'discovery' %}'>Відкриття файлу HTML у браузері для перегляду.</a>
+    </div>
+
+    <!-- Глава 7 -->
+    <a href="#" class="menu-item">📁 Структури HTML</a>
+    <div class="submenu">
+        <a href='{% url 'study' %}'>Вивчення основних тегів (html, head, body).</a>
+        <a href='{% url 'semantics' %}'>Семантичні елементи (header, main, footer).</a>
+    </div>
+
+    <a href="#" class="menu-item">📁 Інформація для сайту</a>
+    <div class="submenu">
+        <a href='{% url 'gathering' %}'>Збір текстового контенту, зображень та медіа.</a>
+        <a href='{% url 'organization' %}'>>Організація інформації у логічні розділи.</a>
+    </div>
+
+    <!-- Глава 6 -->
+    <a href="#" class="menu-item">📁 Дизайн сайту</a>
+    <div class="submenu">
+        <a href='{% url 'connection' %}'>Підключення CSS для стилізації HTML елементів.</a>
+        <a href='{% url 'connectionn' %}'>Створення адаптивного дизайну для різних пристроїв.</a>
+        <a href='{% url 'css' %}'>Цікаві приклади оформлення сайту через цсс.</a>
+    </div>
+
+
+    <!-- Глава 7 -->
+    <a href="#" class="menu-item">📁 Приклади коду та їх результат</a>
+    <div class="submenu">
+        <a href='{% url 'writing' %}'>Написання простого прикладу із заголовком та текстом.</a>
+        <a href='{% url 'addition' %}'>Додавання кнопки та перевірка її роботи у браузері.</a>
+    </div>
+
+</div>   
+    <div class="content">
+    
+        <h1>Створення адаптивного дизайну для різних пристроїв</h1>
+        <p>Адаптивний дизайн дозволяє вашій веб-сторінці коректно виглядати і функціонувати на різних типах пристроїв (десктопах, планшетах, смартфонах).</p>
+        <p>Ось покрокове пояснення, як створити адаптивний дизайн для вашого сайту:</p>
+    
+
+    <section>
+        <h2>1. Використання метатега viewport</h2>
+        <p>Перше, що потрібно зробити, це додати метатег viewport у розділ <code>&lt;head&gt;</code>. Цей метатег дозволяє контролювати, як веб-сторінка виглядатиме на мобільних пристроях.</p>
+
+        <pre>
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Адаптивний дизайн&lt;/title&gt;
+&lt;/head&gt;
+        </pre>
+
+        <p><strong>Роз'яснення:</strong></p>
+        <ul>
+            <li><code>width=device-width</code> — встановлює ширину області перегляду, що відповідає ширині екрана пристрою.</li>
+            <li><code>initial-scale=1.0</code> — встановлює початковий масштаб сторінки.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>2. Використання медіа-запитів (CSS Media Queries)</h2>
+        <p>Медіа-запити — це частина CSS, яка дозволяє застосовувати різні стилі в залежності від властивостей пристрою, таких як ширина екрану, орієнтація тощо.</p>
+
+        <h3>Приклад адаптивних стилів:</h3>
+        <pre>
+            
+/* Стилі для великого екрану (десктопи) */
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+h1 {
+    font-size: 2em;
+}
+
+/* Стилі для планшетів (екран шириною до 768px) */
+@media (max-width: 768px) {
+    body {
+        background-color: #f0f0f0;
+    }
+    
+    h1 {
+        font-size: 1.5em;
+    }
+}
+
+/* Стилі для мобільних пристроїв (екран шириною до 480px) */
+@media (max-width: 480px) {
+    body {
+        background-color: #e0e0e0;
+    }
+
+    h1 {
+        font-size: 1.2em;
+    }
+
+    p {
+        font-size: 14px;
+    }
+}
+        </pre>
+
+        <p><strong>Пояснення:</strong></p>
+        <ul>
+            <li>Основні стилі (для великих екранів) визначають загальні стилі для сторінки.</li>
+            <li>Медіа-запити для планшетів: Якщо ширина екрана не перевищує 768 пікселів, стилі для цього діапазону будуть застосовуватися (наприклад, змінюється розмір шрифтів і фон).</li>
+            <li>Медіа-запити для мобільних пристроїв: Якщо ширина екрана менша або рівна 480 пікселів, застосовуються стилі, які оптимізують контент для мобільних телефонів, зменшують розмір шрифтів, змінюють фон тощо.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>3. Використання відносних одиниць вимірювання</h2>
+        <p>Щоб забезпечити масштабованість і адаптацію до різних розмірів екрану, рекомендується використовувати відносні одиниці вимірювання, такі як <code>em</code>, <code>rem</code>, <code>%</code>, <code>vh</code>, <code>vw</code>, замість фіксованих значень (пікселів).</p>
+
+        <h3>Приклад:</h3>
+        <pre>
+/* Відносні одиниці для ширини та висоти */
+.container {
+    width: 80%; /* Ширина блоку займає 80% від ширини екрану */
+    height: 50vh; /* Висота блоку буде 50% від висоти екрану */
+}
+
+/* Відносні одиниці для шрифтів */
+h1 {
+    font-size: 3rem; /* Розмір шрифта залежить від кореневого розміру шрифта */
+}
+        </pre>
+    </section>
+
+    <section>
+        <h2>4. Використання гнучких макетів (Flexbox або Grid)</h2>
+        <p>Для створення адаптивних макетів можна використовувати гнучкі макети, такі як Flexbox і CSS Grid. Вони дозволяють автоматично коригувати розташування елементів в залежності від доступного простору на екрані.</p>
+
+        <h3>Приклад використання Flexbox:</h3>
+        <pre>
+/* Контейнер Flex */
+.container {
+    display: flex;
+    flex-wrap: wrap; /* Переносити елементи на новий рядок при необхідності */
+    justify-content: space-between;
+}
+
+/* Картки в контейнері */
+.card {
+    flex: 1 1 300px; /* Картка буде мати мінімум 300px, але може розширюватися */
+    margin: 10px;
+    background-color: #ddd;
+    padding: 20px;
+}
+        </pre>
+    </section>
+
+    <section>
+        <h2>5. Тести для різних пристроїв</h2>
+        <p>Після того, як ви реалізували адаптивний дизайн, важливо протестувати вашу сторінку на різних пристроях або за допомогою інструментів для розробників у браузерах (наприклад, Chrome DevTools). Ви можете змінювати розміри екранів і перевіряти, як ваша сторінка адаптується до нових умов.</p>
+    </section>
+
+    <section>
+        <h2>Приклад адаптивної HTML-структури:</h2>
+        <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="uk"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Адаптивний дизайн&lt;/title&gt;
+    &lt;link rel="stylesheet" href="styles.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;header&gt;
+        &lt;h1&gt;Мій адаптивний сайт&lt;/h1&gt;
+    &lt;/header&gt;
+
+    &lt;section class="container"&gt;
+        &lt;div class="card"&gt;
+            &lt;h2&gt;Картка 1&lt;/h2&gt;
+            &lt;p&gt;Це приклад адаптивної картки на сайті.&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class="card"&gt;
+            &lt;h2&gt;Картка 2&lt;/h2&gt;
+            &lt;p&gt;Це ще одна картка, яка автоматично змінює свій вигляд в залежності від розміру екрану.&lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;footer&gt;
+        &lt;p&gt;© 2025 Мій сайт&lt;/p&gt;
+    &lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+        </pre>
+    </section>
+<style>
+    .custom-button {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        color: white;
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .custom-button:hover {
+        background-color: #0056b3;
+    }
+</style> 
+  <a href="{% url 'kod7' %}" target="_blank" class="custom-button">Продивитися результат</a>
+    <footer>
+        <h2>Висновок</h2>
+        <p>Адаптивний дизайн дозволяє вашому сайту ефективно працювати на різних пристроях. Для цього потрібно:</p>
+        <ul>
+            <li>Встановити метатег viewport.</li>
+            <li>Використовувати медіа-запити для зміни стилів залежно від ширини екрану.</li>
+            <li>Використовувати відносні одиниці вимірювання для кращої масштабованості.</li>
+            <li>Застосовувати гнучкі макети, такі як Flexbox чи Grid, для адаптації контенту.</li>
+            <li>Тестувати на різних пристроях.</li>
+        </ul>
+        <p>Ці техніки забезпечують комфортний користувацький досвід на будь-якому пристрої, від мобільних телефонів до десктопів.</p>
+        
+
+<div class="comment-form">
+    <h2>Залиште коментар</h2>
+    {% if user.is_authenticated %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Відправити</button>
+    </form>
+    {% else %}
+    <p><strong>Щоб залишити коментар, необхідно <a href="{% url 'user_login' %}">увійти</a> в систему або <a href="{% url 'user_register' %}">зареєструватись</a></strong></p>
+    {% endif %}
+</div>
+
+<div class="comments-section">
+    <h2>Коментарі</h2>
+    {% for comment in comments %}
+        <div class="comment">
+            <div>
+                <strong>{{ comment.user.username }}</strong>
+                <p>{{ comment.text }}</p>
+                
+            </div>
+        </div>
+    {% empty %}
+        <p>Поки немає коментарів.</p>
+    {% endfor %}
+</div>
+    </div>
+		
+</head>
+<body>
+
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/sidebar.js' %}"></script>
+    <script src="{% static 'js/anim.js' %}"></script>
+</body>
+</html>

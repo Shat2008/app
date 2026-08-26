@@ -1,0 +1,631 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест: Основи HTML</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        /* === ОФОРМЛЕННЯ ТЕСТУ === */
+        .test-container {
+            max-width: 800px;
+            margin: 100px auto;
+            background: var(--surface);
+            padding: 30px 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .test-container h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .test-container p {
+            text-align: center;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        .question {
+            background: var(--muted);
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            transition: 0.2s;
+            border: 1px solid rgba(0,0,0,0.06);
+        }
+
+        .question:hover {
+            background: rgba(234,243,255,0.95);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .question p {
+            font-weight: bold;
+            color: #222;
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            margin-left: 10px;
+            padding: 3px 0;
+            cursor: pointer;
+        }
+
+        button {
+            display: block;
+            margin: 20px auto 10px auto;
+            padding: 10px 30px;
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+
+        #result {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h2>Тести</h2>
+    </header>
+
+<nav>
+        <a href='{% url "sait" %}' onclick="showSection('intro')" class="nav-logo">
+            <img src="{% static 'images/дом.png' %}" alt="Button" style="width: 30px; height: auto;">
+        </a>
+        <div class="nav-links">
+            <a href='{% url "html_page" %}' onclick="showSection('html')">HTML</a>
+        </div>
+        <div class="nav-links">
+            <a href='{% url "cssGlav" %}' onclick="showSection('html')">CSS</a>
+        </div>
+                <div class="nav-links">
+            <a href='{% url "jsGlav" %}' onclick="showSection('html')">JavaScript</a>
+        </div>
+       </div>
+                <div class="nav-links">
+            <a href='{% url "testGlav" %}' onclick="showSection('html')">Тести</a>
+        </div>
+        </div>
+                <div class="nav-links">
+            <a href='{% url "chat" %}' onclick="showSection('html')">Асистент сайту</a>
+        </div>
+        <a href="https://t.me/studuhtml" class="nav-logo1" target="_blank">
+            <img src="{% static 'images/111.png' %}" alt="Головна" style="width: 45px; height: 35px;">
+        </a>
+    </nav>
+
+    <div class="sidebar">
+        <!-- Тести HTML -->
+        <a href="#" class="menu-item">📘 Тести HTML</a>
+        <div class="submenu">
+            <a href="{% url 'test_html_basic' %}" class="active">Основи HTML</a>
+            <a href="{% url 'test_html_advanced' %}">Просунуті елементи HTML</a>
+        </div>
+
+        <!-- Тести CSS -->
+        <a href="#" class="menu-item">🎨 Тести CSS</a>
+        <div class="submenu">
+            <a href="{% url 'test_css_basic' %}">Основи стилів</a>
+            <a href="{% url 'test_css_layout' %}">Макети, Flexbox, Grid</a>
+        </div>
+
+        <!-- Тести JavaScript -->
+        <a href="#" class="menu-item">💡 Тести JavaScript</a>
+        <div class="submenu">
+            <a href="{% url 'test_js_basic' %}">Основи мови</a>
+            <a href="{% url 'test_js_dom' %}">Робота з DOM</a>
+        </div>
+
+        <!-- Загальний тест -->
+        <a href="#" class="menu-item">🏆 Підсумковий тест</a>
+        <div class="submenu">
+            <a href="{% url 'test_all' %}">HTML + CSS + JS</a>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="test-container">
+            <h2>Тест: Основи HTML</h2>
+            <p>Відповідай на питання, щоб перевірити свої знання. Обери правильний варіант у кожному з них.</p>
+
+            <form id="htmlTestForm">
+                <div id="questions"></div>
+                <div style="display: flex; gap: 10px; margin-top: 20px;">
+                    <button type="button" onclick="checkAnswers()" style="flex: 1;">Перевірити</button>
+                    <button type="button" onclick="resetTest()" style="flex: 1; background: #6c757d;">Оновити тест</button>
+                </div>
+            </form>
+
+            <p id="result"></p>
+        </div>
+    </div>
+
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/sidebar.js' %}"></script>
+
+    <script>
+        // Банк вопросов для основ HTML
+        const questionBank = [
+            {
+                question: "Що означає HTML?",
+                options: ["Hyperlinks and Text Markup Language", "Hyper Text Markup Language", "Home Tool Markup Language"],
+                correct: 1
+            },
+            {
+                question: "Який тег використовується для найважливішого заголовка?",
+                options: ["&lt;heading&gt;", "&lt;h6&gt;", "&lt;h1&gt;"],
+                correct: 2
+            },
+            {
+                question: "Який тег використовується для вставки зображення?",
+                options: ["&lt;img&gt;", "&lt;src&gt;", "&lt;image&gt;"],
+                correct: 0
+            },
+            {
+                question: "Де розміщується вміст, який відображається на сторінці?",
+                options: ["&lt;meta&gt;", "&lt;body&gt;", "&lt;title&gt;"],
+                correct: 1
+            },
+            {
+                question: "Який атрибут використовується для задання посилання у тегу &lt;a&gt;?",
+                options: ["link", "href", "src"],
+                correct: 1
+            },
+            {
+                question: "Який тег створює ненумерований список?",
+                options: ["&lt;ol&gt;", "&lt;ul&gt;", "&lt;list&gt;"],
+                correct: 1
+            },
+            {
+                question: "Що робить тег &lt;br&gt;?",
+                options: ["Створює новий абзац", "Додає горизонтальну лінію", "Створює розрив рядка"],
+                correct: 2
+            },
+            {
+                question: "Який тег використовується для створення таблиці?",
+                options: ["&lt;table&gt;", "&lt;tab&gt;", "&lt;tbl&gt;"],
+                correct: 0
+            },
+            {
+                question: "Яка мета елемента &lt;meta&gt;?",
+                options: ["Визначити назву сторінки", "Встановити кодування та метаінформацію сторінки", "Створити заголовок"],
+                correct: 1
+            },
+            {
+                question: "Який тег використовується для параграфу?",
+                options: ["&lt;p&gt;", "&lt;par&gt;", "&lt;paragraph&gt;"],
+                correct: 0
+            },
+            {
+                question: "Яка різниця між &lt;b&gt; та &lt;strong&gt;?",
+                options: ["&lt;b&gt; семантичніший", "&lt;strong&gt; семантичніший", "Немає різниці"],
+                correct: 1
+            },
+            {
+                question: "Для чого використовується тег &lt;div&gt;?",
+                options: ["Для розділення та групування елементів", "Для списків", "Для вставки зображень"],
+                correct: 0
+            },
+            {
+                question: "Яка властивість робить текст курсивом?",
+                options: ["&lt;italic&gt;", "&lt;i&gt;", "&lt;em&gt;"],
+                correct: 1
+            },
+            {
+                question: "Що робить тег &lt;hr&gt;?",
+                options: ["Створює заголовок", "Додає горизонтальну лінію", "Створює розрив"],
+                correct: 1
+            },
+            {
+                question: "Як створити списки у HTML?",
+                options: ["&lt;list&gt; та &lt;item&gt;", "&lt;ol&gt; та &lt;li&gt; для нумерованих, &lt;ul&gt; та &lt;li&gt; для ненумерованих", "&lt;lists&gt; та &lt;items&gt;"],
+                correct: 1
+            },
+            {
+                question: "Які атрибути мають інтернет-посилання?",
+                options: ["src та alt", "href та title", "link та text"],
+                correct: 1
+            },
+            {
+                question: "Як вставити посилання на електронну пошту?",
+                options: ["&lt;a href='email:name@example.com'&gt;", "&lt;a href='mailto:name@example.com'&gt;", "&lt;email href='name@example.com'&gt;"],
+                correct: 1
+            },
+            {
+                question: "Що означає DOCTYPE у HTML?",
+                options: ["Тип документа, який браузер повинен обробляти", "Визначення основного типу даних", "Декоративний елемент"],
+                correct: 0
+            },
+            {
+                question: "Яка різниця між &lt;ul&gt; та &lt;ol&gt;?",
+                options: ["&lt;ul&gt; для нумерованих списків, &lt;ol&gt; для ненумерованих", "&lt;ol&gt; для нумерованих списків, &lt;ul&gt; для ненумерованих", "Вони однакові"],
+                correct: 1
+            },
+            {
+                question: "Як вказати атрибут alt у тегу &lt;img&gt;?",
+                options: ["&lt;img alt='текст' src='image.jpg'&gt;", "&lt;img description='текст' src='image.jpg'&gt;", "&lt;img text='текст' src='image.jpg'&gt;"],
+                correct: 0
+            },
+            {
+                question: "Що таке вкладеність елементів у HTML?",
+                options: ["Розміщення одного елемента всередину іншого", "Створення нових елементів", "Видалення елементів"],
+                correct: 0
+            },
+            {
+                question: "Для чого використовується тег &lt;span&gt;?",
+                options: ["Для розділення сторінки", "Для наведення стилю на частину тексту всередину строки", "Для лінійних розривів"],
+                correct: 1
+            },
+            {
+                question: "Який тег використовується для заголовків від найбільшого до найменшого?",
+                options: ["&lt;h1&gt; до &lt;h6&gt;", "&lt;h1&gt; до &lt;h10&gt;", "&lt;heading1&gt; до &lt;heading6&gt;"],
+                correct: 0
+            },
+            {
+                question: "Як зробити текст підкресленим у HTML?",
+                options: ["&lt;u&gt;", "&lt;underline&gt;", "&lt;u-text&gt;"],
+                correct: 0
+            },
+            {
+                question: "Що робить атрибут 'target' у тегу &lt;a&gt;?",
+                options: ["Встановлює назву посилання", "Визначає, де відкрити посилання (новій вкладці, вікні тощо)", "Встановлює шрифт"],
+                correct: 1
+            },
+            {
+                question: "Для чого використовується тег &lt;form&gt;?",
+                options: ["Для форматування тексту", "Для створення форм, що передають дані на сервер", "Для вставки зображень"],
+                correct: 1
+            },
+            {
+                question: "Яке призначення тегу &lt;input&gt;?",
+                options: ["Вставити зображення", "Створити текстове поле для введення даних", "Створити кнопку"],
+                correct: 1
+            },
+            {
+                question: "Що робить атрибут 'type' у тегу &lt;input&gt;?",
+                options: ["Встановлює шрифт", "Визначає тип введення (text, password, checkbox, radio та ін.)", "Встановлює колір"],
+                correct: 1
+            },
+            {
+                question: "Для чого використовується тег &lt;button&gt;?",
+                options: ["Для вставки зображення", "Для створення натискної кнопки", "Для створення посилання"],
+                correct: 1
+            },
+            {
+                question: "Яка різниця між &lt;label&gt; та звичайним текстом?",
+                options: ["&lt;label&gt; пов'язана з елементом форми і покращує доступність", "Немає різниці", "&lt;label&gt; робить текст жирним"],
+                correct: 0
+            },
+            {
+                question: "Що означає атрибут 'placeholder' у input?",
+                options: ["Встановлює значення за замовчуванням", "Вказує текст-підказку, який з'являється у полі", "Встановлює обов'язковість поля"],
+                correct: 1
+            },
+            {
+                question: "Як вказати обов'язковість заповнення поля у формі?",
+                options: ["&lt;input required&gt;", "&lt;input mandatory&gt;", "&lt;input must-fill&gt;"],
+                correct: 0
+            },
+            {
+                question: "Для чого використовується тег &lt;header&gt;?",
+                options: ["Для зберігання інформації про сторінку", "Для верхнього вмісту сторінки (логотип, навігація)", "Для заголовків"],
+                correct: 1
+            },
+            {
+                question: "Для чого використовується тег &lt;footer&gt;?",
+                options: ["Для нижнього колонтитула сторінки", "Для закриття сторінки", "Для ніжних посилань"],
+                correct: 0
+            },
+            {
+                question: "Що таке семантичне HTML?",
+                options: ["HTML з красивим форматуванням", "HTML, що використовує елементи, які описують значення вмісту", "HTML без стилів"],
+                correct: 1
+            },
+            {
+                question: "Які елементи вважаються блочними?",
+                options: ["&lt;span&gt;, &lt;a&gt;", "&lt;div&gt;, &lt;p&gt;, &lt;h1&gt;", "&lt;img&gt;, &lt;button&gt;"],
+                correct: 1
+            },
+            {
+                question: "Які елементи вважаються рядковими (inline)?",
+                options: ["&lt;div&gt;, &lt;p&gt;", "&lt;span&gt;, &lt;a&gt;, &lt;img&gt;", "&lt;h1&gt;, &lt;body&gt;"],
+                correct: 1
+            },
+            {
+                question: "Що таке доступність (accessibility) у веб-дизайні?",
+                options: ["Швидкість сайту", "Забезпечення того, що сайт легко використовувати людям з інвалідністю", "Дизайн сайту"],
+                correct: 1
+            },
+            {
+                question: "Для чого використовується атрибут 'id'?",
+                options: ["Для встановлення класу елемента", "Для унікального ідентифікування елемента на сторінці", "Для встановлення кольору"],
+                correct: 1
+            },
+            {
+                question: "Для чого використовується атрибут 'class'?",
+                options: ["Для встановлення назви класу 'класу' школи", "Для застосування одного або більше стилів до елементу", "Для установки ID"],
+                correct: 1
+            },
+            {
+                question: "Як вставити закладку у HTML сторінку?",
+                options: ["&lt;bookmark&gt;", "&lt;a href='#myid'&gt; та елемент з id='myid'", "&lt;anchor id='myid'&gt;"],
+                correct: 1
+            },
+            {
+                question: "Що означає атрибут 'href' значення '#'?",
+                options: ["Посилання на новий документ", "Посилання на поточну сторінку (закладка)", "Посилання не працює"],
+                correct: 1
+            },
+            {
+                question: "Який тег використовується для вставки форми?",
+                options: ["&lt;input&gt;", "&lt;form&gt;", "&lt;control&gt;"],
+                correct: 1
+            },
+            {
+                question: "Який атрибут HTML визначає тип поля введення?",
+                options: ["&lt;form type='text'&gt;", "&lt;input type='text'&gt;", "&lt;field type='text'&gt;"],
+                correct: 1
+            },
+            {
+                question: "Що означає DOCTYPE?",
+                options: ["Тип документа", "Версія HTML", "Обидва варіанти коректні"],
+                correct: 2
+            },
+            {
+                question: "Який тег використовується для вставки посилання на CSS?",
+                options: ["&lt;style&gt;", "&lt;link&gt;", "&lt;css&gt;"],
+                correct: 1
+            },
+            {
+                question: "Яке найменше значення атрибуту 'width' в тегу &lt;img&gt;?",
+                options: ["0", "1", "Немає мінімального значення"],
+                correct: 2
+            },
+            {
+                question: "Який тег використовується для визначення комірок таблиці?",
+                options: ["&lt;tc&gt;", "&lt;td&gt;", "&lt;cell&gt;"],
+                correct: 1
+            },
+            {
+                question: "Для чого використовується тег &lt;footer&gt;?",
+                options: ["Для футера (нижня частина)", "Для верхньої частини", "Це застарілий тег"],
+                correct: 0
+            },
+            {
+                question: "Яка мета тегу &lt;article&gt;?",
+                options: ["Створити контейнер для статті", "Форматувати текст", "Створити нумерований список"],
+                correct: 0
+            },
+            {
+                question: "Який тег створює рядок заголовків таблиці?",
+                options: ["&lt;th&gt;", "&lt;tr&gt;", "&lt;thead&gt;"],
+                correct: 2
+            },
+            {
+                question: "Для чого використовується атрибут 'alt' в тегу &lt;img&gt;?",
+                options: ["Для альтернативного тексту", "Для альтернативного джерела", "Для вирівнювання"],
+                correct: 0
+            },
+            {
+                question: "Який тег використовується для важливого тексту?",
+                options: ["&lt;b&gt;", "&lt;strong&gt;", "&lt;important&gt;"],
+                correct: 1
+            },
+            {
+                question: "Яка мета тегу &lt;header&gt;?",
+                options: ["Для заголовка сторінки або секції", "Для заголовків (h1-h6)", "Це не валідний тег"],
+                correct: 0
+            },
+            {
+                question: "Як закрити самозакриваючийся тег в XHTML?",
+                options: ["&lt;br&gt;", "&lt;br/&gt;", "Обидва варіанти"],
+                correct: 1
+            },
+            {
+                question: "Який атрибут унікально визначає HTML елемент?",
+                options: ["class", "id", "name"],
+                correct: 1
+            },
+            {
+                question: "Для чого використовується тег &lt;nav&gt;?",
+                options: ["Для навігації", "Для примітки", "Для нав'язування"],
+                correct: 0
+            },
+            {
+                question: "Яка мета тегу &lt;main&gt;?",
+                options: ["Для основного вмісту сторінки", "Для головної секції", "Для основних стилів"],
+                correct: 0
+            },
+            {
+                question: "Який тег використовується для цитати?",
+                options: ["&lt;quote&gt;", "&lt;blockquote&gt;", "&lt;cite&gt;"],
+                correct: 1
+            },
+            {
+                question: "Для чого використовується тег &lt;aside&gt;?",
+                options: ["Для бічного вмісту", "Для коментарів", "Для порад"],
+                correct: 0
+            },
+            {
+                question: "Як правильно визначити мету браузера для адаптивного дизайну?",
+                options: ["&lt;meta viewport...&gt;", "&lt;meta responsive...&gt;", "&lt;meta device...&gt;"],
+                correct: 0
+            },
+            {
+                question: "Яке значення за замовчуванням для атрибуту 'type' у тегу &lt;input&gt;?",
+                options: ["text", "button", "submit"],
+                correct: 0
+            },
+            {
+                question: "Для чого використовується тег &lt;section&gt;?",
+                options: ["Для закрою секції", "Для групування пов'язаного контенту", "Для секундарного вмісту"],
+                correct: 1
+            },
+            {
+                question: "Як вставити видео на HTML сторінку?",
+                options: ["&lt;video&gt;", "&lt;media&gt;", "&lt;film&gt;"],
+                correct: 0
+            },
+            {
+                question: "Який тег використовується для аудіо?",
+                options: ["&lt;sound&gt;", "&lt;audio&gt;", "&lt;music&gt;"],
+                correct: 1
+            },
+            {
+                question: "Для чого використовується тег &lt;span&gt;?",
+                options: ["Для контейнера в рядку", "Для блочного контейнера", "Для таблиці"],
+                correct: 0
+            },
+            {
+                question: "Як правильно вписати коментар в HTML?",
+                options: ["// Коментар", "/* Коментар */", "&lt;!-- Коментар --&gt;"],
+                correct: 2
+            },
+            {
+                question: "Який тег використовується для попереджувального тексту?",
+                options: ["&lt;warning&gt;", "&lt;mark&gt;", "&lt;del&gt;"],
+                correct: 1
+            },
+            {
+                question: "Для чого використовується тег &lt;label&gt; в формі?",
+                options: ["Для позначення інпутів", "Для назви форми", "Для підписування елементів форми"],
+                correct: 2
+            },
+            {
+                question: "Яка мета атрибуту 'required' в &lt;input&gt;?",
+                options: ["Обов'язкове поле", "Резервне поле", "Приховане поле"],
+                correct: 0
+            }
+        ];
+
+
+        // Функция для перемешивания массива
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        let selectedQuestions = [];
+        let correctAnswers = [];
+
+        // Генерировать вопросы
+        function generateQuestions() {
+            // Выбрать случайные вопросы каждый раз
+            selectedQuestions = [...questionBank];
+            shuffle(selectedQuestions);
+            selectedQuestions = selectedQuestions.slice(0, 10); // Выбрать 10 вопросов
+            correctAnswers = [];
+
+            const container = document.getElementById('questions');
+            container.innerHTML = ''; // Очистить старые вопросы
+            selectedQuestions.forEach((q, index) => {
+                // Перемешать варианты
+                let options = [...q.options];
+                shuffle(options);
+                let correctIndex = options.indexOf(q.options[q.correct]);
+
+                correctAnswers.push(correctIndex);
+
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                questionDiv.innerHTML = `<p>${index + 1}. ${q.question}</p>`;
+
+                options.forEach((opt, optIndex) => {
+                    const label = document.createElement('label');
+                    label.innerHTML = `<input type="radio" name="q${index}" value="${optIndex}"> ${opt}`;
+                    questionDiv.appendChild(label);
+                });
+
+                container.appendChild(questionDiv);
+            });
+        }
+
+        // Проверить ответы
+        function checkAnswers() {
+            let score = 0;
+
+            selectedQuestions.forEach((q, index) => {
+                const selected = document.querySelector(`input[name="q${index}"]:checked`);
+                const questionDiv = document.querySelectorAll('.question')[index];
+                const labels = questionDiv.querySelectorAll('label');
+
+                if (selected) {
+                    if (parseInt(selected.value) === correctAnswers[index]) {
+                        score++;
+                        questionDiv.style.backgroundColor = '#d4edda'; // Зеленый
+                    } else {
+                        questionDiv.style.backgroundColor = '#f8d7da'; // Красный
+                        // Добавить правильный ответ под вопросом
+                        const correctP = document.createElement('p');
+                        correctP.textContent = `Правильна відповідь: ${q.options[q.correct]}`;
+                        correctP.style.color = 'red';
+                        correctP.style.fontWeight = 'bold';
+                        questionDiv.appendChild(correctP);
+                        // Подсветить правильный вариант
+                        labels[correctAnswers[index]].style.backgroundColor = '#d4edda';
+                        labels[correctAnswers[index]].style.padding = '5px';
+                        labels[correctAnswers[index]].style.borderRadius = '5px';
+                    }
+                } else {
+                    questionDiv.style.backgroundColor = '#f8d7da';
+                    // Добавить правильный ответ под вопросом
+                    const correctP = document.createElement('p');
+                    correctP.textContent = `Правильна відповідь: ${q.options[q.correct]}`;
+                    correctP.style.color = 'red';
+                    correctP.style.fontWeight = 'bold';
+                    questionDiv.appendChild(correctP);
+                    // Подсветить правильный вариант
+                    labels[correctAnswers[index]].style.backgroundColor = '#d4edda';
+                    labels[correctAnswers[index]].style.padding = '5px';
+                    labels[correctAnswers[index]].style.borderRadius = '5px';
+                }
+            });
+
+            const result = document.getElementById("result");
+            result.innerHTML = `<strong>✅ Твій результат: ${score} з ${selectedQuestions.length} правильних відповідей.</strong><br>`;
+            if (score === selectedQuestions.length) {
+                result.innerHTML += "Чудово! Ти впевнено володієш основами HTML!";
+                result.style.color = "green";
+            } else if (score >= selectedQuestions.length * 0.6) {
+                result.innerHTML += "Добре! Але можна повторити деякі теми.";
+                result.style.color = "orange";
+            } else {
+                result.innerHTML += "Не засмучуйся — спробуй ще раз!";
+                result.style.color = "red";
+            }
+        }
+
+        // Генерировать при загрузке
+        window.onload = generateQuestions;
+
+        // Функция для обновления теста
+        function resetTest() {
+            document.getElementById('htmlTestForm').reset();
+            document.getElementById('result').innerHTML = '';
+            document.getElementById('questions').innerHTML = '';
+            generateQuestions();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,207 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML / CSS / JS Онлайн Редактор</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      overflow: hidden;
+      animation: fadeIn 1s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.98); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .home-btn {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--surface);
+      padding: 10px;
+      border-radius: 15px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 12px var(--shadow);
+      transition: 0.3s;
+      text-decoration: none;
+      z-index: 10;
+      border: 1px solid rgba(0,0,0,0.04);
+    }
+
+    .home-btn img {
+      width: 30px;
+      height: auto;
+    }
+
+    .home-btn:hover {
+      background: var(--surface);
+      box-shadow: 0 6px 18px var(--shadow);
+      transform: scale(1.07);
+    }
+    h1 {
+      font-size: 26px;
+      font-weight: 600;
+      text-align: center;
+      margin: 70px 0 10px 0;
+      color: var(--text);
+      text-shadow: 0 3px 12px rgba(0,0,0,0.06);
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-3px); }
+    }
+    .editor-container {
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+      padding: 20px;
+      height: calc(100vh - 120px);
+      box-sizing: border-box;
+    }
+    .editor, .output {
+      flex: 1;
+      background: var(--muted);
+      padding: 20px;
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 25px var(--shadow);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .editor:hover, .output:hover {
+      transform: scale(1.01);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.35);
+    }
+
+    textarea {
+      flex: 1;
+      width: 100%;
+      border: none;
+      padding: 15px;
+      font-size: 16px;
+      font-family: 'Courier New', monospace;
+      outline: none;
+      resize: none;
+      border-radius: 12px;
+      background: var(--surface);
+      color: var(--text);
+      box-shadow: inset 0 3px 6px rgba(0,0,0,0.06);
+      transition: all 0.3s;
+    }
+
+    textarea:focus {
+      background: var(--surface);
+      box-shadow: 0 0 14px rgba(0,68,255,0.18);
+    }
+
+    button {
+      background: linear-gradient(135deg, var(--primary-1) 0%, var(--primary-2) 100%);
+      color: white;
+      border: none;
+      padding: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      margin-top: 15px;
+      box-shadow: 0 6px 18px rgba(0,68,255,0.12);
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 26px rgba(0,68,255,0.16);
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 12px;
+      background: var(--surface);
+      box-shadow: inset 0 2px 6px rgba(0,0,0,0.06);
+    }
+    @media (max-width: 768px) {
+      .editor-container {
+        flex-direction: column;
+        height: auto;
+      }
+
+      h1 {
+        font-size: 22px;
+        margin-top: 80px;
+      }
+
+      .editor, .output {
+        min-height: 300px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="{% url 'sait' %}" onclick="showSection('intro')" class="home-btn">
+    <img src="{% static 'images/дом.png' %}" alt="Button">
+  </a>
+
+  <h1>Онлайн-Редактор HTML / CSS / JS</h1>
+
+  <div class="editor-container">
+    <!-- Поле кода -->
+    <div class="editor">
+      <textarea id="code" placeholder="Введіть ваш код тут (HTML, CSS, JS)...">
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { background: lightblue; color: navy; text-align: center; }
+    button { background: yellow; border: none; padding: 10px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>Привіт, світ!</h1>
+  <button onclick="alert('Вітаю!')">Натисни мене</button>
+
+  <script>
+    console.log("JS працює!");
+  </script>
+</body>
+</html>
+      </textarea>
+      <button onclick="runCode()">🚀 Запустити код</button>
+    </div>
+
+    <!--Вивід -->
+    <div class="output">
+      <iframe id="output"></iframe>
+    </div>
+  </div>
+
+  <script>
+    function runCode() {
+      const code = document.getElementById('code').value;
+      const output = document.getElementById('output');
+      output.srcdoc = code;
+    }
+  </script>
+
+</body>
+</html>

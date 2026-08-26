@@ -1,0 +1,199 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>HTML</h1>
+    </header>
+    
+<nav>
+        <a href='{% url "sait" %}' onclick="showSection('intro')" class="nav-logo">
+            <img src="{% static 'images/дом.png' %}" alt="Button" style="width: 30px; height: auto;">
+        </a>
+        <div class="nav-links">
+            <a href='{% url "html_page" %}' onclick="showSection('html')">HTML</a>
+        </div>
+        <div class="nav-links">
+            <a href='{% url "cssGlav" %}' onclick="showSection('html')">CSS</a>
+        </div>
+                <div class="nav-links">
+            <a href='{% url "jsGlav" %}' onclick="showSection('html')">JavaScript</a>
+        </div>
+       </div>
+                <div class="nav-links">
+            <a href='{% url "testGlav" %}' onclick="showSection('html')">Тести</a>
+        </div>
+        </div>
+                <div class="nav-links">
+            <a href='{% url "chat" %}' onclick="showSection('html')">Асистент сайту</a>
+        </div>
+        <a href="https://t.me/studuhtml" class="nav-logo1" target="_blank">
+            <img src="{% static 'images/111.png' %}" alt="Головна" style="width: 45px; height: 35px;">
+        </a>
+    </nav>
+
+<div class="sidebar"> 
+    <!-- Глава 5 -->
+    <a href="#" class="menu-item">📁 Підготовка</a>
+    <div class="submenu">
+        <a href='{% url 'choice' %}'>Вибір інструментів розробки (редактор коду, браузер, ресурси).</a>
+        <a href='{% url 'definition' %}'>Визначення цілей та структури майбутнього сайту.</a>
+    </div>
+
+    <!-- Глава 6 -->
+    <a href="#" class="menu-item">📁 Як створити сайт HTML</a>
+    <div class="submenu">
+        <a href='{% url 'creation' %}'>Створення базового HTML-файлу (файл із розширенням .html).</a>
+        <a href='{% url 'discovery' %}'>Відкриття файлу HTML у браузері для перегляду.</a>
+    </div>
+
+    <!-- Глава 7 -->
+    <a href="#" class="menu-item">📁 Структури HTML</a>
+    <div class="submenu">
+        <a href='{% url 'study' %}'>Вивчення основних тегів (html, head, body).</a>
+        <a href='{% url 'semantics' %}'>Семантичні елементи (header, main, footer).</a>
+    </div>
+
+    <a href="#" class="menu-item">📁 Інформація для сайту</a>
+    <div class="submenu">
+        <a href='{% url 'gathering' %}'>Збір текстового контенту, зображень та медіа.</a>
+        <a href='{% url 'organization' %}'>>Організація інформації у логічні розділи.</a>
+    </div>
+
+    <!-- Глава 6 -->
+    <a href="#" class="menu-item">📁 Дизайн сайту</a>
+    <div class="submenu">
+        <a href='{% url 'connection' %}'>Підключення CSS для стилізації HTML елементів.</a>
+        <a href='{% url 'connectionn' %}'>Створення адаптивного дизайну для різних пристроїв.</a>
+        <a href='{% url 'css' %}'>Цікаві приклади оформлення сайту через цсс.</a>
+    </div>
+
+
+    <!-- Глава 7 -->
+    <a href="#" class="menu-item">📁 Приклади коду та їх результат</a>
+    <div class="submenu">
+        <a href='{% url 'writing' %}'>Написання простого прикладу із заголовком та текстом.</a>
+        <a href='{% url 'addition' %}'>Додавання кнопки та перевірка її роботи у браузері.</a>
+    </div>
+</div>   
+
+    <div class="content">
+    <h1>HTML (HyperText Markup Language) – це основа будь-якого веб-сайту</h1>
+    <p>Вона використовується для створення та структурування веб-сторінок, додаючи текст, зображення, посилання, таблиці, форми та інші елементи. HTML дозволяє веб-браузерам інтерпретувати вміст сторінки та правильно його відображати. Щоб створити базовий HTML-файл, потрібно всього лише текстовий редактор (наприклад, Notepad, Visual Studio Code, Sublime Text або навіть стандартний "Блокнот" у Windows). Сам файл повинен мати розширення <strong>.html</strong>, щоб браузери могли правильно його розпізнати та відобразити.</p>
+
+    <h2>Як створити HTML-файл</h2>
+    <p>Перший крок – це відкриття текстового редактора. Якщо ти використовуєш Notepad, просто відкрий його, введи код і збережи файл із розширенням <strong>.html</strong>. Наприклад, якщо ти хочеш створити веб-сторінку під назвою "index", тобі потрібно зберегти файл як <strong>index.html</strong>. Важливо переконатися, що в налаштуваннях збереження вибраний "Усі файли" (All Files), щоб уникнути випадкового збереження як текстового документа.</p>
+
+    <h2>Запуск HTML-файлу в браузері</h2>
+    <p>Щоб переглянути HTML-файл у браузері, достатньо двічі клікнути на нього – система автоматично відкриє його у стандартному браузері. Якщо ж потрібно перевірити, як сторінка виглядає в іншому браузері (наприклад, Google Chrome, Mozilla Firefox, Microsoft Edge або Opera), можна просто відкрити браузер, натиснути <strong>Ctrl + O</strong> (або <strong>Cmd + O</strong> на Mac), а потім вибрати потрібний HTML-файл.</p>
+
+    <h2>Вміст HTML-файлу</h2>
+    <p>Якщо відкрити порожній HTML-файл у браузері, то на екрані не з’явиться нічого, окрім білої сторінки. Але якщо додати хоча б простий текст або заголовок, його вже можна буде побачити. Наприклад:</p>
+    <pre>
+        &lt;h1&gt;Привіт, світ!&lt;/h1&gt;
+    </pre>
+    <p>Для кращого вигляду можна також використовувати CSS (каскадні таблиці стилів), які дозволяють змінювати шрифти, кольори, розміщення елементів та багато іншого.</p>
+    
+    <h2>Використання редакторів коду</h2>
+    <p>Для написання HTML рекомендується використовувати редактори коду, які мають підсвічування синтаксису та додаткові функції для веб-розробки. Найпопулярніші редактори:</p>
+    <ul>
+        <li><strong>Visual Studio Code</strong> – безкоштовний, має велику кількість плагінів та підтримку розширень.</li>
+        <li><strong>Sublime Text</strong> – швидкий і легкий редактор із мінімалістичним інтерфейсом.</li>
+        <li><strong>Atom</strong> – редактор від GitHub із широкими можливостями розширення, хоча його підтримка припинена.</li>
+        <li><strong>Notepad++</strong> – легкий текстовий редактор для Windows, що підтримує багато мов програмування.</li>
+    </ul>
+    <style>
+    .custom-button {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        color: white;
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .custom-button:hover {
+        background-color: #0056b3;
+    }
+
+    /* Стили для формы */
+    .comment-form {
+        background: #f8f9fa;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+    }
+    .comment-form h2 {
+        color: #333;
+        margin-bottom: 10px;
+    }
+    .comment-form button {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+    .comment-form button:hover {
+        background-color: #0056b3;
+    }
+    /* Стили для комментариев */
+    .comment {
+        background: #eee;
+        padding: 10px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: flex-start;
+    }
+
+    .comments-section h2 {
+        color: #333;
+    }
+</style>
+
+<div class="comment-form">
+    <h2>Залиште коментар</h2>
+    {% if user.is_authenticated %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Відправити</button>
+    </form>
+    {% else %}
+    <p><strong>Щоб залишити коментар, необхідно <a href="{% url 'user_login' %}">увійти</a> в систему або <a href="{% url 'user_register' %}">зареєструватись</a></strong></p>
+    {% endif %}
+</div>
+
+<div class="comments-section">
+    <h2>Коментарі</h2>
+    {% for comment in comments %}
+                <div class="comment">
+                    <div>
+                        <strong>{{ comment.user.username }}</strong>
+                        <p>{{ comment.text }}</p>
+                    </div>
+                </div>
+    {% empty %}
+        <p>Поки немає коментарів.</p>
+    {% endfor %}
+</div>
+    </div>
+
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/sidebar.js' %}"></script>
+    <script src="{% static 'js/anim.js' %}"></script>
+</body>
+</html>

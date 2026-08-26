@@ -1,0 +1,185 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flexbox та Grid для макета сторінки</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>CSS: Використання Flexbox та Grid</h1>
+    </header>
+    
+<nav>
+        <a href='{% url "sait" %}' onclick="showSection('intro')" class="nav-logo">
+            <img src="{% static 'images/дом.png' %}" alt="Button" style="width: 30px; height: auto;">
+        </a>
+        <div class="nav-links">
+            <a href='{% url "html_page" %}' onclick="showSection('html')">HTML</a>
+        </div>
+        <div class="nav-links">
+            <a href='{% url "cssGlav" %}' onclick="showSection('html')">CSS</a>
+        </div>
+                <div class="nav-links">
+            <a href='{% url "jsGlav" %}' onclick="showSection('html')">JavaScript</a>
+        </div>
+       </div>
+                <div class="nav-links">
+            <a href='{% url "testGlav" %}' onclick="showSection('html')">Тести</a>
+        </div>
+        </div>
+                <div class="nav-links">
+            <a href='{% url "chat" %}' onclick="showSection('html')">Асистент сайту</a>
+        </div>
+        <a href="https://t.me/studuhtml" class="nav-logo1" target="_blank">
+            <img src="{% static 'images/111.png' %}" alt="Головна" style="width: 45px; height: 35px;">
+        </a>
+    </nav>
+
+    <div class="sidebar"> 
+        <!-- Глава 1 -->
+        <a href="#" class="menu-item">📁 Вступ до CSS</a>
+        <div class="submenu">
+            <a href="{% url 'vstypOneCss' %}">Що таке CSS і для чого він потрібен.</a>
+            <a href="{% url 'vstypTwoCss' %}">Основні способи підключення CSS до HTML.</a>
+        </div>
+
+        <!-- Глава 2 -->
+        <a href="#" class="menu-item">📁 Основи синтаксису CSS</a>
+        <div class="submenu">
+            <a href="{% url 'osnoviOneCss' %}">Селектори, властивості та значення.</a>
+            <a href="{% url 'osnoviTwoCss' %}">Коментарі в CSS та структура коду.</a>
+        </div>
+
+        <!-- Глава 3 -->
+        <a href="#" class="menu-item">📁 Робота з кольорами та шрифтами</a>
+        <div class="submenu">
+            <a href="{% url 'workOneCss' %}">Кольори: HEX, RGB, RGBA, HSL.</a>
+            <a href="{% url 'workTwoCss' %}">Шрифти, розмір, товщина, вирівнювання тексту.</a>
+        </div>
+
+        <!-- Глава 4 -->
+        <a href="#" class="menu-item">📁 Розміщення елементів</a>
+        <div class="submenu">
+            <a href="{% url 'blokOneCss' %}">Блокова і стрічкова модель елементів.</a>
+            <a href="{% url 'blokTwoCss' %}">Використання flexbox та grid для макета сторінки.</a>
+        </div>
+
+        <!-- Глава 5 -->
+        <a href="#" class="menu-item">📁 Оформлення сторінки</a>
+        <div class="submenu">
+            <a href="{% url 'oforOneCss' %}">Фони, межі, тіні та закруглення кутів.</a>
+            <a href="{% url 'oforTwoCss' %}">Зображення, прозорість та градієнти.</a>
+        </div>
+
+        <!-- Глава 6 -->
+        <a href="#" class="menu-item">📁 Анімації та переходи</a>
+        <div class="submenu">
+            <a href="{% url 'animOneCss' %}">CSS transitions — плавні зміни властивостей.</a>
+            <a href="{% url 'animTwoCss' %}">CSS animations — створення рухомих ефектів.</a>
+        </div>
+
+        <!-- Глава 7 -->
+        <a href="#" class="menu-item">📁 Адаптивний дизайн</a>
+        <div class="submenu">
+            <a href="{% url 'adapOneCss' %}">Використання медіа-запитів для різних пристроїв.</a>
+            <a href="{% url 'adapTwoCss' %}">Приклади створення адаптивного сайту.</a>
+        </div>
+    </div>   
+    
+    <div class="content">
+        <h1>Flexbox та Grid для макета сторінки</h1>
+
+        <section>
+            <h2>Вступ</h2>
+            <p>Flexbox і Grid — це сучасні інструменти CSS для розташування елементів на сторінці. Flexbox працює в одному напрямку (рядок або колонка), Grid дозволяє будувати двовимірні макети (рядки та колонки одночасно).</p>
+        </section>
+
+        <section>
+            <h2>1. Flexbox</h2>
+            <p>Flexbox дозволяє розташовувати елементи всередині контейнера легко та гнучко.</p>
+            <p>Приклад:</p>
+            <pre><code>
+&lt;div style="display: flex; gap: 10px;"&gt;
+    &lt;div style="background-color: lightblue; padding: 20px;"&gt;Блок 1&lt;/div&gt;
+    &lt;div style="background-color: lightgreen; padding: 20px;"&gt;Блок 2&lt;/div&gt;
+    &lt;div style="background-color: lightcoral; padding: 20px;"&gt;Блок 3&lt;/div&gt;
+&lt;/div&gt;
+            </code></pre>
+            <p>Елементи розташовані в рядок з проміжками.</p>
+        </section>
+
+        <section>
+            <h2>2. Grid</h2>
+            <p>Grid дозволяє будувати сітку з рядків і колонок для складних макетів.</p>
+            <p>Приклад:</p>
+            <pre><code>
+&lt;div style="display: grid; grid-template-columns: 1fr 2fr; gap: 10px;"&gt;
+    &lt;div style="background-color: lightblue; padding: 20px;"&gt;Блок A&lt;/div&gt;
+    &lt;div style="background-color: lightgreen; padding: 20px;"&gt;Блок B&lt;/div&gt;
+    &lt;div style="background-color: lightcoral; padding: 20px;"&gt;Блок C&lt;/div&gt;
+&lt;/div&gt;
+            </code></pre>
+            <p>Елементи розподіляються по двох колонках з різною шириною.</p>
+        </section>
+
+        <section>
+            <h2>Порівняння</h2>
+            <table border="1" cellpadding="8" style="border-collapse: collapse; width: 100%;">
+                <tr>
+                    <th>Модель</th>
+                    <th>Підходить для</th>
+                    <th>Особливості</th>
+                </tr>
+                <tr>
+                    <td>Flexbox</td>
+                    <td>Одновимірні макети</td>
+                    <td>Рядок або колонка, гнучке вирівнювання та проміжки</td>
+                </tr>
+                <tr>
+                    <td>Grid</td>
+                    <td>Двовимірні макети</td>
+                    <td>Рядки та колонки одночасно, контроль ширини/висоти</td>
+                </tr>
+            </table>
+        </section>
+
+        <section>
+            <h2>Висновок</h2>
+            <p>Flexbox і Grid — потужні інструменти для макетів. Flexbox підходить для простих рядків або колонок, Grid — для складних сіток.</p>
+        </section>
+
+        {% if user.is_authenticated %}
+        <div class="comment-form">
+            <h2>Залиште коментар</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Відправити</button>
+            </form>
+        </div>
+        {% else %}
+        <div class="comment-form">
+            <p><strong>Щоб залишити коментар, необхідно <a href="{% url 'user_login' %}">увійти</a> в систему або <a href="{% url 'user_register' %}">зареєструватись</a></strong></p>
+        </div>
+        {% endif %}
+
+        <div class="comments-section">
+            <h2>Коментарі</h2>
+            {% for comment in comments %}
+                <div class="comment">
+                    <strong>{{ comment.user.username }}:</strong> {{ comment.text }}
+                </div>
+            {% empty %}
+                <p>Поки немає коментарів.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/sidebar.js' %}"></script>
+    <script src="{% static 'js/anim.js' %}"></script>
+</body>
+</html>

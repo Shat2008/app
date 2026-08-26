@@ -1,0 +1,455 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+
+    <header>
+        <h1>HTML</h1>
+    </header>
+    
+<nav>
+        <a href='{% url "sait" %}' onclick="showSection('intro')" class="nav-logo">
+            <img src="{% static 'images/дом.png' %}" alt="Button" style="width: 30px; height: auto;">
+        </a>
+        <div class="nav-links">
+            <a href='{% url "html_page" %}' onclick="showSection('html')">HTML</a>
+        </div>
+        <div class="nav-links">
+            <a href='{% url "cssGlav" %}' onclick="showSection('html')">CSS</a>
+        </div>
+        <div class="nav-links">
+            <a href='{% url "jsGlav" %}' onclick="showSection('html')">JavaScript</a>
+        </div>
+        <div class="nav-links">
+            <a href='{% url "testGlav" %}' onclick="showSection('html')">Тести</a>
+        </div>
+        <div class="nav-links">
+            <a href='{% url "chat" %}' onclick="showSection('html')">Асистент сайту</a>
+        </div>
+        <a href="https://t.me/studuhtml" class="nav-logo1" target="_blank">
+            <img src="{% static 'images/111.png' %}" alt="Головна" style="width: 45px; height: 35px;">
+        </a>
+    </nav>
+
+<div class="sidebar"> 
+    <!-- Глава 5 -->
+    <a href="#" class="menu-item">📁 Підготовка</a>
+    <div class="submenu">
+        <a href='{% url 'choice' %}'>Вибір інструментів розробки (редактор коду, браузер, ресурси).</a>
+        <a href='{% url 'definition' %}'>Визначення цілей та структури майбутнього сайту.</a>
+    </div>
+
+    <!-- Глава 6 -->
+    <a href="#" class="menu-item">📁 Як створити сайт HTML</a>
+    <div class="submenu">
+        <a href='{% url 'creation' %}'>Створення базового HTML-файлу (файл із розширенням .html).</a>
+        <a href='{% url 'discovery' %}'>Відкриття файлу HTML у браузері для перегляду.</a>
+    </div>
+
+    <!-- Глава 7 -->
+    <a href="#" class="menu-item">📁 Структури HTML</a>
+    <div class="submenu">
+        <a href='{% url 'study' %}'>Вивчення основних тегів (html, head, body).</a>
+        <a href='{% url 'semantics' %}'>Семантичні елементи (header, main, footer).</a>
+    </div>
+
+    <a href="#" class="menu-item">📁 Інформація для сайту</a>
+    <div class="submenu">
+        <a href='{% url 'gathering' %}'>Збір текстового контенту, зображень та медіа.</a>
+        <a href='{% url 'gathering' %}'>>Організація інформації у логічні розділи.</a>
+    </div>
+
+    <!-- Глава 6 -->
+    <a href="#" class="menu-item">📁 Дизайн сайту</a>
+    <div class="submenu">
+        <a href='{% url 'connection' %}'>Підключення CSS для стилізації HTML елементів.</a>
+        <a href='{% url 'connectionn' %}'>Створення адаптивного дизайну для різних пристроїв.</a>
+        <a href='{% url 'css' %}'>Цікаві приклади оформлення сайту через цсс.</a>
+    </div>
+
+
+    <!-- Глава 7 -->
+    <a href="#" class="menu-item">📁 Приклади коду та їх результат</a>
+    <div class="submenu">
+        <a href='{% url 'writing' %}'>Написання простого прикладу із заголовком та текстом.</a>
+        <a href='{% url 'addition' %}'>Додавання кнопки та перевірка її роботи у браузері.</a>
+    </div>
+
+</div>   
+    <div class="content">
+    <h1>HTML — це основа веб-розробки, мова розмітки гіпертексту, яка використовується для створення структури веб-сторінок. Основні теги HTML відповідають за визначення структури та вмісту документа. Найважливішими тегами є <code>&lt;html&gt;</code>, <code>&lt;head&gt;</code> і <code>&lt;body&gt;</code>. Розглянемо їх докладніше.</h1>
+
+        <h2>Тег <code>&lt;html&gt;</code></h2>
+        <p>Тег <code>&lt;html&gt;</code> є кореневим елементом будь-якого документа HTML. Він охоплює весь код сторінки та повідомляє браузеру, що це HTML-документ. Всі інші елементи, такі як <code>&lt;head&gt;</code> і <code>&lt;body&gt;</code>, знаходяться всередині тегу <code>&lt;html&gt;</code>. Цей тег завжди має бути на початку та в кінці документа.</p>
+        
+        <p>Приклад:</p>
+        <pre>
+<code>
+
+
+    &lt;!DOCTYPE html&gt;
+    &lt;html&gt;
+        &lt;head&gt;
+            &lt;meta charset="UTF-8"&gt;
+            &lt;title Проста сторінка /title&gt;
+        &lt;/head&gt;
+        &lt;body&gt;
+            &lt;h1 Ласкаво просимо! /h1 &gt;
+        &lt;/body&gt;
+    &lt;/html&gt;
+</code>
+        </pre>
+       <style>
+    .custom-button {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        color: white;
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .custom-button:hover {
+        background-color: #0056b3;
+    }
+</style> 
+ <a href="{% url 'kod1' %}" target="_blank" class="custom-button">Продивитися результат</a>
+    
+  
+
+        <h2>Тег <code>&lt;head&gt;</code></h2>
+        <p>Тег <code>&lt;head&gt;</code> містить метаінформацію про сторінку. Це інформація, яка не відображається безпосередньо на веб-сторінці, але необхідна для роботи сайту та взаємодії з браузером. Усередині тегу <code>&lt;head&gt;</code> розміщуються різні мета-теги, посилання на стилі, скрипти та інші елементи, що впливають на відображення та функціональність сторінки.</p>
+        
+        <p>Приклад вмісту тегу <code>&lt;head&gt;</code>:</p>
+        <pre>
+<code>
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt; &lt;!-- Встановлює кодування документа --&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt; &lt;!-- Налаштування адаптивності --&gt;
+    &lt;title&gt;Заголовок сторінки&lt;/title&gt; &lt;!-- Заголовок сторінки --&gt;
+    &lt;link rel="stylesheet" href="styles.css"&gt; &lt;!-- Посилання на зовнішній CSS-файл --&gt;
+    &lt;script src="script.js"&gt;&lt;/script&gt; &lt;!-- Посилання на зовнішній JavaScript файл --&gt;
+&lt;/head&gt;
+</code>
+        </pre>
+
+        <h3>Основні елементи всередині тегу <code>&lt;head&gt;</code>:</h3>
+        <ul>
+            <li><code>&lt;meta charset="UTF-8"&gt;</code> — визначає кодування документа (важливо для коректного відображення символів).</li>
+            <li><code>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</code> — робить сторінку адаптивною на мобільних пристроях.</li>
+            <li><code>&lt;title&gt;</code> — визначає назву сторінки, яка відображається на вкладці браузера.</li>
+            <li><code>&lt;link&gt;</code> — використовується для підключення зовнішніх файлів, таких як CSS.</li>
+            <li><code>&lt;script&gt;</code> — для підключення зовнішніх файлів JavaScript або для написання скриптів всередині сторінки.</li>
+        </ul>
+
+        <h2>Тег <code>&lt;body&gt;</code></h2>
+        <p>Тег <code>&lt;body&gt;</code> містить всі елементи, які відображаються на веб-сторінці. Це текст, зображення, таблиці, посилання, форми та інші елементи контенту, видимі для користувача. На відміну від тегу <code>&lt;head&gt;</code>, який відповідає за метаінформацію, <code>&lt;body&gt;</code> призначений для відображення інформації.</p>
+
+        <p>Приклад:</p>
+        <pre>
+<code>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+    &lt;h1>Ласкаво просимо на мій сайт!/h1&gt;
+    &lt;p>Це абзац тексту на сторінці./p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+&lt;/body&gt;
+</code>
+        </pre>
+<a href="{% url 'kod2' %}" target="_blank" class="custom-button">Продивитися результат</a>
+
+        <h3>Основні елементи всередині тегу <code>&lt;body&gt;</code>:</h3>
+        <ul>
+            <li><code>&lt;h1&gt;</code> — заголовок першого рівня. HTML підтримує шість рівнів заголовків (від <code>&lt;h1&gt;</code> до <code>&lt;h6&gt;</code>), де <code>&lt;h1&gt;</code> є найважливішим, а <code>&lt;h6&gt;</code> — найменш важливим.</li>
+            <li><code>&lt;p&gt;</code> — абзац тексту. Це базовий елемент для тексту на сторінці.</li>
+        </ul>
+
+        <h2>Структура документа HTML</h2>
+        <p>Документ HTML має чітку ієрархію. Важливим моментом є те, що правильне використання тегів гарантує, що сторінка буде правильно інтерпретована браузером. Розглянемо типову структуру документа:</p>
+        <pre>
+<code>
+&lt;!DOCTYPE html&gt; &lt;!-- Декларація типу документа, необхідна для HTML5 --&gt;
+&lt;html lang="uk"&gt; &lt;!-- Вказівка на мову сторінки --&gt;
+    &lt;head&gt;
+        &lt;meta charset="UTF-8"&gt;
+        &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+        &lt;title&gt;Приклад документа HTML&lt;/title&gt;
+        &lt;link rel="stylesheet" href="styles.css"&gt;
+        &lt;script src="script.js"&gt;&lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h1&gt;Заголовок сторінки&lt;/h1&gt;
+        &lt;p&gt;Текст абзацу.&lt;/p&gt;
+        &lt;a href="https://example.com"&gt;Посилання на інший сайт&lt;/a&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code>
+        </pre>
+<a href="{% url 'kod3' %}" target="_blank" class="custom-button">Продивитися результат</a>
+        <h2>Декларація <code>&lt;!DOCTYPE html&gt;</code></h2>
+        <p>Перед тегом <code>&lt;html&gt;</code> зазвичай ставиться декларація типу документа. Для HTML5 використовується <code>&lt;!DOCTYPE html&gt;</code>. Цей тег не є елементом HTML, але він необхідний для того, щоб браузер правильно інтерпретував сторінку як HTML5-документ. Він повідомляє браузеру, що сторінка використовує специфікацію HTML5, і дозволяє уникнути проблем з рендерингом сторінки.</p>
+
+        <h2>Інші важливі теги HTML</h2>
+
+        <h3>Таблиці</h3>
+        <p>Таблиці використовуються для відображення табульованих даних. Основні теги для таблиць:</p>
+        <ul>
+            <li><code>&lt;table&gt;</code> — контейнер для таблиці.</li>
+            <li><code>&lt;tr&gt;</code> — рядок таблиці (table row).</li>
+            <li><code>&lt;td&gt;</code> — комірка даних (table data).</li>
+            <li><code>&lt;th&gt;</code> — комірка заголовка таблиці (table header).</li>
+            <li><code>&lt;thead&gt;</code> — група рядків заголовка.</li>
+            <li><code>&lt;tbody&gt;</code> — група рядків з основним вмістом.</li>
+            <li><code>&lt;tfoot&gt;</code> — група рядків підсумків.</li>
+        </ul>
+
+        <p>Приклад таблиці:</p>
+        <pre>
+<code>
+&lt;table border="1"&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Ім'я&lt;/th&gt;
+      &lt;th&gt;Вік&lt;/th&gt;
+      &lt;th&gt;Місто&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Іван&lt;/td&gt;
+      &lt;td&gt;25&lt;/td&gt;
+      &lt;td&gt;Київ&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Марія&lt;/td&gt;
+      &lt;td&gt;30&lt;/td&gt;
+      &lt;td&gt;Харків&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+</code>
+        </pre>
+<a href="{% url 'kod6' %}" target="_blank" class="custom-button">Продивитися результат</a>
+
+        <h3>Форми</h3>
+        <p>Форми використовуються для зібрання інформації від користувачів. Основні теги для форм:</p>
+        <ul>
+            <li><code>&lt;form&gt;</code> — контейнер для форми.</li>
+            <li><code>&lt;input&gt;</code> — поле введення (текст, пароль, чекбокс, радіокнопка тощо).</li>
+            <li><code>&lt;textarea&gt;</code> — багаторядкове текстове поле.</li>
+            <li><code>&lt;select&gt;</code> — випадаючий список.</li>
+            <li><code>&lt;button&gt;</code> — кнопка.</li>
+            <li><code>&lt;label&gt;</code> — позначка для форми.</li>
+        </ul>
+
+        <p>Приклад форми:</p>
+        <pre>
+<code>
+&lt;form action="/submit" method="POST"&gt;
+  &lt;label for="name"&gt;Ім'я:&lt;/label&gt;
+  &lt;input type="text" id="name" name="name" required&gt;
+  
+  &lt;label for="email"&gt;Email:&lt;/label&gt;
+  &lt;input type="email" id="email" name="email"&gt;
+  
+  &lt;label for="message"&gt;Повідомлення:&lt;/label&gt;
+  &lt;textarea id="message" name="message" rows="4"&gt;&lt;/textarea&gt;
+  
+  &lt;button type="submit"&gt;Відправити&lt;/button&gt;
+&lt;/form&gt;
+</code>
+        </pre>
+<a href="{% url 'kod7' %}" target="_blank" class="custom-button">Продивитися результат</a>
+
+        <h3>Фрейми (iframe)</h3>
+        <p>Фрейм (iframe) дозволяє вставити одну веб-сторінку всередину іншої. Це корисно для вставлення карт, відео або іншого контенту з інших сайтів.</p>
+
+        <p>Приклад фрейму:</p>
+        <pre>
+<code>
+&lt;!-- Вставлення відео з YouTube --&gt;
+&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+    frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;!-- Вставлення Google Map --&gt;
+&lt;iframe src="https://www.google.com/maps/embed?pb=..." width="600" height="450" 
+    style="border:0;" allowfullscreen="" loading="lazy"&gt;&lt;/iframe&gt;
+</code>
+        </pre>
+
+        <h3>Мультимедіа: Аудіо та Відео</h3>
+        <p>Для вставлення аудіо та відео контенту використовуються теги <code>&lt;audio&gt;</code> та <code>&lt;video&gt;</code>:</p>
+
+        <p>Приклад відео:</p>
+        <pre>
+<code>
+&lt;video width="320" height="240" controls&gt;
+  &lt;source src="movie.mp4" type="video/mp4"&gt;
+  &lt;source src="movie.ogg" type="video/ogg"&gt;
+  Ваш браузер не підтримує тег video.
+&lt;/video&gt;
+</code>
+        </pre>
+
+        <p>Приклад аудіо:</p>
+        <pre>
+<code>
+&lt;audio controls&gt;
+  &lt;source src="audio.mp3" type="audio/mpeg"&gt;
+  Ваш браузер не підтримує тег audio.
+&lt;/audio&gt;
+</code>
+        </pre>
+
+        <h3>Списки</h3>
+        <p>HTML підтримує три типи списків:</p>
+        <ul>
+            <li><code>&lt;ul&gt;</code> — невпорядкований список (з точками).</li>
+            <li><code>&lt;ol&gt;</code> — впорядкований список (з номерами).</li>
+            <li><code>&lt;dl&gt;</code> — список визначень.</li>
+        </ul>
+
+        <p>Приклад списків:</p>
+        <pre>
+<code>
+&lt;!-- Невпорядкований список --&gt;
+&lt;ul&gt;
+  &lt;li&gt;Перший елемент&lt;/li&gt;
+  &lt;li&gt;Другий елемент&lt;/li&gt;
+  &lt;li&gt;Третій елемент&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!-- Впорядкований список --&gt;
+&lt;ol&gt;
+  &lt;li&gt;Перший крок&lt;/li&gt;
+  &lt;li&gt;Другий крок&lt;/li&gt;
+  &lt;li&gt;Третій крок&lt;/li&gt;
+&lt;/ol&gt;
+</code>
+        </pre>
+
+        <h3>Зображення</h3>
+        <p>Для вставлення зображень використовується тег <code>&lt;img&gt;</code>:</p>
+        <pre>
+<code>
+&lt;img src="image.jpg" alt="Опис зображення" width="300" height="200"&gt;
+</code>
+        </pre>
+
+        <h3>Посилання</h3>
+        <p>Тег <code>&lt;a&gt;</code> використовується для створення посилань на інші сторінки або ресурси:</p>
+        <pre>
+<code>
+&lt;!-- Посилання на іншу сторінку --&gt;
+&lt;a href="https://example.com"&gt;Перейти на example.com&lt;/a&gt;
+
+&lt;!-- Посилання на email --&gt;
+&lt;a href="mailto:info@example.com"&gt;Відправити email&lt;/a&gt;
+
+&lt;!-- Посилання на номер телефону --&gt;
+&lt;a href="tel:+380123456789"&gt;+38 (012) 345-67-89&lt;/a&gt;
+</code>
+        </pre>
+
+        <h3>Інші важливі теги</h3>
+        <ul>
+            <li><code>&lt;div&gt;</code> — контейнер для групування елементів (блоковий елемент).</li>
+            <li><code>&lt;span&gt;</code> — контейнер для групування елементів (вбудований елемент).</li>
+            <li><code>&lt;strong&gt;</code> — сильний наголос (жирний текст).</li>
+            <li><code>&lt;em&gt;</code> — наголос (курсивний текст).</li>
+            <li><code>&lt;br&gt;</code> — розрив рядка.</li>
+            <li><code>&lt;hr&gt;</code> — горизонтальна лінія.</li>
+            <li><code>&lt;blockquote&gt;</code> — довга цитата.</li>
+            <li><code>&lt;code&gt;</code> — вставка коду.</li>
+            <li><code>&lt;pre&gt;</code> — попередньо відформатований текст.</li>
+        </ul>
+
+        <h2>Висновок</h2>
+        <p>HTML має багато тегів, які дозволяють створювати складні та багатофункціональні веб-сторінки. Розуміння призначення кожного тегу дозволяє створювати семантично коректні і доступні веб-сайти. Постійно вивчайте нові можливості HTML та експериментуйте з їх використанням.</p>
+        <p>Багато тегів HTML можуть мати атрибути, які змінюють їх поведінку або вигляд. Наприклад, атрибут <code>href</code> в тегу <code>&lt;a&gt;</code> вказує посилання, атрибут <code>src</code> в тегу <code>&lt;img&gt;</code> вказує шлях до зображення, а атрибут <code>class</code> використовується для стилізації елементів через CSS.</p>
+
+        <p>Приклад з атрибутами:</p>
+        <pre>
+<code>
+&lt;a href="https://www.example.com" target="_blank"&gt;Перейти на сайт&lt;/a&gt; &lt;!-- Посилання на зовнішній сайт --&gt;
+&lt;img src="image.jpg" alt="Опис зображення" width="500" height="300"&gt; &lt;!-- Зображення з вказаними розмірами --&gt;
+&lt;button class="btn-primary"&gt;Натисни мене!&lt;/button&gt; &lt;!-- Кнопка з класом для стилізації --&gt;
+</code>
+        </pre>
+
+        <h2>Підсумок</h2>
+        <p>HTML — це основа всіх веб-сторінок. Розуміння структури документа, а також правильне використання тегів <code>&lt;html&gt;</code>, <code>&lt;head&gt;</code> і <code>&lt;body&gt;</code> є важливими для створення якісних і коректних веб-сторінок. Ці теги дозволяють розділяти метаінформацію, структуру та контент, що забезпечує правильну роботу сайту як на комп'ютерах, так і на мобільних пристроях.</p>
+		<div style="text-align: center;">
+    <video width="1280" height="720" controls>
+        <source src="{% static 'videos/video2.mp4' %}" type="video/mp4">
+        Ваш браузер не поддерживает элемент видео.
+    </video>
+</div>
+    <script>
+        const video = document.getElementById('myVideo');
+        
+        function playVideo() {
+            video.play();
+        }
+        
+        function pauseVideo() {
+            video.pause();
+        }
+        
+        function rewind() {
+            // Отнимаем 10 секунд от текущего времени, но не меньше 0
+            video.currentTime = Math.max(video.currentTime - 10, 0);
+        }
+        
+        function fastForward() {
+            // Добавляем 10 секунд к текущему времени, но не больше длительности видео
+            video.currentTime = Math.min(video.currentTime + 10, video.duration);
+        }
+    </script>
+    
+
+<div class="comment-form">
+    <h2>Залиште коментар</h2>
+    {% if user.is_authenticated %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Відправити</button>
+    </form>
+    {% else %}
+    <p><strong>Щоб залишити коментар, необхідно <a href="{% url 'user_login' %}">увійти</a> в систему або <a href="{% url 'user_register' %}">зареєструватись</a></strong></p>
+    {% endif %}
+</div>
+
+<div class="comments-section">
+    <h2>Коментарі</h2>
+    {% for comment in comments %}
+        <div class="comment">
+            <div>
+                <strong>{{ comment.user.username }}</strong>
+                <p>{{ comment.text }}</p>
+                
+            </div>
+        </div>
+    {% empty %}
+        <p>Поки немає коментарів.</p>
+    {% endfor %}
+</div>
+    </div>
+        <script src="{% static 'js/script.js' %}"></script>
+        <script src="{% static 'js/sidebar.js' %}"></script>
+        <script src="{% static 'js/anim.js' %}"></script>
+</body>
+</html>

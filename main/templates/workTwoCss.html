@@ -1,0 +1,417 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Шрифти, розмір, товщина, вирівнювання тексту</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<body>
+    <header>
+        <h1>CSS</h1>
+    </header>
+    
+<nav>
+        <a href='{% url "sait" %}' onclick="showSection('intro')" class="nav-logo">
+            <img src="{% static 'images/дом.png' %}" alt="Button" style="width: 30px; height: auto;">
+        </a>
+        <div class="nav-links">
+            <a href='{% url "html_page" %}' onclick="showSection('html')">HTML</a>
+        </div>
+        <div class="nav-links">
+            <a href='{% url "cssGlav" %}' onclick="showSection('html')">CSS</a>
+        </div>
+                <div class="nav-links">
+            <a href='{% url "jsGlav" %}' onclick="showSection('html')">JavaScript</a>
+        </div>
+       </div>
+                <div class="nav-links">
+            <a href='{% url "testGlav" %}' onclick="showSection('html')">Тести</a>
+        </div>
+        </div>
+                <div class="nav-links">
+            <a href='{% url "chat" %}' onclick="showSection('html')">Асистент сайту</a>
+        </div>
+        <a href="https://t.me/studuhtml" class="nav-logo1" target="_blank">
+            <img src="{% static 'images/111.png' %}" alt="Головна" style="width: 45px; height: 35px;">
+        </a>
+    </nav>
+
+    <div class="sidebar"> 
+        <!-- Глава 1 -->
+        <a href="#" class="menu-item">📁 Вступ до CSS</a>
+        <div class="submenu">
+            <a href="{% url 'vstypOneCss' %}">Що таке CSS і для чого він потрібен.</a>
+            <a href="{% url 'vstypTwoCss' %}">Основні способи підключення CSS до HTML.</a>
+        </div>
+
+        <!-- Глава 2 -->
+        <a href="#" class="menu-item">📁 Основи синтаксису CSS</a>
+        <div class="submenu">
+            <a href="{% url 'osnoviOneCss' %}">Селектори, властивості та значення.</a>
+            <a href="{% url 'osnoviTwoCss' %}">Коментарі в CSS та структура коду.</a>
+        </div>
+
+        <!-- Глава 3 -->
+        <a href="#" class="menu-item">📁 Робота з кольорами та шрифтами</a>
+        <div class="submenu">
+            <a href="{% url 'workOneCss' %}">Кольори: HEX, RGB, RGBA, HSL.</a>
+            <a href="{% url 'workTwoCss' %}">Шрифти, розмір, товщина, вирівнювання тексту.</a>
+        </div>
+
+        <!-- Глава 4 -->
+        <a href="#" class="menu-item">📁 Розміщення елементів</a>
+        <div class="submenu">
+            <a href="{% url 'blokOneCss' %}">Блокова і стрічкова модель елементів.</a>
+            <a href="{% url 'blokTwoCss' %}">Використання flexbox та grid для макета сторінки.</a>
+        </div>
+
+        <!-- Глава 5 -->
+        <a href="#" class="menu-item">📁 Оформлення сторінки</a>
+        <div class="submenu">
+            <a href="{% url 'oforOneCss' %}">Фони, межі, тіні та закруглення кутів.</a>
+            <a href="{% url 'oforTwoCss' %}">Зображення, прозорість та градієнти.</a>
+        </div>
+
+        <!-- Глава 6 -->
+        <a href="#" class="menu-item">📁 Анімації та переходи</a>
+        <div class="submenu">
+            <a href="{% url 'animOneCss' %}">CSS transitions — плавні зміни властивостей.</a>
+            <a href="{% url 'animTwoCss' %}">CSS animations — створення рухомих ефектів.</a>
+        </div>
+
+        <!-- Глава 7 -->
+        <a href="#" class="menu-item">📁 Адаптивний дизайн</a>
+        <div class="submenu">
+            <a href="{% url 'adapOneCss' %}">Використання медіа-запитів для різних пристроїв.</a>
+            <a href="{% url 'adapTwoCss' %}">Приклади створення адаптивного сайту.</a>
+        </div>
+    </div>   
+    
+    <div class="content">
+        <h1>Шрифти, розмір, товщина, вирівнювання тексту</h1>
+
+        <section>
+            <p>У CSS є багато властивостей для роботи з текстом: шрифти, розмір, товщина та вирівнювання. Розглянемо основні.</p>
+
+            <h2>1. Шрифти (font-family)</h2>
+            <p>Властивість <code>font-family</code> задає, який шрифт використовувати:</p>
+            <pre><code>
+p {
+    font-family: Arial, sans-serif;
+}
+h1 {
+    font-family: "Times New Roman", serif;
+}
+            </code></pre>
+            <p>Можна вказувати декілька шрифтів через кому — браузер обере перший доступний.</p>
+
+            <h2>2. Розмір тексту (font-size)</h2>
+            <p>Розмір тексту задається у пікселях (px), відсотках (%), em, rem тощо:</p>
+            <pre><code>
+p {
+    font-size: 16px;
+}
+h1 {
+    font-size: 2em; /* в 2 рази більший за базовий */
+}
+            </code></pre>
+
+            <h2>3. Товщина тексту (font-weight)</h2>
+            <p>Властивість <code>font-weight</code> задає товщину шрифту:</p>
+            <ul>
+                <li><code>normal</code> — звичайна</li>
+                <li><code>bold</code> — жирна</li>
+                <li><code>100, 200 ... 900</code> — конкретні значення товщини</li>
+            </ul>
+            <pre><code>
+p {
+    font-weight: normal;
+}
+strong {
+    font-weight: bold;
+}
+            </code></pre>
+
+            <h2>4. Вирівнювання тексту (text-align)</h2>
+            <p>Властивість <code>text-align</code> задає горизонтальне вирівнювання:</p>
+            <ul>
+                <li><code>left</code> — ліворуч</li>
+                <li><code>center</code> — по центру</li>
+                <li><code>right</code> — праворуч</li>
+                <li><code>justify</code> — вирівнювання по ширині</li>
+            </ul>
+            <pre><code>
+p {
+    text-align: justify;
+}
+h1 {
+    text-align: center;
+}
+            </code></pre>
+
+            <h2>Поради</h2>
+            <ul>
+                <li>✅ Використовуй <code>font-family</code> з запасними шрифтами.</li>
+                <li>✅ Для заголовків можна застосовувати більший <code>font-size</code> і <code>font-weight</code> bold.</li>
+                <li>✅ <code>text-align: justify;</code> робить текст акуратним для абзаців.</li>
+            </ul>
+
+            <h2>🎨 Інтерактивні приклади</h2>
+            <p>Спробуй змінити властивості тексту в реальному часі:</p>
+
+            <!-- Приклад 1: Розмір шрифту -->
+            <div class="interactive-demo">
+                <h3>Розмір шрифту (font-size)</h3>
+                <div style="margin-bottom: 15px;">
+                    <label>Розмір: <input type="range" id="sizeSlider" min="10" max="50" value="18" style="width: 200px;"> <span id="sizeValue">18</span>px</label>
+                </div>
+                <div id="sizePreview" style="padding: 20px; background: #f0f8ff; border-radius: 5px; border-left: 4px solid #007bff;">
+                    Це текст змінюється розміром
+                </div>
+            </div>
+
+            <!-- Приклад 2: Товщина шрифту -->
+            <div class="interactive-demo">
+                <h3>Товщина шрифту (font-weight)</h3>
+                <div style="margin-bottom: 15px;">
+                    <button class="weight-btn" onclick="changeWeight(400)">Normal (400)</button>
+                    <button class="weight-btn" onclick="changeWeight(600)">Semi-Bold (600)</button>
+                    <button class="weight-btn" onclick="changeWeight(700)">Bold (700)</button>
+                    <button class="weight-btn" onclick="changeWeight(900)">Black (900)</button>
+                </div>
+                <div id="weightPreview" style="padding: 20px; background: #f0f8ff; border-radius: 5px; border-left: 4px solid #007bff; font-size: 20px; font-weight: 400;">
+                    Це текст змінює товщину!
+                </div>
+            </div>
+
+            <!-- Приклад 3: Вирівнювання -->
+            <div class="interactive-demo">
+                <h3>Вирівнювання тексту (text-align)</h3>
+                <div style="margin-bottom: 15px;">
+                    <button class="align-btn" onclick="changeAlign('left')">↶ Ліворуч</button>
+                    <button class="align-btn" onclick="changeAlign('center')">↨ По центру</button>
+                    <button class="align-btn" onclick="changeAlign('right')">↷ Праворуч</button>
+                </div>
+                <div id="alignPreview" style="padding: 20px; background: #f0f8ff; border-radius: 5px; border-left: 4px solid #007bff; text-align: left;">
+                    Це багатовідкритий текст, який змінює своє вирівнювання. Спробуй клікнути на кнопки вище і спостерігай як змінюється позиція тексту.
+                </div>
+            </div>
+
+            <!-- Приклад 4: Комбінована демонстрація -->
+            <div class="interactive-demo">
+                <h3>🎯 Комбінована демонстрація</h3>
+                <div style="margin-bottom: 15px;">
+                    <div style="margin-bottom: 10px;">
+                        Розмір: <input type="range" id="fontSize2" min="14" max="48" value="20" style="width: 150px;"> <span id="fSize2">20</span>px
+                    </div>
+                    <div style="margin-bottom: 10px;">
+                        Товщина: <input type="range" id="fontWeight2" min="100" max="900" step="100" value="400" style="width: 150px;"> <span id="fWeight2">400</span>
+                    </div>
+                    <div>
+                        Шрифт: 
+                        <select id="fontFamily2" style="padding: 5px; border-radius: 3px;">
+                            <option value="Arial, sans-serif">Arial</option>
+                            <option value="'Times New Roman', serif">Times New Roman</option>
+                            <option value="'Courier New', monospace">Courier New</option>
+                            <option value="Georgia, serif">Georgia</option>
+                            <option value="Verdana, sans-serif">Verdana</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="combinedPreview" style="padding: 25px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 8px; text-align: center; font-size: 20px; font-weight: 400; font-family: Arial, sans-serif;">
+                    🌟 Розрахункова демонстрація! Створи свій стиль!
+                </div>
+            </div>
+        </section>
+
+        <style>
+        .comment-form {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .comment-form h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .comment-form button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .comment-form button:hover {
+            background-color: #0056b3;
+        }
+        .comment {
+            background: #eee;
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+        }
+        .comments-section h2 {
+            color: #333;
+        }
+
+        /* Інтерактивні стилі */
+        .interactive-demo {
+            background: #f9f9f9;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            border: 2px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        .interactive-demo:hover {
+            border-color: #007bff;
+            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.1);
+        }
+        .interactive-demo h3 {
+            color: #007bff;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+        .weight-btn, .align-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            margin: 5px 5px 5px 0;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        .weight-btn:hover, .align-btn:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .weight-btn:active, .align-btn:active {
+            background: #003d82;
+            transform: translateY(0);
+        }
+
+        .code-examples {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+        .code-box {
+            background: #282c34;
+            color: #abb2bf;
+            padding: 15px;
+            border-radius: 8px;
+            flex: 1;
+            min-width: 300px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+        .code-box h4 {
+            color: #61dafb;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        .code-box pre {
+            margin: 0;
+            overflow-x: auto;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        #sizePreview, #weightPreview, #alignPreview, #combinedPreview {
+            transition: all 0.1s ease;
+        }
+        </style>
+
+        {% if user.is_authenticated %}
+        <div class="comment-form">
+            <h2>Залиште коментар</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Відправити</button>
+            </form>
+        </div>
+        {% else %}
+        <div class="comment-form">
+            <p><strong>Щоб залишити коментар, необхідно <a href="{% url 'user_login' %}">увійти</a> в систему або <a href="{% url 'user_register' %}">зареєструватись</a></strong></p>
+        </div>
+        {% endif %}
+
+        <div class="comments-section">
+            <h2>Коментарі</h2>
+            {% for comment in comments %}
+                <div class="comment">
+                    <div>
+                        <strong>{{ comment.user.username }}</strong>
+                        <p>{{ comment.text }}</p>
+                    </div>
+                </div>
+            {% empty %}
+                <p>Поки немає коментарів.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/sidebar.js' %}"></script>
+    <script src="{% static 'js/anim.js' %}"></script>
+
+    <script>
+        // Rozmir shriftu
+        document.getElementById('sizeSlider').addEventListener('input', function() {
+            const size = this.value;
+            document.getElementById('sizeValue').textContent = size;
+            document.getElementById('sizePreview').style.fontSize = size + 'px';
+        });
+
+        // Tovshchyna shriftu
+        function changeWeight(weight) {
+            document.getElementById('weightPreview').style.fontWeight = weight;
+            // Zminyty znachennya u slidakh
+            document.querySelectorAll('.weight-btn').forEach(btn => {
+                btn.style.background = '#007bff';
+                btn.style.opacity = '1';
+            });
+            event.target.style.background = '#0056b3';
+            event.target.style.opacity = '1';
+        }
+
+        // Virivnuvannya tekstu
+        function changeAlign(align) {
+            document.getElementById('alignPreview').style.textAlign = align;
+            document.querySelectorAll('.align-btn').forEach(btn => {
+                btn.style.background = '#007bff';
+            });
+            event.target.style.background = '#0056b3';
+        }
+
+        // Kombinovana demonstraciya
+        document.getElementById('fontSize2').addEventListener('input', function() {
+            document.getElementById('fSize2').textContent = this.value;
+            document.getElementById('combinedPreview').style.fontSize = this.value + 'px';
+        });
+
+        document.getElementById('fontWeight2').addEventListener('input', function() {
+            document.getElementById('fWeight2').textContent = this.value;
+            document.getElementById('combinedPreview').style.fontWeight = this.value;
+        });
+
+        document.getElementById('fontFamily2').addEventListener('change', function() {
+            document.getElementById('combinedPreview').style.fontFamily = this.value;
+        });
+    </script>
+</body>
+</html>

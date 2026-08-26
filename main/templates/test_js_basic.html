@@ -1,0 +1,565 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест: Основи мови JavaScript</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        .test-container {
+            max-width: 800px;
+            margin: 100px auto;
+            background: var(--surface);
+            padding: 30px 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .test-container h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .test-container p {
+            text-align: center;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        .question {
+            background: var(--muted);
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            transition: 0.2s;
+            border: 1px solid #ddd;
+        }
+
+        .question:hover {
+            background: rgba(234,243,255,0.95);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .question p {
+            font-weight: bold;
+            color: #222;
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            margin-left: 10px;
+            padding: 3px 0;
+            cursor: pointer;
+        }
+
+        button {
+            display: block;
+            margin: 20px auto 10px auto;
+            padding: 10px 30px;
+            background-color: #2196F3;
+            border: none;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #1976D2;
+            transform: scale(1.05);
+        }
+
+        #result {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h2>Тести</h2>
+    </header>
+
+<nav>
+        <a href='{% url "sait" %}' onclick="showSection('intro')" class="nav-logo">
+            <img src="{% static 'images/дом.png' %}" alt="Button" style="width: 30px; height: auto;">
+        </a>
+        <div class="nav-links">
+            <a href='{% url "html_page" %}' onclick="showSection('html')">HTML</a>
+        </div>
+        <div class="nav-links">
+            <a href='{% url "cssGlav" %}' onclick="showSection('html')">CSS</a>
+        </div>
+                <div class="nav-links">
+            <a href='{% url "jsGlav" %}' onclick="showSection('html')">JavaScript</a>
+        </div>
+       </div>
+                <div class="nav-links">
+            <a href='{% url "testGlav" %}' onclick="showSection('html')">Тести</a>
+        </div>
+        </div>
+                <div class="nav-links">
+            <a href='{% url "chat" %}' onclick="showSection('html')">Асистент сайту</a>
+        </div>
+        <a href="https://t.me/studuhtml" class="nav-logo1" target="_blank">
+            <img src="{% static 'images/111.png' %}" alt="Головна" style="width: 45px; height: 35px;">
+        </a>
+    </nav>
+
+    <div class="sidebar">
+        <!-- Тести HTML -->
+        <a href="#" class="menu-item">📘 Тести HTML</a>
+        <div class="submenu">
+            <a href="{% url 'test_html_basic' %}">Основи HTML</a>
+            <a href="{% url 'test_html_advanced' %}">Просунуті елементи HTML</a>
+        </div>
+
+        <!-- Тести CSS -->
+        <a href="#" class="menu-item">🎨 Тести CSS</a>
+        <div class="submenu">
+            <a href="{% url 'test_css_basic' %}">Основи стилів</a>
+            <a href="{% url 'test_css_layout' %}">Макети, Flexbox, Grid</a>
+        </div>
+
+        <!-- Тести JavaScript -->
+        <a href="#" class="menu-item">💡 Тести JavaScript</a>
+        <div class="submenu">
+            <a href="{% url 'test_js_basic' %}" class="active">Основи мови</a>
+            <a href="{% url 'test_js_dom' %}">Робота з DOM</a>
+        </div>
+
+        <!-- Загальний тест -->
+        <a href="#" class="menu-item">🏆 Підсумковий тест</a>
+        <div class="submenu">
+            <a href="{% url 'test_all' %}">HTML + CSS + JS</a>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="test-container">
+            <h2>Тест: Основи мови JavaScript</h2>
+            <p>Перевір свої знання базових конструкцій та синтаксису JavaScript.</p>
+
+            <form id="jsBasicTest">
+                <div id="questions"></div>
+                <div style="display: flex; gap: 10px; margin-top: 20px;">
+                    <button type="button" onclick="checkAnswers()" style="flex: 1;">Перевірити</button>
+                    <button type="button" onclick="resetTest()" style="flex: 1; background: #6c757d;">Оновити тест</button>
+                </div>
+            </form>
+
+            <p id="result"></p>
+        </div>
+    </div>
+
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/sidebar.js' %}"></script>
+
+    <script>
+        // Банк вопросов для основ JS
+        const questionBank = [
+            {
+                question: "Яке ключове слово використовується для оголошення змінної?",
+                options: ["variable", "let", "set"],
+                correct: 1
+            },
+            {
+                question: "Як вивести повідомлення у консоль?",
+                options: ["print(\"Hello\")", "log(\"Hello\")", "console.log(\"Hello\")"],
+                correct: 2
+            },
+            {
+                question: "Який оператор використовується для порівняння з перевіркою типів?",
+                options: ["==", "===", "!="],
+                correct: 1
+            },
+            {
+                question: "Як створити функцію у JavaScript?",
+                options: ["function myFunc() { }", "func myFunc() { }", "create myFunc() { }"],
+                correct: 0
+            },
+            {
+                question: "Як записати однорядковий коментар?",
+                options: ["# коментар", "// коментар", "/* коментар */"],
+                correct: 1
+            },
+            {
+                question: "Який тип даних має значення <code>true</code>?",
+                options: ["Boolean", "String", "Number"],
+                correct: 0
+            },
+            {
+                question: "Як перевірити умову \"a більше 10\"?",
+                options: ["if a > 10", "if (a > 10)", "if: a > 10"],
+                correct: 1
+            },
+            {
+                question: "Що робить оператор <code>++</code>?",
+                options: ["Зменшує значення на 1", "Збільшує значення на 1", "Ділить на 2"],
+                correct: 1
+            },
+            {
+                question: "Як оголосити константу?",
+                options: ["const name = \"Alex\";", "constant name = \"Alex\";", "let name = \"Alex\";"],
+                correct: 0
+            },
+            {
+                question: "Яка різниця між var та let?",
+                options: ["Вони однакові", "let має блокову область видимості, var має функціональну область", "var має блокову область"],
+                correct: 1
+            },
+            {
+                question: "Що таке hoisting у JavaScript?",
+                options: ["Підняття змінних та функцій на початок області видимості", "Видалення змінних", "Копіювання функцій"],
+                correct: 0
+            },
+            {
+                question: "Як перевірити, чи змінна існує?",
+                options: ["if (variable)", "if (typeof variable !== 'undefined')", "if (variable == null)"],
+                correct: 1
+            },
+            {
+                question: "Що повертає оператор typeof?",
+                options: ["Назву класу", "Тип даних у вигляді рядка", "Назву змінної"],
+                correct: 1
+            },
+            {
+                question: "Які типи даних у JavaScript?",
+                options: ["Number, String, Object", "Number, String, Boolean, Object, null, undefined, Symbol", "Тільки Number та String"],
+                correct: 1
+            },
+            {
+                question: "Як створити масив?",
+                options: ["array arr = [1, 2, 3];", "let arr = [1, 2, 3];", "create arr = {1, 2, 3};"],
+                correct: 1
+            },
+            {
+                question: "Як отримати значення з масиву за індексом?",
+                options: ["arr->0", "arr[0]", "arr.0"],
+                correct: 1
+            },
+            {
+                question: "Як отримати довжину масиву?",
+                options: ["arr.size", "arr.length", "len(arr)"],
+                correct: 1
+            },
+            {
+                question: "Як додати елемент у кінець масиву?",
+                options: ["arr.add(element)", "arr.push(element)", "arr.append(element)"],
+                correct: 1
+            },
+            {
+                question: "Як видалити елемент з кінця масиву?",
+                options: ["arr.remove()", "arr.pop()", "arr.delete()"],
+                correct: 1
+            },
+            {
+                question: "Як створити об'єкт?",
+                options: ["let obj = [1, 2, 3];", "let obj = {name: \"Alex\", age: 25};", "let obj = (1, 2, 3);"],
+                correct: 1
+            },
+            {
+                question: "Як отримати значення властивості об'єкта?",
+                options: ["obj.name", "obj[\"name\"]", "обидва варіанти правильні"],
+                correct: 2
+            },
+            {
+                question: "Як перевірити, чи існує властивість у об'єкта?",
+                options: ["obj.hasOwnProperty('name')", "'name' in obj", "обидва варіанти правильні"],
+                correct: 2
+            },
+            {
+                question: "Як написати цикл for?",
+                options: ["for (i = 0; i < 5; i++) { }", "for i in range(5) { }", "repeat 5 times { }"],
+                correct: 0
+            },
+            {
+                question: "Як написати цикл while?",
+                options: ["while (i < 10) { }", "loop (i < 10) { }", "repeat (i < 10) { }"],
+                correct: 0
+            },
+            {
+                question: "Що робить return у функції?",
+                options: ["Повертає значення з функції", "Переводить у режим читання", "Перезавантажує функцію"],
+                correct: 0
+            },
+            {
+                question: "Як викликати функцію?",
+                options: ["call myFunc()", "myFunc()", "invoke myFunc()"],
+                correct: 1
+            },
+            {
+                question: "Що таке замикання (closure) у JavaScript?",
+                options: ["Закриття вкладки браузера", "Функція, яка має доступ до змінних з їїї зовнішньої області видимості", "Закриття сайту"],
+                correct: 1
+            },
+            {
+                question: "Як використовувати ternary оператор?",
+                options: ["? :", "condition ? true_value : false_value", "if condition { }"],
+                correct: 1
+            },
+            {
+                question: "Що означає NaN у JavaScript?",
+                options: ["Not a Name", "Not a Number", "Nothing and Null"],
+                correct: 1
+            },
+            {
+                question: "Як перевірити, чи значення NaN?",
+                options: ["value == NaN", "isNaN(value)", "value === NaN"],
+                correct: 1
+            },
+            {
+                question: "Як використовувати switch оператор?",
+                options: ["switch (x) { case 1: ... break; }", "switch x from 1 to 10", "select x { }"],
+                correct: 0
+            },
+            {
+                question: "Як потрібно переривати цикл?",
+                options: ["stop", "break", "exit"],
+                correct: 1
+            },
+            {
+                question: "Як пропустити ітерацію циклу?",
+                options: ["skip", "continue", "next"],
+                correct: 1
+            },
+            {
+                question: "Яка різниця між == та ===?",
+                options: ["Вони однакові", "== порівнює значення, === також перевіряє тип", "=== порівнює значення"],
+                correct: 1
+            },
+            {
+                question: "Як написати функцію, що приймає змінну кількість аргументів?",
+                options: ["function func(...args) { }", "function func(args[]) { }", "function func(unlimited) { }"],
+                correct: 0
+            },
+            {
+                question: "Що такий arrow function?",
+                options: ["Функція зі стрілкою", "const func = () => { } - скорочена функція", "Функція, що повертає стрілку"],
+                correct: 1
+            },
+            {
+                question: "Як написати arrow function?",
+                options: ["const add = (a, b) => a + b;", "const add => (a, b) { a + b };", "arrow add = (a, b) => { a + b };"],
+                correct: 0
+            },
+            {
+                question: "Що таке scope у JavaScript?",
+                options: ["Дальність видимості змінних", "Назва файла", "Тип функції"],
+                correct: 0
+            },
+            {
+                question: "Яка різниця між глобальною та локальною областю видимості?",
+                options: ["Глобальна - доступна скрізь, локальна - тільки всередину функції", "Локальна доступна скрізь", "Вони однакові"],
+                correct: 0
+            },
+            {
+                question: "Що означає hoisting?",
+                options: ["Підняття змінних та функцій на початок області видимості", "Видалення змінних", "Копіювання функцій"],
+                correct: 0
+            },
+            {
+                question: "Яка різниця между function declaration та function expression?",
+                options: ["Вони однакові", "Declaration піднімається, expression - ні", "Expression піднімається"],
+                correct: 1
+            },
+            {
+                question: "Як написати callback функцію?",
+                options: ["function callback() { }", "Функція, яка передається як аргумент іншій функції", "callback = function() { };"],
+                correct: 1
+            },
+            {
+                question: "Що таке Promise у JavaScript?",
+                options: ["Обіцянка користувачу", "Об'єкт, що представляє результат асинхронної операції", "Обіцянка браузеру"],
+                correct: 1
+            },
+            {
+                question: "Як створити Promise?",
+                options: ["new Promise((resolve, reject) => { })", "Promise((resolve, reject) => { })", "promise(() => { })"],
+                correct: 0
+            },
+            {
+                question: "Яка різниця між null та undefined?",
+                options: ["Вони однакові", "null - намірено порожній, undefined - змінна не визначена", "undefined - намірено порожній"],
+                correct: 1
+            },
+            {
+                question: "Як перевірити, чи змінна порожня?",
+                options: ["if (variable)", "if (variable == null)", "if (variable === null || variable === undefined)"],
+                correct: 2
+            },
+            {
+                question: "Що робить метод <code>Array.map()</code>?",
+                options: ["Встановлює карту", "Трансформує кожен елемент масиву у новий масив", "Шукає елемент"],
+                correct: 1
+            },
+            {
+                question: "Що робить метод <code>Array.filter()</code>?",
+                options: ["Фільтрує вхідні дані", "Створює новий масив із елементами, що задовольняють умову", "Видаляє елементи"],
+                correct: 1
+            },
+            {
+                question: "Як використовувати <code>Array.reduce()</code>?",
+                options: ["arr.reduce((acc, val) => acc + val, 0)", "arr.reduce(sum)", "reduce(arr)"],
+                correct: 0
+            },
+            {
+                question: "Як перевірити, чи містить масив елемент?",
+                options: ["arr.includes(element)", "arr.contains(element)", "arr.has(element)"],
+                correct: 0
+            },
+            {
+                question: "Як знайти перший елемент, що задовольняє умову?",
+                options: ["arr.find(el => el > 5)", "arr.findFirst(el => el > 5)", "arr.search(el => el > 5)"],
+                correct: 0
+            },
+            {
+                question: "Як знайти індекс елемента у масиві?",
+                options: ["arr.findIndex(el => el > 5)", "arr.indexOf(element)", "обидва варіанти правильні"],
+                correct: 2
+            },
+            {
+                question: "Яка властивість повертає тип змінної?",
+                options: ["getType()", "typeof variable", "variable.type"],
+                correct: 1
+            },
+            {
+                question: "Як перетворити рядок у число?",
+                options: ["parseInt(str), parseFloat(str), Number(str)", "toNumber(str)", "Number(str)"],
+                correct: 0
+            },
+            {
+                question: "Як перетворити число у рядок?",
+                options: ["String(num)", "num.toString()", "обидва варіанти правильні"],
+                correct: 2
+            },
+            {
+                question: "Як використовувати шаблонні рядки (template literals)?",
+                options: ["`text ${variable}`", "'text ' + variable", "обидва варіанти правильні"],
+                correct: 0
+            },
+            {
+                question: "Що робить метод <code>String.split()</code>?",
+                options: ["Розділяє рядок за розділювачем на масив", "Розділяє розділювач", "Розрізає рядок навпіл"],
+                correct: 0
+            }
+        ];
+
+        // Функция для перемешивания массива
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        let selectedQuestions = [];
+        let correctAnswers = [];
+
+        // Генерировать вопросы
+        function generateQuestions() {
+            // Выбрать случайные вопросы каждый раз
+            selectedQuestions = [...questionBank];
+            shuffle(selectedQuestions);
+            selectedQuestions = selectedQuestions.slice(0, 10); // Выбрать 10 вопросов
+            correctAnswers = [];
+
+            const container = document.getElementById('questions');
+            container.innerHTML = ''; // Очистить старые вопросы
+            selectedQuestions.forEach((q, index) => {
+                // Перемешать варианты
+                let options = [...q.options];
+                shuffle(options);
+                let correctIndex = options.indexOf(q.options[q.correct]);
+
+                correctAnswers.push(correctIndex);
+
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                questionDiv.innerHTML = `<p>${index + 1}. ${q.question}</p>`;
+
+                options.forEach((opt, optIndex) => {
+                    const label = document.createElement('label');
+                    label.innerHTML = `<input type="radio" name="q${index}" value="${optIndex}"> ${opt}`;
+                    questionDiv.appendChild(label);
+                });
+
+                container.appendChild(questionDiv);
+            });
+        }
+
+        // Проверить ответы
+        function checkAnswers() {
+            let score = 0;
+
+            selectedQuestions.forEach((q, index) => {
+                const selected = document.querySelector(`input[name="q${index}"]:checked`);
+                const questionDiv = document.querySelectorAll('.question')[index];
+                const labels = questionDiv.querySelectorAll('label');
+
+                if (selected) {
+                    if (parseInt(selected.value) === correctAnswers[index]) {
+                        score++;
+                        questionDiv.style.backgroundColor = '#d4edda'; // Зеленый
+                    } else {
+                        questionDiv.style.backgroundColor = '#f8d7da'; // Красный
+                        // Добавить правильный ответ под вопросом
+                        const correctP = document.createElement('p');
+                        correctP.textContent = `Правильна відповідь: ${q.options[q.correct]}`;
+                        correctP.style.color = 'red';
+                        correctP.style.fontWeight = 'bold';
+                        questionDiv.appendChild(correctP);
+                        // Подсветить правильный вариант
+                        labels[correctAnswers[index]].style.backgroundColor = '#d4edda';
+                        labels[correctAnswers[index]].style.padding = '5px';
+                        labels[correctAnswers[index]].style.borderRadius = '5px';
+                    }
+                } else {
+                    questionDiv.style.backgroundColor = '#f8d7da';
+                    // Добавить правильный ответ под вопросом
+                    const correctP = document.createElement('p');
+                    correctP.textContent = `Правильна відповідь: ${q.options[q.correct]}`;
+                    correctP.style.color = 'red';
+                    correctP.style.fontWeight = 'bold';
+                    questionDiv.appendChild(correctP);
+                    // Подсветить правильный вариант
+                    labels[correctAnswers[index]].style.backgroundColor = '#d4edda';
+                    labels[correctAnswers[index]].style.padding = '5px';
+                    labels[correctAnswers[index]].style.borderRadius = '5px';
+                }
+            });
+
+            const result = document.getElementById("result");
+            result.innerHTML = `<strong>✅ Твій результат: ${score} з ${selectedQuestions.length} правильних відповідей.</strong><br>`;
+            if (score === selectedQuestions.length) {
+                result.innerHTML += "Відмінно! Ти чудово розумієш основи JS!";
+                result.style.color = "green";
+            } else if (score >= selectedQuestions.length * 0.6) {
+                result.innerHTML += "Добре, але повтори синтаксис та логіку.";
+                result.style.color = "orange";
+            } else {
+                result.innerHTML += "Потрібно ще трохи практики. У тебе вийде!";
+                result.style.color = "red";
+            }
+        }
+
+        // Функция для обновления теста
+        function resetTest() {
+            document.getElementById('jsBasicTest').reset();
+            document.getElementById('result').innerHTML = '';
+            document.getElementById('questions').innerHTML = '';
+            correctAnswers = [];
+            generateQuestions();
+        }
+
+        // Генерировать при загрузке
+        window.onload = generateQuestions;
+    </script>
+</body>
+</html>

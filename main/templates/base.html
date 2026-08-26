@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Сайт{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block extra_head %}{% endblock %}
+    </head>
+<body>
+    <header>
+        <h1>{% block header_title %}Навчальний сайт з веб-розробки{% endblock %}</h1>
+    </header>
+
+    <nav>
+        <div class="nav-left">
+            <a href="{% url 'sait' %}"><img src="{% static 'images/дом.png' %}" alt="Головна" style="width:28px;height:28px;"></a>
+        </div>
+        <div class="nav-center">
+            <a href="{% url 'html_page' %}">HTML</a>
+            <a href="{% url 'cssGlav' %}">CSS</a>
+            <a href="{% url 'jsGlav' %}">JavaScript</a>
+            <a href="{% url 'testGlav' %}">Тести</a>
+        </div>
+        <div class="nav-right">
+            <a href="{% url 'chat' %}">Асистент сайту</a>
+            <a href="https://t.me/studuhtml" target="_blank" rel="noopener">
+                <img src="{% static 'images/111.png' %}" alt="Telegram" style="width:36px;height:34px;">
+            </a>
+        </div>
+    </nav>
+
+    <div class="sidebar"> 
+        <a href="#" class="menu-item">📁 Підготовка</a>
+        <div class="submenu">
+            <a href='{% url 'choice' %}'>Вибір інструментів розробки (редактор коду, браузер, ресурси).</a>
+            <a href='{% url 'definition' %}'>Визначення цілей та структури майбутнього сайту.</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Як створити сайт HTML</a>
+        <div class="submenu">
+            <a href='{% url 'creation' %}'>Створення базового HTML-файлу (файл із розширенням .html).</a>
+            <a href='{% url 'discovery' %}'>Відкриття файлу HTML у браузері для перегляду.</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Структури HTML</a>
+        <div class="submenu">
+            <a href='{% url 'study' %}'>Вивчення основних тегів (html, head, body).</a>
+            <a href='{% url 'semantics' %}'>Семантичні елементи (header, main, footer).</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Інформація для сайту</a>
+        <div class="submenu">
+            <a href='{% url 'gathering' %}'>Збір текстового контенту, зображень та медіа.</a>
+            <a href='{% url 'organization' %}'>Організація інформації у логічні розділи.</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Дизайн сайту</a>
+        <div class="submenu">
+            <a href='{% url 'connection' %}'>Підключення CSS для стилізації HTML елементів.</a>
+            <a href='{% url 'connectionn' %}'>Створення адаптивного дизайну для різних пристроїв.</a>
+            <a href='{% url 'css' %}'>Цікаві приклади оформлення сайту через цсс.</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Приклади коду та їх результат</a>
+        <div class="submenu">
+            <a href='{% url 'writing' %}'>Написання простого прикладу із заголовком та текстом.</a>
+            <a href='{% url 'addition' %}'>Додавання кнопки та перевірка її роботи у браузері.</a>
+        </div>
+    </div>
+
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Навчальний сайт з веб-розробки | HTML • CSS • JS</p>
+    </footer>
+
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/sidebar.js' %}"></script>
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>

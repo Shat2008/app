@@ -1,0 +1,228 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Навчання веб-розробці</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Вибір інструментів розробки (редактор коду, браузер, ресурси).</h1>
+    </header>
+    
+<nav>
+        <a href='{% url "sait" %}' onclick="showSection('intro')" class="nav-logo">
+            <img src="{% static 'images/дом.png' %}" alt="Button" style="width: 30px; height: auto;">
+        </a>
+        <div class="nav-links">
+            <a href='{% url "html_page" %}' onclick="showSection('html')">HTML</a>
+        </div>
+        <div class="nav-links">
+            <a href='{% url "cssGlav" %}' onclick="showSection('html')">CSS</a>
+        </div>
+                <div class="nav-links">
+            <a href='{% url "jsGlav" %}' onclick="showSection('html')">JavaScript</a>
+        </div>
+       </div>
+                <div class="nav-links">
+            <a href='{% url "testGlav" %}' onclick="showSection('html')">Тести</a>
+        </div>
+        </div>
+                <div class="nav-links">
+            <a href='{% url "chat" %}' onclick="showSection('html')">Асистент сайту</a>
+        </div>
+        <a href="https://t.me/studuhtml" class="nav-logo1" target="_blank">
+            <img src="{% static 'images/111.png' %}" alt="Головна" style="width: 45px; height: 35px;">
+        </a>
+    </nav>
+
+    <div class="sidebar"> 
+        <!-- Глава 5 -->
+        <a href="#" class="menu-item">📁 Підготовка</a>
+        <div class="submenu">
+            <a href='{% url 'choice' %}'>Вибір інструментів розробки (редактор коду, браузер, ресурси).</a>
+            <a href='{% url 'definition' %}'>Визначення цілей та структури майбутнього сайту.</a>
+        </div>
+
+        <!-- Глава 6 -->
+        <a href="#" class="menu-item">📁 Як створити сайт HTML</a>
+        <div class="submenu">
+            <a href='{% url 'creation' %}'>Створення базового HTML-файлу (файл із розширенням .html).</a>
+            <a href='{% url 'discovery' %}'>Відкриття файлу HTML у браузері для перегляду.</a>
+        </div>
+
+        <!-- Глава 7 -->
+        <a href="#" class="menu-item">📁 Структури HTML</a>
+        <div class="submenu">
+            <a href='{% url 'study' %}'>Вивчення основних тегів (html, head, body).</a>
+            <a href='{% url 'semantics' %}'>Семантичні елементи (header, main, footer).</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Інформація для сайту</a>
+        <div class="submenu">
+            <a href='{% url 'gathering' %}'>Збір текстового контенту, зображень та медіа.</a>
+            <a href='{% url 'organization' %}'>Організація інформації у логічні розділи.</a>
+        </div>
+
+        <!-- Глава 6 -->
+        <a href="#" class="menu-item">📁 Дизайн сайту</a>
+        <div class="submenu">
+            <a href='{% url 'connection' %}'>Підключення CSS для стилізації HTML елементів.</a>
+            <a href='{% url 'connectionn' %}'>Створення адаптивного дизайну для різних пристроїв.</a>
+            <a href='{% url 'css' %}'>Цікаві приклади оформлення сайту через цсс.</a>
+        </div>
+    
+
+        <!-- Глава 7 -->
+        <a href="#" class="menu-item">📁 Приклади коду та їх результат</a>
+        <div class="submenu">
+            <a href='{% url 'writing' %}'>Написання простого прикладу із заголовком та текстом.</a>
+            <a href='{% url 'addition' %}'>Додавання кнопки та перевірка її роботи у браузері.</a>
+        </div>
+    </div>   
+
+    <div class="content">
+        <h1>Вибір інструментів розробки (редактор коду, браузер, ресурси)</h1>
+    
+        <p>Вибір інструментів для розробки є важливим етапом у створенні програмного забезпечення, оскільки вони безпосередньо впливають на ефективність роботи, зручність розробника та якість кінцевого продукту. У сучасному світі веб-розробки основними інструментами є редактори коду, браузери та різноманітні онлайн-ресурси. Давайте розглянемо кожен з них.</p>
+    
+        <h2>1. Редактор коду</h2>
+        <p>Редактор коду — це інструмент, який забезпечує середовище для написання та редагування програмного коду. Вибір редактора залежить від уподобань розробника, типу проекту, а також підтримки специфічних мов програмування та технологій.</p>
+    
+        <ul>
+            <li>
+                <strong>Visual Studio Code (VSCode)</strong> — один із найпопулярніших редакторів, який підтримує велику кількість мов програмування, зокрема HTML, CSS, JavaScript, Python, PHP тощо. Його особливістю є велика кількість плагінів, що дозволяють розширювати функціональність, таких як автозавершення коду, підтримка Git, дебагінг та інші.
+                <br>
+                <a href="https://code.visualstudio.com/" target="_blank">Скачати Visual Studio Code</a>
+                <br>
+            </li>
+            <li>
+                <strong>Sublime Text</strong> — легкий і швидкий редактор, який добре підходить для розробки невеликих проектів. Його перевагою є мінімалістичний інтерфейс, а також зручність в налаштуванні.
+                <br>
+                <a href="https://www.sublimetext.com/" target="_blank">Скачати Sublime Text</a>
+                <br>
+            </li>
+            <li>
+                <strong>Atom</strong> — редактор з відкритим вихідним кодом, розроблений GitHub. Він також має підтримку багатьох плагінів і дозволяє створювати власні.
+                <br>
+                <a href="https://atom.io/" target="_blank">Скачати Atom</a>
+                <br>
+            </li>
+            <li>
+                <strong>JetBrains WebStorm</strong> — один із потужних інструментів для розробки на JavaScript та суміжних технологіях. Він має вбудовану підтримку багатьох фреймворків і бібліотек, що дозволяє значно спростити розробку складних додатків.
+                <br>
+                <a href="https://www.jetbrains.com/webstorm/" target="_blank">Скачати WebStorm</a>
+                <br>
+            </li>
+        </ul>
+
+         
+    </nav>
+        <div class="slider-container">
+            <div class="slider">
+                <div class="slide"><img src="{% static 'images/atom.png' %}" alt="Слайд 1"></div>
+                <div class="slide"><img src="{% static 'images/vs.jpg' %}" alt="Слайд 2"></div>
+                <div class="slide"><img src="{% static 'images/web.png' %}" alt="Слайд 3"></div>
+                <div class="slide"><img src="{% static 'images/Sublime.png' %}" alt="Слайд 4"></div>
+            </div>
+            <button class="prev">&#10094;</button>
+            <button class="next">&#10095;</button>
+        </div>
+        <p>У виборі редактора важливо звертати увагу на швидкість роботи, зручність інтерфейсу, наявність плагінів для роботи з конкретними технологіями, а також підтримку системи контролю версій, що є важливою для командної роботи.</p>
+    
+        <h2>2. Браузер</h2>
+        <p>Браузери є не менш важливими інструментами для веб-розробника, адже вони забезпечують середовище для тестування та відлагодження веб-додатків. Найпопулярнішими браузерами для веб-розробки є:</p>
+    
+        <ul>
+            <li>
+                <strong>Google Chrome</strong> — найбільш поширений браузер серед розробників завдяки великій кількості інструментів для розробки (Developer Tools), таких як консоль для перевірки JavaScript, інспектор елементів для роботи з HTML і CSS, а також інші корисні функції, як емулятор мобільних пристроїв.
+                <br>
+                <a href="https://www.google.com/chrome/" target="_blank">Скачати Google Chrome</a>
+                <br>
+            </li>
+            <li>
+                <strong>Mozilla Firefox</strong> — ще один потужний браузер з багатьма інструментами для розробки. Він славиться своїми інструментами для роботи з CSS і підтримкою новітніх стандартів веб-розробки.
+                <br>
+                <a href="https://www.mozilla.org/en-US/firefox/new/" target="_blank">Скачати Mozilla Firefox</a>
+                <br>
+            </li>
+            <li>
+                <strong>Microsoft Edge</strong> — браузер на базі Chromium, який також надає потужні інструменти для розробки, аналогічні Chrome. Його можна використовувати для тестування додатків у різних умовах.
+                <br>
+                <a href="https://www.microsoft.com/en-us/edge" target="_blank">Скачати Microsoft Edge</a>
+                <br>
+            </li>
+        </ul>
+    
+        <p>Браузери дозволяють тестувати веб-додатки на різних платформах і пристроях, а також надають інструменти для налагодження та оптимізації коду.</p>
+    
+        <h2>3. Ресурси для розробки</h2>
+        <p>Веб-розробник має доступ до безлічі онлайн-ресурсів, які допомагають у пошуку рішень для різних задач. Це можуть бути як офіційні документації, так і онлайн-курси, форуми, бібліотеки та інші корисні інструменти.</p>
+    
+        <ul>
+            <li>
+                <strong>MDN Web Docs</strong> — одна з найкращих ресурсів для вивчення веб-технологій. Вона містить детальну документацію по HTML, CSS, JavaScript і багатьом іншим веб-технологіям.
+                <br>
+                <a href="https://developer.mozilla.org/ru/" target="_blank">Перейти до MDN Web Docs</a>
+                <br>
+            </li>
+            <li>
+                <strong>Stack Overflow</strong> — популярний форум, де розробники з усього світу обговорюють проблеми та шукають рішення. Це незамінний ресурс для вирішення конкретних технічних проблем.
+                <br>
+                <a href="https://stackoverflow.com/" target="_blank">Перейти до Stack Overflow</a>
+                <br>
+            </li>
+            <li>
+                <strong>GitHub</strong> — платформа для хостингу проектів, яка також є чудовим ресурсом для знаходження відкритих бібліотек, шаблонів і інструментів. На GitHub розробники можуть зберігати свій код, працювати в команді, відстежувати зміни та використовувати репозиторії інших розробників.
+                <br>
+                <a href="https://github.com/" target="_blank">Перейти до GitHub</a>
+                <br>
+            </li>
+            <li>
+                <strong>CodePen</strong> — онлайн-редактор для створення та тестування HTML, CSS і JavaScript-коду. Це зручний інструмент для швидкої демонстрації ідей і прототипів.
+                <br>
+                <a href="https://codepen.io/" target="_blank">Перейти до CodePen</a>
+                <br>
+            </li>
+        </ul>
+    
+        <h2>Висновок</h2>
+        <p>Правильний вибір інструментів для розробки значно підвищує продуктивність і зручність роботи розробника. Редактори коду, браузери та онлайн-ресурси є основними інструментами, які допомагають створювати ефективні та якісні веб-додатки. Вибір інструментів завжди залежить від конкретних потреб проекту, індивідуальних уподобань і досвіду розробника. Тому варто звертати увагу на кожен інструмент, тестувати його в реальних умовах і обирати найкраще для себе.</p>
+    <title>Комментарии</title>
+</head>
+
+<div class="comment-form">
+    <h2>Залиште коментар</h2>
+    {% if user.is_authenticated %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Відправити</button>
+    </form>
+    {% else %}
+    <p><strong>Щоб залишити коментар, необхідно <a href="{% url 'user_login' %}">увійти</a> в систему або <a href="{% url 'user_register' %}">зареєструватись</a></strong></p>
+    {% endif %}
+</div>
+
+<div class="comments-section">
+    <h2>Коментарі</h2>
+    {% for comment in comments %}
+        <div class="comment">
+            <div>
+                <strong>{{ comment.user.username }}</strong>
+                <p>{{ comment.text }}</p>
+                
+            </div>
+        </div>
+    {% empty %}
+        <p>Поки немає коментарів.</p>
+    {% endfor %}
+</div>
+    </div>
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/sidebar.js' %}"></script>
+    <script src="{% static 'js/anim.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,218 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Навчання веб-розробці</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Відкриття файлу HTML у браузері для перегляду.</h1>
+    </header>
+    
+<nav>
+        <a href='{% url "sait" %}' onclick="showSection('intro')" class="nav-logo">
+            <img src="{% static 'images/дом.png' %}" alt="Button" style="width: 30px; height: auto;">
+        </a>
+        <div class="nav-links">
+            <a href='{% url "html_page" %}' onclick="showSection('html')">HTML</a>
+        </div>
+        <div class="nav-links">
+            <a href='{% url "cssGlav" %}' onclick="showSection('html')">CSS</a>
+        </div>
+                <div class="nav-links">
+            <a href='{% url "jsGlav" %}' onclick="showSection('html')">JavaScript</a>
+        </div>
+       </div>
+                <div class="nav-links">
+            <a href='{% url "testGlav" %}' onclick="showSection('html')">Тести</a>
+        </div>
+        </div>
+                <div class="nav-links">
+            <a href='{% url "chat" %}' onclick="showSection('html')">Асистент сайту</a>
+        </div>
+        <a href="https://t.me/studuhtml" class="nav-logo1" target="_blank">
+            <img src="{% static 'images/111.png' %}" alt="Головна" style="width: 45px; height: 35px;">
+        </a>
+    </nav>
+
+
+<div class="sidebar"> 
+    <!-- Глава 5 -->
+    <a href="#" class="menu-item">📁 Підготовка</a>
+    <div class="submenu">
+        <a href='{% url 'choice' %}'>Вибір інструментів розробки (редактор коду, браузер, ресурси).</a>
+        <a href='{% url 'definition' %}'>Визначення цілей та структури майбутнього сайту.</a>
+    </div>
+
+    <!-- Глава 6 -->
+    <a href="#" class="menu-item">📁 Як створити сайт HTML</a>
+    <div class="submenu">
+        <a href='{% url 'creation' %}'>Створення базового HTML-файлу (файл із розширенням .html).</a>
+        <a href='{% url 'discovery' %}'>Відкриття файлу HTML у браузері для перегляду.</a>
+    </div>
+
+    <!-- Глава 7 -->
+    <a href="#" class="menu-item">📁 Структури HTML</a>
+    <div class="submenu">
+        <a href='{% url 'study' %}'>Вивчення основних тегів (html, head, body).</a>
+        <a href='{% url 'semantics' %}'>Семантичні елементи (header, main, footer).</a>
+    </div>
+
+    <a href="#" class="menu-item">📁 Інформація для сайту</a>
+    <div class="submenu">
+        <a href='{% url 'gathering' %}'>Збір текстового контенту, зображень та медіа.</a>
+        <a href='{% url 'gathering' %}'>>Організація інформації у логічні розділи.</a>
+    </div>
+
+    <!-- Глава 6 -->
+    <a href="#" class="menu-item">📁 Дизайн сайту</a>
+    <div class="submenu">
+        <a href='{% url 'connection' %}'>Підключення CSS для стилізації HTML елементів.</a>
+        <a href='{% url 'connectionn' %}'>Створення адаптивного дизайну для різних пристроїв.</a>
+        <a href='{% url 'css' %}'>Цікаві приклади оформлення сайту через цсс.</a>
+    </div>
+
+
+    <!-- Глава 7 -->
+    <a href="#" class="menu-item">📁 Приклади коду та їх результат</a>
+    <div class="submenu">
+        <a href='{% url 'writing' %}'>Написання простого прикладу із заголовком та текстом.</a>
+        <a href='{% url 'addition' %}'>Додавання кнопки та перевірка її роботи у браузері.</a>
+    </div>
+
+</div>   
+    <div class="content">
+    <h1>Відкриття HTML-файлу у браузері</h1>
+    
+    
+    <h2>1. Відкриття HTML-файлу подвійним кліком</h2>
+    <p>Це найпростіший і найшвидший спосіб.</p>
+    <ol>
+        <li>Перейдіть до папки, де збережено HTML-файл.</li>
+        <li>Двічі клацніть по файлу (index.html або іншому .html-файлу).</li>
+        <li>Файл відкриється у браузері за замовчуванням (Chrome, Firefox, Edge, Safari тощо).</li>
+    </ol>
+    <p><strong>Примітка:</strong> Якщо файл відкривається в текстовому редакторі, можливо, потрібно змінити програму за замовчуванням для відкриття .html-файлів.</p>
+    <h2>2. Відкриття файлу через контекстне меню</h2>
+    <ol>
+        <li>Клацніть правою кнопкою миші на HTML-файлі.</li>
+        <li>Оберіть "Відкрити за допомогою".</li>
+        <li>Виберіть браузер, який ви хочете використовувати (Google Chrome, Mozilla Firefox, Microsoft Edge тощо).</li>
+    </ol>
+    
+    <h2>3. Перетягування файлу у вікно браузера</h2>
+    <ol>
+        <li>Відкрийте веб-браузер.</li>
+        <li>Відкрийте папку з вашим HTML-файлом.</li>
+        <li>Перетягніть файл у вікно браузера.</li>
+        <li>Браузер автоматично завантажить і відобразить сторінку.</li>
+    </ol>
+    
+    <h2>4. Відкриття HTML-файлу через браузер (гарячі клавіші)</h2>
+    <ol>
+        <li>Відкрийте браузер.</li>
+        <li>Натисніть <strong>Ctrl + O</strong> (<strong>Cmd + O</strong> на macOS).</li>
+        <li>З'явиться вікно вибору файлу.</li>
+        <li>Виберіть ваш HTML-файл та натисніть "Відкрити".</li>
+    </ol>
+    
+    <h2>5. Відкриття HTML-файлу у браузері через командний рядок (термінал)</h2>
+    <h3>На Windows (CMD або PowerShell)</h3>
+    <pre>cd C:\Users\ВашКористувач\Documents
+start chrome index.html
+start msedge index.html</pre>
+    
+    <h3>На macOS (Термінал)</h3>
+    <pre>cd ~/Documents
+open -a Safari index.html
+open -a "Google Chrome" index.html</pre>
+    
+    <h3>На Linux (Термінал)</h3>
+    <pre>cd ~/Documents
+firefox index.html
+google-chrome index.html</pre>
+    
+    <h2>6. Відкриття HTML-файлу у браузері з текстового редактора</h2>
+    <h3>Visual Studio Code</h3>
+    <ol>
+        <li>Встановіть розширення <strong>Live Server</strong>.</li>
+        <li>Відкрийте HTML-файл у VS Code.</li>
+        <li>Натисніть "Go Live" у нижній панелі.</li>
+    </ol>
+    
+    <h3>Sublime Text</h3>
+    <ol>
+        <li>Відкрийте HTML-файл у Sublime Text.</li>
+        <li>Натисніть <strong>Ctrl + Shift + B</strong> (або <strong>Cmd + Shift + B</strong> на macOS).</li>
+    </ol>
+    
+    <h2>7. Перегляд HTML-коду у браузері</h2>
+    <ul>
+        <li>Правий клік → "Переглянути вихідний код сторінки"</li>
+        <li>Натисніть <strong>Ctrl + U</strong> (<strong>Cmd + U</strong> на Mac)</li>
+    </ul>
+    
+    <h2>8. Використання локального веб-сервера для перегляду HTML-файлів</h2>
+    <h3>Python (для швидкого запуску)</h3>
+    <pre>python -m http.server 8000</pre>
+    <p>Потім відкрийте у браузері <a href="http://localhost:8000/">http://localhost:8000/</a>.</p>
+    
+    <h3>Node.js (з використанням пакета http-server)</h3>
+    <pre>npx http-server</pre>
+    <p>Потім відкрийте <a href="http://localhost:8080/">http://localhost:8080/</a>.</p>
+    
+    <h2>9. Що робити, якщо HTML-файл не відкривається у браузері?</h2>
+    <ul>
+        <li>✅ Файл має правильне розширення <strong>.html</strong>.</li>
+        <li>✅ Шлях до файлу правильний.</li>
+        <li>✅ Немає помилок у коді (відкрийте Інструменти розробника → F12 → Console).</li>
+        <li>✅ Спробуйте інший браузер.</li>
+        <li>✅ Переконайтесь, що локальний сервер запущено (якщо використовуєте AJAX або JavaScript).</li>
+    </ul>
+    
+    <h2>Висновок</h2>
+    <p>Існує безліч способів відкрити HTML-файл у браузері. Найпростіші методи — подвійний клік, контекстне меню або перетягування у браузер.</p>
+    
+
+<div class="comment-form">
+    <h2>Залиште коментар</h2>
+    {% if user.is_authenticated %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Відправити</button>
+    </form>
+    {% else %}
+    <p><strong>Щоб залишити коментар, необхідно <a href="{% url 'user_login' %}">увійти</a> в систему або <a href="{% url 'user_register' %}">зареєструватись</a></strong></p>
+    {% endif %}
+</div>
+
+<div class="comments-section">
+    <h2>Коментарі</h2>
+    {% for comment in comments %}
+        <div class="comment">
+            <div>
+                <strong>{{ comment.user.username }}</strong>
+                <p>{{ comment.text }}</p>
+                
+            </div>
+        </div>
+    {% empty %}
+        <p>Поки немає коментарів.</p>
+    {% endfor %}
+</div>
+    </div>
+</body>
+</div>
+
+</head>
+<body>
+
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/sidebar.js' %}"></script>
+    <script src="{% static 'js/anim.js' %}"></script>
+</body>
+</html>

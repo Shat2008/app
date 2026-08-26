@@ -1,0 +1,575 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест: Просунуті елементи HTML</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        .test-container {
+            max-width: 800px;
+            margin: 100px auto;
+            background: var(--surface);
+            padding: 30px 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .test-container h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .test-container p {
+            text-align: center;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        .question {
+            background: var(--muted);
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            transition: 0.2s;
+            border: 1px solid #ddd;
+        }
+
+        .question:hover {
+            background: rgba(234,243,255,0.95);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .question p {
+            font-weight: bold;
+            color: #222;
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            margin-left: 10px;
+            padding: 3px 0;
+            cursor: pointer;
+        }
+
+        button {
+            display: block;
+            margin: 20px auto 10px auto;
+            padding: 10px 30px;
+            background-color: #2196F3;
+            border: none;
+            color: white;
+            border-radius: 8px;
+            .question:hover {
+                background: rgba(234,243,255,0.95);
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            }
+
+        button:hover {
+            background-color: #1976D2;
+            transform: scale(1.05);
+        }
+
+        #result {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h2>Тести</h2>
+    </header>
+
+<nav>
+        <a href='{% url "sait" %}' onclick="showSection('intro')" class="nav-logo">
+            <img src="{% static 'images/дом.png' %}" alt="Button" style="width: 30px; height: auto;">
+        </a>
+        <div class="nav-links">
+            <a href='{% url "html_page" %}' onclick="showSection('html')">HTML</a>
+        </div>
+        <div class="nav-links">
+            <a href='{% url "cssGlav" %}' onclick="showSection('html')">CSS</a>
+        </div>
+                <div class="nav-links">
+            <a href='{% url "jsGlav" %}' onclick="showSection('html')">JavaScript</a>
+        </div>
+       </div>
+                <div class="nav-links">
+            <a href='{% url "testGlav" %}' onclick="showSection('html')">Тести</a>
+        </div>
+        </div>
+                <div class="nav-links">
+            <a href='{% url "chat" %}' onclick="showSection('html')">Асистент сайту</a>
+        </div>
+        <a href="https://t.me/studuhtml" class="nav-logo1" target="_blank">
+            <img src="{% static 'images/111.png' %}" alt="Головна" style="width: 45px; height: 35px;">
+        </a>
+    </nav>
+
+    <div class="sidebar">
+        <!-- Тести HTML -->
+        <a href="#" class="menu-item">📘 Тести HTML</a>
+        <div class="submenu">
+            <a href="{% url 'test_html_basic' %}">Основи HTML</a>
+            <a href="{% url 'test_html_advanced' %}" class="active">Просунуті елементи HTML</a>
+        </div>
+
+        <!-- Тести CSS -->
+        <a href="#" class="menu-item">🎨 Тести CSS</a>
+        <div class="submenu">
+            <a href="{% url 'test_css_basic' %}">Основи стилів</a>
+            <a href="{% url 'test_css_layout' %}">Макети, Flexbox, Grid</a>
+        </div>
+
+        <!-- Тести JavaScript -->
+        <a href="#" class="menu-item">💡 Тести JavaScript</a>
+        <div class="submenu">
+            <a href="{% url 'test_js_basic' %}">Основи мови</a>
+            <a href="{% url 'test_js_dom' %}">Робота з DOM</a>
+        </div>
+
+        <!-- Загальний тест -->
+        <a href="#" class="menu-item">🏆 Підсумковий тест</a>
+        <div class="submenu">
+            <a href="{% url 'test_all' %}">HTML + CSS + JS</a>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="test-container">
+            <h2>Тест: Просунуті елементи HTML</h2>
+            <p>Спробуй свої сили у складніших питаннях, що стосуються сучасних HTML5-елементів.</p>
+
+            <form id="htmlAdvancedTest">
+                <div id="questions"></div>
+                <div style="display: flex; gap: 10px; margin-top: 20px;">
+                    <button type="button" onclick="checkAnswers()" style="flex: 1;">Перевірити</button>
+                    <button type="button" onclick="resetTest()" style="flex: 1; background: #6c757d;">Оновити тест</button>
+                </div>
+            </form>
+
+            <p id="result"></p>
+        </div>
+    </div>
+
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/sidebar.js' %}"></script>
+
+    <script>
+        // Банк вопросов для продвинутого HTML
+        const questionBank = [
+            {
+                question: "Який елемент використовується для відтворення відео у HTML5?",
+                options: ["&lt;media&gt;", "&lt;video&gt;", "&lt;movie&gt;"],
+                correct: 1
+            },
+            {
+                question: "Який тег використовується для вбудовування аудіо?",
+                options: ["&lt;music&gt;", "&lt;audio&gt;", "&lt;sound&gt;"],
+                correct: 1
+            },
+            {
+                question: "Який тег використовується для малювання на сторінці?",
+                options: ["&lt;canvas&gt;", "&lt;paint&gt;", "&lt;draw&gt;"],
+                correct: 0
+            },
+            {
+                question: "Який елемент використовується для відображення навігаційного меню?",
+                options: ["&lt;navigation&gt;", "&lt;nav&gt;", "&lt;menu&gt;"],
+                correct: 1
+            },
+            {
+                question: "Який тег використовується для визначення області з унікальним вмістом (напр. стаття, пост)?",
+                options: ["&lt;article&gt;", "&lt;section&gt;", "&lt;aside&gt;"],
+                correct: 0
+            },
+            {
+                question: "Який тег використовується для відображення інтерактивної мапи?",
+                options: ["&lt;map&gt;", "&lt;area&gt;", "&lt;location&gt;"],
+                correct: 0
+            },
+            {
+                question: "Для чого використовується елемент &lt;figure&gt;?",
+                options: ["Для створення зображення з підписом", "Для форматування тексту", "Для списків"],
+                correct: 0
+            },
+            {
+                question: "Що робить елемент &lt;progress&gt;?",
+                options: ["Показує прогрес виконання завдання", "Створює кнопку", "Додає звук"],
+                correct: 0
+            },
+            {
+                question: "Який тег використовується для відображення результату обчислень?",
+                options: ["&lt;output&gt;", "&lt;result&gt;", "&lt;calc&gt;"],
+                correct: 0
+            },
+            {
+                question: "Яка назва елемента для кастомізованої форми вибору?",
+                options: ["&lt;select-custom&gt;", "&lt;datalist&gt;", "&lt;pick&gt;"],
+                correct: 1
+            },
+            {
+                question: "Для чого використовується &lt;details&gt; та &lt;summary&gt;?",
+                options: ["Для вставки видеозмісту", "Для створення розгортаємих/згортаємих розділів", "Для таблиць"],
+                correct: 1
+            },
+            {
+                question: "Що дозволяє атрибут 'data-*'?",
+                options: ["Встановлювати посилання", "Зберігати користувацькі дані у HTML-елементах", "Встановлювати клас"],
+                correct: 1
+            },
+            {
+                question: "Для чого використовується тег &lt;time&gt;?",
+                options: ["Для вставки часу завантаження", "Для семантичної розмітки дати та часу", "Для встановлення таймера"],
+                correct: 1
+            },
+            {
+                question: "Що робить атрибут 'contenteditable' у HTML?",
+                options: ["Змінює шрифт", "Дозволяє користувачу редагувати текст елемента безпосередньо на сторінці", "Приховує елемент"],
+                correct: 1
+            },
+            {
+                question: "Для чого використовується &lt;mark&gt;?",
+                options: ["Для маркування списків", "Для виділення тексту (як маркер)", "Для лічильників"],
+                correct: 1
+            },
+            {
+                question: "Як вставити SVG у HTML?",
+                options: ["&lt;svg&gt; напрямок, &lt;embed&gt;, або &lt;object&gt;", "Тільки через &lt;img&gt;", "SVG неможливо вставити у HTML"],
+                correct: 0
+            },
+            {
+                question: "Яка мета Geolocation API у HTML5?",
+                options: ["Отримати географічне місцезнаходження користувача", "Встановити локальні налаштування", "Завантажити карту"],
+                correct: 0
+            },
+            {
+                question: "Для чого використовується Web Storage (localStorage та sessionStorage)?",
+                options: ["Для збереження файлів", "Для зберігання даних на клієнтській стороні браузера", "Для завантаження вмісту"],
+                correct: 1
+            },
+            {
+                question: "Яка різниця між localStorage та sessionStorage?",
+                options: ["localStorage зберігається назавжди, sessionStorage - лише під час сесії", "Вони однакові", "sessionStorage більший за обсягом"],
+                correct: 0
+            },
+            {
+                question: "Що робить Drag and Drop API?",
+                options: ["Завантажує файли", "Дозволяє перетягувати елементи на сторінці", "Відновлює дані"],
+                correct: 1
+            },
+            {
+                question: "Для чого використовується File API?",
+                options: ["Для читання інформації про файли, вибрані користувачем", "Для видалення файлів", "Для переміщення файлів"],
+                correct: 0
+            },
+            {
+                question: "Що таке IndexedDB?",
+                options: ["Індекс URL-адрес", "Низькорівнева база даних на клієнтській стороні для зберігання великих обсягів даних", "База даних на сервері"],
+                correct: 1
+            },
+            {
+                question: "Як вставити відео з контролем у HTML5?",
+                options: ["&lt;video src='video.mp4' controls&gt;&lt;/video&gt;", "&lt;movie src='video.mp4'&gt;&lt;/movie&gt;", "&lt;video controls loop src='video.mp4'&gt;&lt;/video&gt;"],
+                correct: 0
+            },
+            {
+                question: "Для чого використовується &lt;track&gt; у відеозмісті?",
+                options: ["Для відслідковування користувачів", "Для додавання субтитрів або трудових доріжок", "Для звуку"],
+                correct: 1
+            },
+            {
+                question: "Яка мета елемента &lt;source&gt; у тегах &lt;video&gt; та &lt;audio&gt;?",
+                options: ["Встановити джерело звука", "Встановити альтернативні джерела медіа (для сумісності браузерів)", "Встановити якість"],
+                correct: 1
+            },
+            {
+                question: "Що робить атрибут 'async' у &lt;script&gt;?",
+                options: ["Завантажує скрипт одночасно, але виконує його потім", "Робить скрипт неасинхронним", "Ділить скрипт на частини"],
+                correct: 0
+            },
+            {
+                question: "Яка різниця між 'async' та 'defer' у &lt;script&gt;?",
+                options: ["Вони однакові", "'async' виконується одразу, 'defer' - після завантаження сторінки", "'defer' виконується одразу"],
+                correct: 1
+            },
+            {
+                question: "Для чого використовується &lt;meta name='viewport'&gt;?",
+                options: ["Встановлює видимість сторінки", "Робить сайт адаптивним для мобільних пристроїв", "Встановлює розмір вікна"],
+                correct: 1
+            },
+            {
+                question: "Яка мета атрибута 'rel' у тегу &lt;link&gt;?",
+                options: ["Встановить релігію сторінки", "Встановлює тип відносин між документом та пов'язаним ресурсом", "Встановлює посилання"],
+                correct: 1
+            },
+            {
+                question: "Що таке Open Graph у HTML?",
+                options: ["Графік відкритих даних", "Набір мета-тегів для керування тим, як сторінка відображається у соціальних мережах", "Графік користувачів"],
+                correct: 1
+            },
+            {
+                question: "Для чого використовується &lt;picture&gt;?",
+                options: ["Для вставки картинок", "Для адаптивних зображень з різними версіями для різних розмірів екрану", "Для фотографій"],
+                correct: 1
+            },
+            {
+                question: "Що означає атрибут 'srcset' у &lt;img&gt;?",
+                options: ["Встановлює назву зображення", "Встановлює список альтернативних зображень для різних розмірів екрану", "Встановлює тип файлу"],
+                correct: 1
+            },
+            {
+                question: "Яка мета елемента &lt;main&gt;?",
+                options: ["Встановити основний колір", "Визначити основний вміст сторінки, унікальний для цієї сторінки", "Встановити стиль"],
+                correct: 1
+            },
+            {
+                question: "Для чого використовується &lt;aside&gt;?",
+                options: ["Для бічної панелі, пов'язаної з основним вмістом", "Для нижнього вмісту", "Для заголовків"],
+                correct: 0
+            },
+            {
+                question: "Що робить атрибут 'aria-label'?",
+                options: ["Встановлює мову", "Надає текстовий опис елемента для читачів екрану", "Встановлює клас"],
+                correct: 1
+            },
+            {
+                question: "Як вставити Canvas на сторінку HTML5?",
+                options: ["&lt;canvas id='myCanvas'&gt;&lt;/canvas&gt;", "&lt;draw id='myCanvas'&gt;&lt;/draw&gt;", "&lt;paint id='myCanvas'&gt;&lt;/paint&gt;"],
+                correct: 0
+            },
+            {
+                question: "Для чого використовується Web Storage API?",
+                options: ["Для отримання координат користувача", "Для зберігання даних на клієнтській стороні браузера", "Для завантаження вмісту"],
+                correct: 1
+            },
+            {
+                question: "Що таке IndexedDB?",
+                options: ["Індекс URL-адрес", "Низькорівнева база даних на клієнтській стороні для великих обсягів даних", "База даних на сервері"],
+                correct: 1
+            },
+            {
+                question: "Як отримати доступ до геолокації користувача?",
+                options: ["navigator.geolocation.getCurrentPosition()", "location.getCoordinates()", "window.getLocation()"],
+                correct: 0
+            },
+            {
+                question: "Що робить Service Worker?",
+                options: ["Обслуговує веб-сервер", "Запускається у фоновому потоці браузера для кеширування та оффлайн-функцій", "Управляє користувачами"],
+                correct: 1
+            },
+            {
+                question: "Як оголосити Web Worker у JavaScript?",
+                options: ["new Worker('worker.js')", "worker('worker.js')", "createWorker('worker.js')"],
+                correct: 0
+            },
+            {
+                question: "Для чого використовується &lt;template&gt; у HTML5?",
+                options: ["Для визначення шаблону HTML, який не відображається по замовчуванню", "Для форматування тексту", "Для списків"],
+                correct: 0
+            },
+            {
+                question: "Що таке WebSocket у HTML5?",
+                options: ["Гніздо для кабелю", "Протокол для двосторонньої комунікації між клієнтом і сервером", "Тип посилання"],
+                correct: 1
+            },
+            {
+                question: "Як запустити скрипт після завантаження сторінки?",
+                options: ["&lt;script src='file.js' defer&gt;&lt;/script&gt;", "&lt;script src='file.js' async&gt;&lt;/script&gt;", "&lt;script src='file.js' onload&gt;&lt;/script&gt;"],
+                correct: 0
+            },
+            {
+                question: "Що робить атрибут 'crossorigin' у &lt;script&gt;?",
+                options: ["Встановлює джерело", "Контролює CORS для запитів до ресурсів з інших доменів", "Встановлює тип скрипта"],
+                correct: 1
+            },
+            {
+                question: "Як вставити SVG прямо у HTML?",
+                options: ["&lt;svg&gt;...&lt;/svg&gt;", "&lt;embed src='image.svg'&gt;", "обидва варіанти правильні"],
+                correct: 2
+            },
+            {
+                question: "Що означає атрибут 'loading' у &lt;img&gt;?",
+                options: ["Встановлює час завантаження", "Контролює ленивого завантаження зображення (lazy)", "Встановлює якість"],
+                correct: 1
+            },
+            {
+                question: "Для чого використовується &lt;meter&gt;?",
+                options: ["Для вимірювання відстані", "Для відображення вимірювання на масштабі", "Для таймерів"],
+                correct: 1
+            },
+            {
+                question: "Як встановити мету сайту для SEO?",
+                options: ["&lt;meta name='description' content='...'&gt;", "&lt;meta name='keywords' content='...'&gt;", "обидва варіанти правильні"],
+                correct: 2
+            },
+            {
+                question: "Що робить атрибут 'sandbox' у &lt;iframe&gt;?",
+                options: ["Встановлює розмір фрейма", "Обмежує дозволи на контент у фреймі для безпеки", "Встановлює колір"],
+                correct: 1
+            },
+            {
+                question: "Як встановити favicon для сайту?",
+                options: ["&lt;link rel='icon' href='favicon.ico'&gt;", "&lt;icon src='favicon.ico'&gt;", "&lt;meta name='icon' content='favicon.ico'&gt;"],
+                correct: 0
+            },
+            {
+                question: "Що означає атрибут 'spellcheck' у HTML?",
+                options: ["Перевіряє орфографію в editablecontentі", "Встановлює словник", "Встановлює мову"],
+                correct: 0
+            },
+            {
+                question: "Як встановити базовий URL для всіх відносних посилань?",
+                options: ["&lt;base href='https://example.com/'&gt;", "&lt;link href='https://example.com/'&gt;", "&lt;meta href='https://example.com/'&gt;"],
+                correct: 0
+            },
+            {
+                question: "Що робить атрибут 'autocomplete' у &lt;input&gt;?",
+                options: ["Автоматично розраховує значення", "Дозволяє браузеру пропонувати попередні значення", "Автоматично клікає на елемент"],
+                correct: 1
+            },
+            {
+                question: "Як встановити обов'язкове поле форми?",
+                options: ["&lt;input required&gt;", "&lt;input mandatory&gt;", "&lt;input necessary&gt;"],
+                correct: 0
+            },
+            {
+                question: "Для чого використовується атрибут 'pattern' у &lt;input&gt;?",
+                options: ["Встановлює вид узору", "Встановлює регулярний вираз для валідації вводу", "Встановлює шаблон дизайну"],
+                correct: 1
+            },
+            {
+                question: "Як встановити мету слайда для соціальних мереж?",
+                options: ["&lt;meta property='og:title' content='...'&gt;", "&lt;meta name='social' content='...'&gt;", "&lt;meta og='title' content='...'&gt;"],
+                correct: 0
+            },
+            {
+                question: "Як встановити відео з контролем у HTML5?",
+                options: ["&lt;video src='video.mp4' controls&gt;&lt;/video&gt;", "&lt;movie src='video.mp4'&gt;&lt;/movie&gt;", "&lt;video controls loop src='video.mp4'&gt;&lt;/video&gt;"],
+                correct: 0
+            },
+            {
+                question: "Як встановити аудіо з контролем у HTML5?",
+                options: ["&lt;audio src='audio.mp3' controls&gt;&lt;/audio&gt;", "&lt;sound src='audio.mp3'&gt;&lt;/sound&gt;", "&lt;music src='audio.mp3'&gt;&lt;/music&gt;"],
+                correct: 0
+            }
+        ];
+
+        // Функция для перемешивания массива
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        let selectedQuestions = [];
+        let correctAnswers = [];
+
+        // Генерировать вопросы
+        function generateQuestions() {
+            // Выбрать случайные вопросы каждый раз
+            selectedQuestions = [...questionBank];
+            shuffle(selectedQuestions);
+            selectedQuestions = selectedQuestions.slice(0, 10); // Выбрать 10 вопросов
+            correctAnswers = [];
+
+            const container = document.getElementById('questions');
+            container.innerHTML = ''; // Очистить старые вопросы
+            selectedQuestions.forEach((q, index) => {
+                // Перемешать варианты
+                let options = [...q.options];
+                shuffle(options);
+                let correctIndex = options.indexOf(q.options[q.correct]);
+
+                correctAnswers.push(correctIndex);
+
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                questionDiv.innerHTML = `<p>${index + 1}. ${q.question}</p>`;
+
+                options.forEach((opt, optIndex) => {
+                    const label = document.createElement('label');
+                    label.innerHTML = `<input type="radio" name="q${index}" value="${optIndex}"> ${opt}`;
+                    questionDiv.appendChild(label);
+                });
+
+                container.appendChild(questionDiv);
+            });
+        }
+
+        // Проверить ответы
+        function checkAnswers() {
+            let score = 0;
+
+            selectedQuestions.forEach((q, index) => {
+                const selected = document.querySelector(`input[name="q${index}"]:checked`);
+                const questionDiv = document.querySelectorAll('.question')[index];
+                const labels = questionDiv.querySelectorAll('label');
+
+                if (selected) {
+                    if (parseInt(selected.value) === correctAnswers[index]) {
+                        score++;
+                        questionDiv.style.backgroundColor = '#d4edda'; // Зеленый
+                    } else {
+                        questionDiv.style.backgroundColor = '#f8d7da'; // Красный
+                        // Добавить правильный ответ под вопросом
+                        const correctP = document.createElement('p');
+                        correctP.textContent = `Правильна відповідь: ${q.options[q.correct]}`;
+                        correctP.style.color = 'red';
+                        correctP.style.fontWeight = 'bold';
+                        questionDiv.appendChild(correctP);
+                        // Подсветить правильный вариант
+                        labels[correctAnswers[index]].style.backgroundColor = '#d4edda';
+                        labels[correctAnswers[index]].style.padding = '5px';
+                        labels[correctAnswers[index]].style.borderRadius = '5px';
+                    }
+                } else {
+                    questionDiv.style.backgroundColor = '#f8d7da';
+                    // Добавить правильный ответ под вопросом
+                    const correctP = document.createElement('p');
+                    correctP.textContent = `Правильна відповідь: ${q.options[q.correct]}`;
+                    correctP.style.color = 'red';
+                    correctP.style.fontWeight = 'bold';
+                    questionDiv.appendChild(correctP);
+                    // Подсветить правильный вариант
+                    labels[correctAnswers[index]].style.backgroundColor = '#d4edda';
+                    labels[correctAnswers[index]].style.padding = '5px';
+                    labels[correctAnswers[index]].style.borderRadius = '5px';
+                }
+            });
+
+            const result = document.getElementById("result");
+            result.innerHTML = `<strong>✅ Твій результат: ${score} з ${selectedQuestions.length} правильних відповідей.</strong><br>`;
+            if (score === selectedQuestions.length) {
+                result.innerHTML += "Відмінно! Ти чудово розумієш HTML5!";
+                result.style.color = "green";
+            } else if (score >= selectedQuestions.length * 0.6) {
+                result.innerHTML += "Добре, але варто повторити деякі нові елементи.";
+                result.style.color = "orange";
+            } else {
+                result.innerHTML += "Потрібно ще трохи практики. Ти впораєшся!";
+                result.style.color = "red";
+            }
+        }
+
+        // Функция для обновления теста
+        function resetTest() {
+            document.getElementById('htmlAdvancedTest').reset();
+            document.getElementById('result').innerHTML = '';
+            document.getElementById('questions').innerHTML = '';
+            correctAnswers = [];
+            generateQuestions();
+        }
+
+        // Генерировать при загрузке
+        window.onload = generateQuestions;
+    </script>
+</body>
+</html>

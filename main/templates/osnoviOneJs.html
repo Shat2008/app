@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Змінні, типи даних і оператори</title>
+    
+</head>
+<body>
+    <header>
+        <h1>Змінні, типи даних і оператори в JavaScript</h1>
+    </header>
+
+<nav>
+        <a href='{% url "sait" %}' onclick="showSection('intro')" class="nav-logo">
+            <img src="{% static 'images/дом.png' %}" alt="Button" style="width: 30px; height: auto;">
+        </a>
+        <div class="nav-links">
+            <a href='{% url "html_page" %}' onclick="showSection('html')">HTML</a>
+        </div>
+        <div class="nav-links">
+            <a href='{% url "cssGlav" %}' onclick="showSection('html')">CSS</a>
+        </div>
+                <div class="nav-links">
+            <a href='{% url "jsGlav" %}' onclick="showSection('html')">JavaScript</a>
+        </div>
+       </div>
+                <div class="nav-links">
+            <a href='{% url "testGlav" %}' onclick="showSection('html')">Тести</a>
+        </div>
+        </div>
+                <div class="nav-links">
+            <a href='{% url "chat" %}' onclick="showSection('html')">Асистент сайту</a>
+        </div>
+        <a href="https://t.me/studuhtml" class="nav-logo1" target="_blank">
+            <img src="{% static 'images/111.png' %}" alt="Головна" style="width: 45px; height: 35px;">
+        </a>
+    </nav>
+
+    <div class="sidebar"> 
+        <!-- Меню JavaScript -->
+        <a href="#" class="menu-item">📁 Вступ до JavaScript</a>
+        <div class="submenu">
+            <a href="{% url 'vstypOneJs' %}">Що таке JavaScript і для чого він потрібен.</a>
+            <a href="{% url 'vstypTwoJs' %}">Як підключити JavaScript до HTML.</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Основи мови</a>
+        <div class="submenu">
+            <a href="{% url 'osnoviOneJs' %}">Змінні, типи даних і оператори.</a>
+            <a href="{% url 'osnoviTwoJs' %}">Умови if, else, switch.</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Цикли та функції</a>
+        <div class="submenu">
+            <a href="{% url 'cyclesOneJs' %}">Цикли for, while, do...while.</a>
+            <a href="{% url 'functionsOneJs' %}">Функції та передача параметрів.</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Робота з DOM</a>
+        <div class="submenu">
+            <a href="{% url 'domOneJs' %}">Пошук і зміна елементів сторінки.</a>
+            <a href="{% url 'domTwoJs' %}">Обробка подій (click, input, mouseover).</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Масиви та об’єкти</a>
+        <div class="submenu">
+            <a href="{% url 'arrayOneJs' %}">Створення та методи масивів.</a>
+            <a href="{% url 'objectOneJs' %}">Об’єкти та робота з ними.</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Практика JavaScript</a>
+        <div class="submenu">
+            <a href="{% url 'practiceOneJs' %}">Міні-проєкт: калькулятор.</a>
+            <a href="{% url 'practiceTwoJs' %}">Міні-проєкт: інтерактивна форма.</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Розширені можливості</a>
+        <div class="submenu">
+            <a href="{% url 'advancedOneJs' %}">LocalStorage, JSON, Fetch API.</a>
+            <a href="{% url 'advancedTwoJs' %}">Асинхронність і проміси.</a>
+        </div>
+    </div>
+
+    <div class="content">
+        <h1>Змінні, типи даних і оператори</h1>
+        <p>У JavaScript <strong>змінні</strong> використовуються для збереження даних, з якими працює програма.  
+        Наприклад, можна зберегти ім’я користувача, число або результат обчислення.</p>
+
+        <h2>🔹 Як створити змінну</h2>
+        <p>Є три ключові слова для створення змінних:</p>
+        <ul>
+            <li><code>var</code> — старий спосіб (не рекомендується).</li>
+            <li><code>let</code> — використовується для змінних, які можна змінювати.</li>
+            <li><code>const</code> — для констант (значення не змінюється).</li>
+        </ul>
+
+        <pre><code>let name = "Оля";
+const age = 20;
+var city = "Київ";</code></pre>
+
+        <h2>📘 Типи даних у JavaScript</h2>
+        <p>Існує кілька основних типів даних:</p>
+        <ul>
+            <li><strong>string</strong> — рядки (текст) → <code>"Привіт"</code></li>
+            <li><strong>number</strong> — числа → <code>25</code></li>
+            <li><strong>boolean</strong> — логічні значення → <code>true</code> або <code>false</code></li>
+            <li><strong>undefined</strong> — змінна оголошена, але не має значення</li>
+            <li><strong>null</strong> — “порожнє” значення</li>
+            <li><strong>object</strong> — складні структури (масиви, об’єкти)</li>
+        </ul>
+
+        <pre><code>let text = "Привіт!";
+let number = 42;
+let isOnline = true;
+let nothing = null;
+let person = {name: "Оля", age: 20};
+        </code></pre>
+
+        <h2>🧮 Оператори</h2>
+        <p>Оператори дозволяють виконувати дії з даними — наприклад, додавання, порівняння або логічні операції.</p>
+
+        <h3>Арифметичні оператори:</h3>
+        <ul>
+            <li><code>+</code> — додавання</li>
+            <li><code>-</code> — віднімання</li>
+            <li><code>*</code> — множення</li>
+            <li><code>/</code> — ділення</li>
+            <li><code>%</code> — залишок від ділення</li>
+        </ul>
+        <pre><code>let a = 10;
+let b = 3;
+let result = a % b; // 1
+        </code></pre>
+
+        <h3>Оператори порівняння:</h3>
+        <ul>
+            <li><code>==</code> — дорівнює</li>
+            <li><code>===</code> — строго дорівнює (перевіряє ще й тип)</li>
+            <li><code>!=</code> — не дорівнює</li>
+            <li><code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code> — більше/менше</li>
+        </ul>
+
+        <h2>🎨 Інтерактивні приклади</h2>
+
+        <!-- Приклад 1: Типи даних -->
+        <div class="js-demo">
+            <h3>🔍 Перевір тип даних</h3>
+            <p>Введи значення і дізнайся його тип:</p>
+            <input type="text" id="typeInput" placeholder="Введи будь-що (текст, число, true/false)" style="width: 100%; padding: 10px; border-radius: 5px; border: 2px solid #007bff; margin-bottom: 10px;">
+            <button class="js-btn" onclick="checkType()">Перевірити тип</button>
+            <div id="typeOutput" style="margin-top: 15px; padding: 15px; background: #e7f3ff; border-radius: 5px; border-left: 4px solid #007bff; display: none;">
+                <strong>Результат:</strong> <span id="typeResult"></span>
+            </div>
+        </div>
+
+        <!-- Приклад 2: Арифметичні операції -->
+        <div class="js-demo">
+            <h3>🧮 Арифметичний калькулятор</h3>
+            <div style="display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap;">
+                <input type="number" id="calcA" placeholder="Число A" style="flex: 1; min-width: 100px; padding: 8px; border-radius: 5px; border: 1px solid #ddd;">
+                <select id="operator" style="padding: 8px; border-radius: 5px; border: 1px solid #ddd;">
+                    <option value="+">+ Додавання</option>
+                    <option value="-">- Віднімання</option>
+                    <option value="*">× Множення</option>
+                    <option value="/">÷ Ділення</option>
+                    <option value="%">% Залишок</option>
+                </select>
+                <input type="number" id="calcB" placeholder="Число B" style="flex: 1; min-width: 100px; padding: 8px; border-radius: 5px; border: 1px solid #ddd;">
+                <button class="js-btn" onclick="calculateOperation()">Обчислити</button>
+            </div>
+            <div id="calcOutput" style="padding: 15px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 5px; text-align: center; font-size: 18px; font-weight: bold; display: none;"></div>
+        </div>
+
+        <!-- Приклад 4: Гра - Вгадай тип -->
+        <div class="js-demo">
+            <h3>🎮 Гра: Вгадай тип даних</h3>
+            <p>Яким типом даних є значення?</p>
+            <div id="gameContainer" style="padding: 15px; background: #f9f9f9; border-radius: 5px;">
+                <div style="font-size: 24px; font-weight: bold; color: #007bff; margin-bottom: 15px; padding: 15px; background: white; border-radius: 5px;" id="gameValue"></div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px;" id="gameButtons"></div>
+                <div id="gameResult" style="padding: 10px; border-radius: 5px; text-align: center; font-weight: bold; display: none;"></div>
+            </div>
+        </div>
+
+        <style>
+            .js-demo {
+                background: #f9f9f9;
+                padding: 20px;
+                margin: 20px 0;
+                border-radius: 10px;
+                border: 2px solid #e0e0e0;
+                transition: all 0.3s ease;
+            }
+            .js-demo:hover {
+                border-color: #007bff;
+                box-shadow: 0 4px 12px rgba(0, 123, 255, 0.1);
+            }
+            .js-demo h3 {
+                color: #007bff;
+                margin-top: 0;
+                margin-bottom: 15px;
+            }
+            .js-btn {
+                background: #007bff;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 14px;
+                font-weight: bold;
+                transition: all 0.3s ease;
+            }
+            .js-btn:hover {
+                background: #0056b3;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+            .js-btn:active {
+                transform: translateY(0);
+            }
+            .game-btn {
+                background: #28a745;
+                color: white;
+                border: none;
+                padding: 12px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 14px;
+                font-weight: bold;
+                transition: all 0.3s ease;
+            }
+            .game-btn:hover {
+                background: #218838;
+            }
+            .game-btn.correct {
+                background: #28a745;
+                box-shadow: 0 0 10px rgba(40, 167, 69, 0.5);
+            }
+            .game-btn.incorrect {
+                background: #dc3545;
+                box-shadow: 0 0 10px rgba(220, 53, 69, 0.5);
+            }
+        </style>
+
+        <h2>💡 Висновок:</h2>
+        <ul>
+            <li>✔ Змінні зберігають дані для роботи JavaScript.</li>
+            <li>✔ Типи даних визначають, як можна використовувати значення.</li>
+            <li>✔ Оператори дозволяють виконувати обчислення та перевірки.</li>
+        </ul>
+
+        <div class="comment-form">
+            <h2>Залиште коментар</h2>
+            {% if user.is_authenticated %}
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Відправити</button>
+            </form>
+            {% else %}
+            <p><strong>Щоб залишити коментар, необхідно <a href="{% url 'user_login' %}">увійти</a> в систему або <a href="{% url 'user_register' %}">зареєструватись</a></strong></p>
+            {% endif %}
+        </div>
+
+        <div class="comments-section">
+            <h2>Коментарі</h2>
+            {% for comment in comments %}
+                <div class="comment">
+                    <div>
+                        <strong>{{ comment.user.username }}</strong>
+                        <p>{{ comment.text }}</p>
+                    </div>
+                </div>
+            {% empty %}
+                <p>Поки немає коментарів.</p>
+            {% endfor %}
+        </div>
+
+    </div>
+
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/sidebar.js' %}"></script>
+    <script src="{% static 'js/anim.js' %}"></script>
+
+    <script>
+        // Перевірка типу даних
+        function checkType() {
+            let input = document.getElementById('typeInput').value;
+            let type = typeof input;
+            let displayValue = input;
+            
+            // Перевіримо на спеціальні значення
+            if (input === 'null') {
+                type = 'null';
+                displayValue = 'null';
+            } else if (input === 'true') {
+                type = 'boolean';
+                displayValue = 'true';
+            } else if (input === 'false') {
+                type = 'boolean';
+                displayValue = 'false';
+            } else if (input === 'undefined') {
+                type = 'undefined';
+                displayValue = 'undefined';
+            } else if (!isNaN(input) && input !== '') {
+                // Якщо це число
+                type = 'number';
+                displayValue = input;
+            }
+            
+            const result = `${displayValue} => тип: <strong>${type}</strong>`;
+            document.getElementById('typeResult').innerHTML = result;
+            document.getElementById('typeOutput').style.display = 'block';
+        }
+
+        // Обчислення операцій
+        function calculateOperation() {
+            const a = parseFloat(document.getElementById('calcA').value);
+            const b = parseFloat(document.getElementById('calcB').value);
+            const op = document.getElementById('operator').value;
+            
+            if (isNaN(a) || isNaN(b)) {
+                alert('Будь ласка, введи два числа!');
+                return;
+            }
+            
+            let result;
+            let symbol = op;
+            if (op === '+') result = a + b;
+            else if (op === '-') result = a - b;
+            else if (op === '*') result = a * b;
+            else if (op === '/') result = a / b;
+            else if (op === '%') result = a % b;
+            
+            const display = document.getElementById('calcOutput');
+            display.innerHTML = `${a} ${symbol} ${b} = <strong style="font-size: 28px;">${result}</strong>`;
+            display.style.display = 'block';
+        }
+
+        // Гра - вгадай тип
+        const gameTypes = ['string', 'number', 'boolean', 'string', 'number', 'boolean'];
+        const gameValues = ['"Привіт"', '42', 'true', '3.14', '-5', 'false'];
+        let currentGameIndex = 0;
+        let gameScore = 0;
+
+        function startGame() {
+            currentGameIndex = 0;
+            gameScore = 0;
+            showGameQuestion();
+        }
+
+        function showGameQuestion() {
+            if (currentGameIndex >= gameValues.length) {
+                document.getElementById('gameValue').innerHTML = '🎉 Гра закінчена!';
+                document.getElementById('gameButtons').innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 15px; background: #fff; border-radius: 5px;">
+                        Твій результат: <strong style="font-size: 24px; color: #007bff;">${gameScore} з ${gameValues.length}</strong>
+                    </div>
+                    <button class="js-btn" onclick="startGame()" style="grid-column: 1 / -1;">Грати ще раз</button>
+                `;
+                document.getElementById('gameResult').style.display = 'none';
+                return;
+            }
+
+            const value = gameValues[currentGameIndex];
+            const correctType = gameTypes[currentGameIndex];
+            
+            document.getElementById('gameValue').innerHTML = value;
+            
+            const types = ['string', 'number', 'boolean'];
+            let buttons = '';
+            types.forEach(t => {
+                buttons += `<button class="game-btn" onclick="answerGame('${t}', '${correctType}')">${t}</button>`;
+            });
+            document.getElementById('gameButtons').innerHTML = buttons;
+            document.getElementById('gameResult').style.display = 'none';
+        }
+
+        function answerGame(selected, correct) {
+            const isCorrect = selected === correct;
+            if (isCorrect) gameScore++;
+            
+            const result = document.getElementById('gameResult');
+            result.innerHTML = isCorrect ? '✅ Правильно!' : `❌ Неправильно! Правильна відповідь: ${correct}`;
+            result.style.background = isCorrect ? '#d4edda' : '#f8d7da';
+            result.style.color = isCorrect ? '#155724' : '#721c24';
+            result.style.display = 'block';
+            
+            document.querySelectorAll('.game-btn').forEach(btn => btn.disabled = true);
+            
+            setTimeout(() => {
+                currentGameIndex++;
+                showGameQuestion();
+            }, 1500);
+        }
+
+        // Почати гру при завантаженні
+        startGame();
+    </script>
+</body>
+</html>

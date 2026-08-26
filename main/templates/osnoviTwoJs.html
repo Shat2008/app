@@ -1,0 +1,235 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Умови if, else, switch</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Умови if, else, switch у JavaScript</h1>
+    </header>
+
+<nav>
+        <a href='{% url "sait" %}' onclick="showSection('intro')" class="nav-logo">
+            <img src="{% static 'images/дом.png' %}" alt="Button" style="width: 30px; height: auto;">
+        </a>
+        <div class="nav-links">
+            <a href='{% url "html_page" %}' onclick="showSection('html')">HTML</a>
+        </div>
+        <div class="nav-links">
+            <a href='{% url "cssGlav" %}' onclick="showSection('html')">CSS</a>
+        </div>
+                <div class="nav-links">
+            <a href='{% url "jsGlav" %}' onclick="showSection('html')">JavaScript</a>
+        </div>
+       </div>
+                <div class="nav-links">
+            <a href='{% url "testGlav" %}' onclick="showSection('html')">Тести</a>
+        </div>
+        </div>
+                <div class="nav-links">
+            <a href='{% url "chat" %}' onclick="showSection('html')">Асистент сайту</a>
+        </div>
+        <a href="https://t.me/studuhtml" class="nav-logo1" target="_blank">
+            <img src="{% static 'images/111.png' %}" alt="Головна" style="width: 45px; height: 35px;">
+        </a>
+    </nav>
+
+    <div class="sidebar"> 
+        <a href="#" class="menu-item">📁 Вступ до JavaScript</a>
+        <div class="submenu">
+            <a href="{% url 'vstypOneJs' %}">Що таке JavaScript і для чого він потрібен.</a>
+            <a href="{% url 'vstypTwoJs' %}">Як підключити JavaScript до HTML.</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Основи мови</a>
+        <div class="submenu">
+            <a href="{% url 'osnoviOneJs' %}">Змінні, типи даних і оператори.</a>
+            <a href="{% url 'osnoviTwoJs' %}">Умови if, else, switch.</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Цикли та функції</a>
+        <div class="submenu">
+            <a href="{% url 'cyclesOneJs' %}">Цикли for, while, do...while.</a>
+            <a href="{% url 'functionsOneJs' %}">Функції та передача параметрів.</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Робота з DOM</a>
+        <div class="submenu">
+            <a href="{% url 'domOneJs' %}">Пошук і зміна елементів сторінки.</a>
+            <a href="{% url 'domTwoJs' %}">Обробка подій (click, input, mouseover).</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Масиви та об’єкти</a>
+        <div class="submenu">
+            <a href="{% url 'arrayOneJs' %}">Створення та методи масивів.</a>
+            <a href="{% url 'objectOneJs' %}">Об’єкти та робота з ними.</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Практика JavaScript</a>
+        <div class="submenu">
+            <a href="{% url 'practiceOneJs' %}">Міні-проєкт: калькулятор.</a>
+            <a href="{% url 'practiceTwoJs' %}">Міні-проєкт: інтерактивна форма.</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Розширені можливості</a>
+        <div class="submenu">
+            <a href="{% url 'advancedOneJs' %}">LocalStorage, JSON, Fetch API.</a>
+            <a href="{% url 'advancedTwoJs' %}">Асинхронність і проміси.</a>
+        </div>
+    </div>
+
+    <div class="content">
+        <h1>Умови if, else, switch у JavaScript</h1>
+        <p>Умови дозволяють програмі приймати рішення: виконувати певні дії лише тоді, коли виконується якась умова.</p>
+
+        <h2>🔹 Оператор if</h2>
+        <p>Оператор <code>if</code> перевіряє умову і виконує код, якщо вона <strong>true</strong>.</p>
+        <pre><code>let age = 18;
+
+if (age >= 18) {
+    console.log("Ти повнолітній!");
+}</code></pre>
+
+        <h2>🔹 if...else</h2>
+        <p>Якщо умова не виконується, можна вказати іншу дію через <code>else</code>:</p>
+        <pre><code>let time = 20;
+
+if (time &lt; 18) {
+    console.log("Добрий день!");
+} else {
+    console.log("Добрий вечір!");
+}</code></pre>
+
+        <h2>🔹 if...else if...else</h2>
+        <p>Можна додавати кілька умов підряд:</p>
+        <pre><code>let score = 75;
+
+if (score &gt;= 90) {
+    console.log("Відмінно!");
+} else if (score &gt;= 70) {
+    console.log("Добре!");
+} else {
+    console.log("Спробуй ще раз.");
+}</code></pre>
+
+        <h2>🔹 switch</h2>
+        <p>Оператор <code>switch</code> використовується, коли є багато варіантів вибору.</p>
+        <pre><code>let day = 3;
+let dayName;
+
+switch (day) {
+    case 1:
+        dayName = "Понеділок";
+        break;
+    case 2:
+        dayName = "Вівторок";
+        break;
+    case 3:
+        dayName = "Середа";
+        break;
+    default:
+        dayName = "Невідомий день";
+}
+
+console.log(dayName);</code></pre>
+
+        <h2>🎮 Міні-практика: Перевірка температури</h2>
+        <p>Введіть температуру, і програма підкаже, холодно чи тепло 🧣☀️</p>
+
+        <div class="calc">
+            <input type="number" id="temp" placeholder="Введіть температуру">
+            <button onclick="checkTemp()">Перевірити</button>
+            <p id="output">Результат: —</p>
+        </div>
+
+        <script>
+            function checkTemp() {
+                const t = Number(document.getElementById('temp').value);
+                let message = "";
+
+                if (t < 0) {
+                    message = "❄ Дуже холодно!";
+                } else if (t < 15) {
+                    message = "🧥 Прохолодно, вдягнись тепліше.";
+                } else if (t < 25) {
+                    message = "😊 Комфортна температура.";
+                } else {
+                    message = "☀ Спекотно!";
+                }
+
+                document.getElementById('output').innerText = "Результат: " + message;
+            }
+        </script>
+
+        <style>
+            .calc {
+                margin-top: 20px;
+                padding: 15px;
+                background: #f0f0f0;
+                border-radius: 10px;
+                width: 100%;
+                max-width: 400px;
+            }
+            .calc input {
+                padding: 5px;
+                margin: 5px;
+                width: 45%;
+            }
+            .calc button {
+                background: #007bff;
+                border: none;
+                color: white;
+                padding: 10px;
+                cursor: pointer;
+                border-radius: 5px;
+            }
+            .calc button:hover {
+                background: #0056b3;
+            }
+        </style>
+
+        <h2>💡 Висновок:</h2>
+        <ul>
+            <li>✔ <code>if</code> — перевіряє одну умову.</li>
+            <li>✔ <code>else if</code> — додає інші варіанти перевірки.</li>
+            <li>✔ <code>switch</code> — зручно для вибору між багатьма значеннями.</li>
+        </ul>
+
+        <div class="comment-form">
+            <h2>Залиште коментар</h2>
+            {% if user.is_authenticated %}
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Відправити</button>
+            </form>
+            {% else %}
+            <p><strong>Щоб залишити коментар, необхідно <a href="{% url 'user_login' %}">увійти</a> в систему або <a href="{% url 'user_register' %}">зареєструватись</a></strong></p>
+            {% endif %}
+        </div>
+
+        <div class="comments-section">
+            <h2>Коментарі</h2>
+            {% for comment in comments %}
+                <div class="comment">
+                    <div>
+                        <strong>{{ comment.user.username }}</strong>
+                        <p>{{ comment.text }}</p>
+                    </div>
+                </div>
+            {% empty %}
+                <p>Поки немає коментарів.</p>
+            {% endfor %}
+        </div>
+
+    </div>
+
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/sidebar.js' %}"></script>
+    <script src="{% static 'js/anim.js' %}"></script>
+</body>
+</html>

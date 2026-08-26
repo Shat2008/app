@@ -1,0 +1,276 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  </head>
+<body>
+  <header>
+    <h1>HTML</h1>
+  </header>
+    
+  <nav>
+    <a href='{% url "sait" %}' onclick="showSection('intro')" class="nav-logo">
+      <img src="{% static 'images/дом.png' %}" alt="Button" style="width: 30px; height: auto;">
+    </a>
+    <div class="nav-links">
+      <a href='{% url "html_page" %}' onclick="showSection('html')">HTML</a>
+    </div>
+    <div class="nav-links">
+      <a href='{% url "cssGlav" %}' onclick="showSection('html')">CSS</a>
+    </div>
+    <div class="nav-links">
+      <a href='{% url "jsGlav" %}' onclick="showSection('html')">JavaScript</a>
+    </div>
+    <div class="nav-links">
+      <a href='{% url "testGlav" %}' onclick="showSection('html')">Тести</a>
+    </div>
+    <div class="nav-links">
+      <a href='{% url "chat" %}' onclick="showSection('html')">Асистент сайту</a>
+    </div>
+    <a href="https://t.me/studuhtml" class="nav-logo1" target="_blank">
+      <img src="{% static 'images/111.png' %}" alt="Головна" style="width: 45px; height: 35px;">
+    </a>
+  </nav>
+
+<div class="sidebar"> 
+    <!-- Глава 5 -->
+    <a href="#" class="menu-item">📁 Підготовка</a>
+    <div class="submenu">
+        <a href='{% url 'choice' %}'>Вибір інструментів розробки (редактор коду, браузер, ресурси).</a>
+        <a href='{% url 'definition' %}'>Визначення цілей та структури майбутнього сайту.</a>
+    </div>
+
+    <!-- Глава 6 -->
+    <a href="#" class="menu-item">📁 Як створити сайт HTML</a>
+    <div class="submenu">
+        <a href='{% url 'creation' %}'>Створення базового HTML-файлу (файл із розширенням .html).</a>
+        <a href='{% url 'discovery' %}'>Відкриття файлу HTML у браузері для перегляду.</a>
+    </div>
+
+    <!-- Глава 7 -->
+    <a href="#" class="menu-item">📁 Структури HTML</a>
+    <div class="submenu">
+        <a href='{% url 'study' %}'>Вивчення основних тегів (html, head, body).</a>
+        <a href='{% url 'semantics' %}'>Семантичні елементи (header, main, footer).</a>
+    </div>
+
+    <a href="#" class="menu-item">📁 Інформація для сайту</a>
+    <div class="submenu">
+        <a href='{% url 'gathering' %}'>Збір текстового контенту, зображень та медіа.</a>
+        <a href='{% url 'gathering' %}'>>Організація інформації у логічні розділи.</a>
+    </div>
+
+    <!-- Глава 6 -->
+    <a href="#" class="menu-item">📁 Дизайн сайту</a>
+    <div class="submenu">
+        <a href='{% url 'connection' %}'>Підключення CSS для стилізації HTML елементів.</a>
+        <a href='{% url 'connectionn' %}'>Створення адаптивного дизайну для різних пристроїв.</a>
+        <a href='{% url 'css' %}'>Цікаві приклади оформлення сайту через цсс.</a>
+    </div>
+
+    <!-- Глава 7 -->
+    <a href="#" class="menu-item">📁 Приклади коду та їх результат</a>
+    <div class="submenu">
+        <a href='{% url 'writing' %}'>Написання простого прикладу із заголовком та текстом.</a>
+        <a href='{% url 'addition' %}'>Додавання кнопки та перевірка її роботи у браузері.</a>
+    </div>
+
+</div>   
+  <div class="content">
+    <h1>Семантичні елементи в HTML</h1>
+
+    <h2>1. &lt;header&gt; (Шапка)</h2>
+    <p>Цей елемент зазвичай використовується для розміщення вступної інформації про сторінку або розділ. У шапці можуть бути розміщені логотип, заголовок сайту, навігаційне меню та інші елементи, які зазвичай знаходяться в верхній частині сторінки.</p>
+  
+    <h3>Приклад:</h3>
+    <pre>
+    <code>
+    &lt;header&gt;
+      &lt;h1&gt;Мій сайт&lt;/h1&gt;
+      &lt;nav&gt;
+        &lt;ul&gt;
+          &lt;li&gt;&lt;a href="#home"&gt;Головна&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href="#about"&gt;Про нас&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href="#services"&gt;Послуги&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href="#contact"&gt;Контакти&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/nav&gt;
+    &lt;/header&gt;
+    </code>
+    </pre>
+    <style>
+    .custom-button {
+      display: inline-block;
+      padding: 10px 20px;
+      font-size: 16px;
+      color: white;
+      background-color: #007bff;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .custom-button:hover {
+      background-color: #0056b3;
+    }
+  </style> 
+  <a href="{% url 'kod4' %}" target="_blank" class="custom-button">Продивитися результат</a>
+    <h3>Пояснення:</h3>
+    <p>У цьому прикладі в елементі <code>&lt;header&gt;</code> розміщені:</p>
+    <ul>
+      <li><code>&lt;h1&gt;</code> — назва сайту.</li>
+      <li><code>&lt;nav&gt;</code> — навігаційне меню, що містить посилання на основні розділи сайту.</li>
+    </ul>
+    <p>Шапка допомагає структуризувати сторінки та полегшує навігацію.</p>
+  
+    <h2>2. &lt;main&gt; (Основний контент)</h2>
+    <p>Елемент <code>&lt;main&gt;</code> використовується для позначення основного контенту сторінки. У ньому міститься унікальна інформація, яка є основною для цієї сторінки. Це основний розділ, який не повторюється на сторінці (тобто один елемент <code>&lt;main&gt;</code> на сторінці).</p>
+  
+    <h3>Приклад:</h3>
+    <pre>
+    <code>
+    &lt;main&gt;
+      &lt;section&gt;
+        &lt;h2&gt;Наші послуги&lt;/h2&gt;
+        &lt;p&gt;Ми пропонуємо високоякісні послуги з розробки веб-сайтів.&lt;/p&gt;
+      &lt;/section&gt;
+  
+      &lt;section&gt;
+        &lt;h2&gt;Про компанію&lt;/h2&gt;
+        &lt;p&gt;Наша компанія займається розробкою та дизайном з 2005 року.&lt;/p&gt;
+      &lt;/section&gt;
+    &lt;/main&gt;
+    </code>
+    </pre>
+  <a href="{% url 'kod5' %}" target="_blank" class="custom-button">Продивитися результат</a>
+    <h3>Пояснення:</h3>
+    <p>У середині <code>&lt;main&gt;</code> знаходяться два розділи (використовуємо <code>&lt;section&gt;</code> для поділу контенту):</p>
+    <ul>
+      <li>Перший розділ містить інформацію про послуги компанії.</li>
+      <li>Другий розділ містить опис компанії.</li>
+    </ul>
+    <p>Все вміст у <code>&lt;main&gt;</code> важливе для розуміння того, про що йде мова на сторінці.</p>
+  
+    <h2>3. &lt;footer&gt; (Підвал)</h2>
+    <p>Цей елемент позначає підвал сторінки або розділу. Зазвичай у підвалі міститься інформація про авторські права, контактні дані, посилання на політику конфіденційності, мапу сайту та інші допоміжні елементи.</p>
+  
+    <h3>Приклад:</h3>
+    <pre>
+    <code>
+    &lt;footer&gt;
+      &lt;p&gt;&copy; 2025 Мій сайт. Усі права захищено.&lt;/p&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href="#privacy"&gt;Політика конфіденційності&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#terms"&gt;Умови використання&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+      &lt;address&gt;
+        &lt;p&gt;Контакти: &lt;a href="mailto:info@example.com"&gt;info@example.com&lt;/a&gt;&lt;/p&gt;
+      &lt;/address&gt;
+    &lt;/footer&gt;
+    </code>
+    </pre>
+  <a href="{% url 'kod6' %}" target="_blank" class="custom-button">Продивитися результат</a>
+    <h3>Пояснення:</h3>
+    <p>В елементі <code>&lt;footer&gt;</code> розміщено:</p>
+    <ul>
+      <li>Параграф з інформацією про авторські права.</li>
+      <li>Посилання на сторінки з політикою конфіденційності та умовами використання.</li>
+      <li>Контактний адресу з посиланням на email.</li>
+    </ul>
+    <p>Цей елемент допомагає користувачам знайти важливу інформацію в нижній частині сторінки.</p>
+  
+    <h2>Для чого потрібні семантичні елементи?</h2>
+    <p>Семантичні елементи (такі як <code>&lt;header&gt;</code>, <code>&lt;main&gt;</code>, та <code>&lt;footer&gt;</code>) мають важливу роль у покращенні доступності, пошукової оптимізації (SEO) та структуризації документа:</p>
+    <ul>
+      <li><strong>SEO:</strong> Допомагають пошуковим системам (Google, Bing тощо) правильно інтерпретувати структуру та вміст сторінки.</li>
+      <li><strong>Доступність:</strong> Семантичні елементи допомагають користувачам, які використовують екранні читалки та інші допоміжні технології, швидше орієнтуватися на сторінці.</li>
+      <li><strong>Структура:</strong> Вони надають структуру веб-сторінці, покращуючи сприйняття та зручність навігації як для користувачів, так і для розробників.</li>
+    </ul>
+    <p>Ці елементи роблять HTML більш читабельним і логічним, що сприяє покращенню користувацького досвіду та взаємодії з сайтом.</p>
+  
+    <h2>4. &lt;section&gt; (Розділ)</h2>
+    <p>Елемент <code>&lt;section&gt;</code> використовується для групування пов'язаного контенту у тематичні розділи. Кожна секція зазвичай містить заголовок та відповідний вміст.</p>
+    <pre>
+    <code>
+    &lt;section&gt;
+      &lt;h2&gt;Заголовок розділу&lt;/h2&gt;
+      &lt;p&gt;Вміст розділу...&lt;/p&gt;
+    &lt;/section&gt;
+    </code>
+    </pre>
+<a href="{% url 'kod5' %}" target="_blank" class="custom-button">Продивитися результат</a>
+
+    <h2>5. &lt;article&gt; (Стаття)</h2>
+    <p>Елемент <code>&lt;article&gt;</code> позначає незалежний, самодостатній вміст, такий як дописи в блозі, новини або коментарі. Це важливо для SEO та доступності.</p>
+    <pre>
+    <code>
+    &lt;article&gt;
+      &lt;h2&gt;Назва статті&lt;/h2&gt;
+      &lt;p&gt;Вміст статті...&lt;/p&gt;
+    &lt;/article&gt;
+    </code>
+    </pre>
+
+    <h2>6. &lt;nav&gt; (Навігація)</h2>
+    <p>Елемент <code>&lt;nav&gt;</code> містить навігаційні посилання на основні розділи сайту.</p>
+    <pre>
+    <code>
+    &lt;nav&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href="/"&gt;Головна&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="/about"&gt;Про нас&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="/contact"&gt;Контакти&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/nav&gt;
+    </code>
+    </pre>
+
+    <h2>7. &lt;aside&gt; (Бічна панель)</h2>
+    <p>Елемент <code>&lt;aside&gt;</code> використовується для контенту, який не входить в основний потік сторінки (наприклад, бічна панель, реклама).</p>
+    <pre>
+    <code>
+    &lt;aside&gt;
+      &lt;h3&gt;Гарячі новини&lt;/h3&gt;
+      &lt;p&gt;Інформація на бічній панелі...&lt;/p&gt;
+    &lt;/aside&gt;
+    </code>
+    </pre>
+
+<div class="comment-form">
+    <h2>Залиште коментар</h2>
+    {% if user.is_authenticated %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Відправити</button>
+    </form>
+    {% else %}
+    <p><strong>Щоб залишити коментар, необхідно <a href="{% url 'user_login' %}">увійти</a> в систему або <a href="{% url 'user_register' %}">зареєструватись</a></strong></p>
+    {% endif %}
+</div>
+
+<div class="comments-section">
+    <h2>Коментарі</h2>
+    {% for comment in comments %}
+    <div class="comment">
+      <div>
+        <strong>{{ comment.user.username }}</strong>
+        <p>{{ comment.text }}</p>
+        
+      </div>
+    </div>
+    {% empty %}
+          <p>Поки немає коментарів.</p>
+    {% endfor %}
+</div>
+    </div>
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/sidebar.js' %}"></script>
+    <script src="{% static 'js/anim.js' %}"></script>
+</body>
+</html>

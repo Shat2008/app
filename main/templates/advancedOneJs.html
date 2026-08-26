@@ -1,0 +1,149 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LocalStorage, JSON, Fetch API</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>LocalStorage, JSON та Fetch API</h1>
+    </header>
+
+<nav>
+        <a href='{% url "sait" %}' onclick="showSection('intro')" class="nav-logo">
+            <img src="{% static 'images/дом.png' %}" alt="Button" style="width: 30px; height: auto;">
+        </a>
+        <div class="nav-links">
+            <a href='{% url "html_page" %}' onclick="showSection('html')">HTML</a>
+        </div>
+        <div class="nav-links">
+            <a href='{% url "cssGlav" %}' onclick="showSection('html')">CSS</a>
+        </div>
+                <div class="nav-links">
+            <a href='{% url "jsGlav" %}' onclick="showSection('html')">JavaScript</a>
+        </div>
+       </div>
+                <div class="nav-links">
+            <a href='{% url "testGlav" %}' onclick="showSection('html')">Тести</a>
+        </div>
+        </div>
+                <div class="nav-links">
+            <a href='{% url "chat" %}' onclick="showSection('html')">Асистент сайту</a>
+        </div>
+        <a href="https://t.me/studuhtml" class="nav-logo1" target="_blank">
+            <img src="{% static 'images/111.png' %}" alt="Головна" style="width: 45px; height: 35px;">
+        </a>
+    </nav>
+
+    <div class="sidebar"> 
+        <!-- Меню JavaScript -->
+        <a href="#" class="menu-item">📁 Вступ до JavaScript</a>
+        <div class="submenu">
+            <a href="{% url 'vstypOneJs' %}">Що таке JavaScript і для чого він потрібен.</a>
+            <a href="{% url 'vstypTwoJs' %}">Як підключити JavaScript до HTML.</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Основи мови</a>
+        <div class="submenu">
+            <a href="{% url 'osnoviOneJs' %}">Змінні, типи даних і оператори.</a>
+            <a href="{% url 'osnoviTwoJs' %}">Умови if, else, switch.</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Цикли та функції</a>
+        <div class="submenu">
+            <a href="{% url 'cyclesOneJs' %}">Цикли в JavaScript</a>
+            <a href="{% url 'functionsOneJs' %}">Функції та передача параметрів</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Робота з DOM</a>
+        <div class="submenu">
+            <a href="{% url 'domOneJs' %}">Пошук і зміна елементів сторінки</a>
+            <a href="{% url 'domTwoJs' %}">Обробка подій (click, input, mouseover)</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Масиви та об’єкти</a>
+        <div class="submenu">
+            <a href="{% url 'arrayOneJs' %}">Створення та методи масивів</a>
+            <a href="{% url 'objectOneJs' %}">Об’єкти та робота з ними</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Практика JavaScript</a>
+        <div class="submenu">
+            <a href="{% url 'practiceOneJs' %}">Міні-проєкт: калькулятор</a>
+            <a href="{% url 'practiceTwoJs' %}">Міні-проєкт: інтерактивна форма</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Розширені можливості</a>
+        <div class="submenu">
+            <a href="{% url 'advancedOneJs' %}">LocalStorage, JSON, Fetch API</a>
+            <a href="{% url 'advancedTwoJs' %}">Асинхронність і проміси</a>
+        </div>
+    </div>
+
+    <div class="content">
+        <h1>LocalStorage, JSON та Fetch API</h1>
+        <p>У цьому розділі ми розглянемо способи зберігання даних у браузері та роботу з даними з серверу.</p>
+
+        <h2>🔹 LocalStorage</h2>
+        <p>LocalStorage дозволяє зберігати дані у браузері користувача навіть після перезавантаження сторінки.</p>
+        <pre><code>localStorage.setItem('name', 'Оля');
+const name = localStorage.getItem('name');
+console.log(name); // "Оля"</code></pre>
+
+        <h2>🔹 JSON</h2>
+        <p>JSON використовується для обміну даними між сервером і клієнтом у вигляді тексту.</p>
+        <pre><code>const user = {name: "Оля", age: 20};
+const json = JSON.stringify(user); // перетворюємо об'єкт у JSON
+const obj = JSON.parse(json); // перетворюємо JSON назад у об'єкт</code></pre>
+
+        <h2>🔹 Fetch API</h2>
+        <p>Fetch API дозволяє робити запити до сервера та отримувати дані асинхронно.</p>
+        <pre><code>fetch('https://jsonplaceholder.typicode.com/users')
+  .then(response =&gt; response.json())
+  .then(data =&gt; console.log(data))
+  .catch(error =&gt; console.log('Помилка:', error));</code></pre>
+
+        <h2>💡 Висновок:</h2>
+        <ul>
+            <li>✔ LocalStorage зберігає дані в браузері користувача.</li>
+            <li>✔ JSON дозволяє легко передавати дані між клієнтом і сервером.</li>
+            <li>✔ Fetch API допомагає отримувати та обробляти дані асинхронно.</li>
+        </ul>
+
+        <div class="comment-form">
+            <h2>Залиште коментар</h2>
+            {% if user.is_authenticated %}
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Відправити</button>
+            </form>
+            {% else %}
+            <p><strong>Щоб залишити коментар, необхідно <a href="{% url 'user_login' %}">увійти</a> в систему або <a href="{% url 'user_register' %}">зареєструватись</a></strong></p>
+            {% endif %}
+        </div>
+
+        <div class="comments-section">
+            <h2>Коментарі</h2>
+            {% for comment in comments %}
+                <div class="comment">
+                    <div>
+                        <strong>{{ comment.user.username }}</strong>
+                        <p>{{ comment.text }}</p>
+                    </div>
+                </div>
+            {% empty %}
+                <p>Поки немає коментарів.</p>
+            {% endfor %}
+        </div>
+
+    </div>
+
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/sidebar.js' %}"></script>
+    <script src="{% static 'js/anim.js' %}"></script>
+</body>
+</html>

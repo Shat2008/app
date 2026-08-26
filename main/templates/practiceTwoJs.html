@@ -1,0 +1,339 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Міні-проєкт: інтерактивна форма</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Міні-проєкт: інтерактивна форма</h1>
+    </header>
+
+<nav>
+        <a href='{% url "sait" %}' onclick="showSection('intro')" class="nav-logo">
+            <img src="{% static 'images/дом.png' %}" alt="Button" style="width: 30px; height: auto;">
+        </a>
+        <div class="nav-links">
+            <a href='{% url "html_page" %}' onclick="showSection('html')">HTML</a>
+        </div>
+        <div class="nav-links">
+            <a href='{% url "cssGlav" %}' onclick="showSection('html')">CSS</a>
+        </div>
+                <div class="nav-links">
+            <a href='{% url "jsGlav" %}' onclick="showSection('html')">JavaScript</a>
+        </div>
+       </div>
+                <div class="nav-links">
+            <a href='{% url "testGlav" %}' onclick="showSection('html')">Тести</a>
+        </div>
+        </div>
+                <div class="nav-links">
+            <a href='{% url "chat" %}' onclick="showSection('html')">Асистент сайту</a>
+        </div>
+        <a href="https://t.me/studuhtml" class="nav-logo1" target="_blank">
+            <img src="{% static 'images/111.png' %}" alt="Головна" style="width: 45px; height: 35px;">
+        </a>
+    </nav>
+
+    <div class="sidebar"> 
+        <!-- Меню JavaScript -->
+        <a href="#" class="menu-item">📁 Вступ до JavaScript</a>
+        <div class="submenu">
+            <a href="{% url 'vstypOneJs' %}">Що таке JavaScript і для чого він потрібен.</a>
+            <a href="{% url 'vstypTwoJs' %}">Як підключити JavaScript до HTML.</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Основи мови</a>
+        <div class="submenu">
+            <a href="{% url 'osnoviOneJs' %}">Змінні, типи даних і оператори.</a>
+            <a href="{% url 'osnoviTwoJs' %}">Умови if, else, switch.</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Цикли та функції</a>
+        <div class="submenu">
+            <a href="{% url 'cyclesOneJs' %}">Цикли в JavaScript</a>
+            <a href="{% url 'functionsOneJs' %}">Функції та передача параметрів</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Робота з DOM</a>
+        <div class="submenu">
+            <a href="{% url 'domOneJs' %}">Пошук і зміна елементів сторінки</a>
+            <a href="{% url 'domTwoJs' %}">Обробка подій (click, input, mouseover)</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Масиви та об'єкти</a>
+        <div class="submenu">
+            <a href="{% url 'arrayOneJs' %}">Створення та методи масивів</a>
+            <a href="{% url 'objectOneJs' %}">Об'єкти та робота з ними</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Практика JavaScript</a>
+        <div class="submenu">
+            <a href="{% url 'practiceOneJs' %}">Міні-проєкт: калькулятор</a>
+            <a href="{% url 'practiceTwoJs' %}">Міні-проєкт: інтерактивна форма</a>
+        </div>
+
+        <a href="#" class="menu-item">📁 Розширені можливості</a>
+        <div class="submenu">
+            <a href="{% url 'advancedOneJs' %}">LocalStorage, JSON, Fetch API.</a>
+            <a href="{% url 'advancedTwoJs' %}">Асинхронність і проміси.</a>
+        </div>
+    </div>
+
+    <div class="content">
+        <h1>Міні-проєкт: інтерактивна форма</h1>
+        <p>Створимо форму, яка перевіряє введені дані і показує повідомлення користувачу без перезавантаження сторінки.</p>
+
+        <h2>📚 Як це працює - Приклади коду</h2>
+
+        <h3>HTML структура форми:</h3>
+        <div class="code-box">
+            <pre><code>&lt;form id="myForm"&gt;
+    &lt;label for="name"&gt;Ім'я:&lt;/label&gt;
+    &lt;input type="text" id="name" placeholder="Введіть ім'я" required&gt;
+    
+    &lt;label for="email"&gt;Email:&lt;/label&gt;
+    &lt;input type="email" id="email" placeholder="Введіть email" required&gt;
+    
+    &lt;label for="message"&gt;Повідомлення:&lt;/label&gt;
+    &lt;textarea id="message" placeholder="Ваше повідомлення" rows="4"&gt;&lt;/textarea&gt;
+    
+    &lt;button type="submit"&gt;Відправити&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+        </div>
+
+        <h3>JavaScript для обробки форми:</h3>
+        <div class="code-box">
+            <pre><code>const form = document.getElementById('myForm');
+
+form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
+
+    if(name && email && message) {
+        showSuccess(`Дякуємо, ${name}!`);
+        form.reset();
+    } else {
+        showError('Заповніть всі поля!');
+    }
+});
+
+function showSuccess(msg) {
+    document.getElementById('output').innerHTML = '✅ ' + msg;
+}
+
+function showError(msg) {
+    document.getElementById('output').innerHTML = '❌ ' + msg;
+}</code></pre>
+        </div>
+
+        <h2>🎮 Спробуй форму прямо зараз!</h2>
+
+        <form id="myForm" class="practice-form">
+            <div class="form-group">
+                <label for="name">Ім'я:</label>
+                <input type="text" id="name" placeholder="Введіть ім'я" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" placeholder="Введіть email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="message">Повідомлення:</label>
+                <textarea id="message" placeholder="Ваше повідомлення" rows="4" required></textarea>
+            </div>
+            
+            <button type="submit" class="submit-btn">Відправити</button>
+        </form>
+        <div id="formOutput"></div>
+
+        <script>
+            const form = document.getElementById('myForm');
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const name = document.getElementById('name').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const message = document.getElementById('message').value.trim();
+
+                if(name && email && message) {
+                    showSuccess('Дякуємо, ' + name + '! Ми отримали ваше повідомлення на ' + email);
+                    form.reset();
+                } else {
+                    showError('Будь ласка, заповніть всі поля!');
+                }
+            });
+
+            function showSuccess(msg) {
+                const output = document.getElementById('formOutput');
+                output.className = 'form-message success';
+                output.innerHTML = '✅ ' + msg;
+            }
+
+            function showError(msg) {
+                const output = document.getElementById('formOutput');
+                output.className = 'form-message error';
+                output.innerHTML = '❌ ' + msg;
+            }
+        </script>
+
+        <style>
+            .code-box {
+                background: #1e1e1e;
+                color: #d4d4d4;
+                padding: 15px;
+                border-radius: 8px;
+                overflow-x: auto;
+                margin: 15px 0;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            }
+            .code-box pre {
+                margin: 0;
+                font-family: 'Courier New', monospace;
+                font-size: 13px;
+                line-height: 1.6;
+            }
+
+            .practice-form {
+                background: linear-gradient(135deg, #5ba8db 0%, #1749d4 100%);
+                padding: 30px;
+                border-radius: 12px;
+                margin: 25px 0;
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+                max-width: 500px;
+            }
+
+            .form-group {
+                margin-bottom: 20px;
+            }
+
+            .practice-form label {
+                display: block;
+                margin-bottom: 8px;
+                color: white;
+                font-weight: bold;
+                font-size: 15px;
+            }
+
+            .practice-form input,
+            .practice-form textarea {
+                width: 100%;
+                padding: 12px;
+                border: none;
+                border-radius: 6px;
+                font-size: 15px;
+                box-sizing: border-box;
+                transition: all 0.3s ease;
+            }
+
+            .practice-form input:focus,
+            .practice-form textarea:focus {
+                outline: none;
+                box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+                transform: scale(1.02);
+            }
+
+            .submit-btn {
+                width: 100%;
+                padding: 14px;
+                background: #28a745;
+                color: white;
+                border: none;
+                border-radius: 6px;
+                font-size: 16px;
+                font-weight: bold;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+
+            .submit-btn:hover {
+                background: #218838;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            }
+
+            .submit-btn:active {
+                transform: translateY(0);
+            }
+
+            .form-message {
+                margin-top: 20px;
+                padding: 15px;
+                border-radius: 8px;
+                font-size: 16px;
+                font-weight: bold;
+                text-align: center;
+                animation: slideIn 0.3s ease;
+            }
+
+            .form-message.success {
+                background: #d4edda;
+                color: #155724;
+                border: 2px solid #28a745;
+            }
+
+            .form-message.error {
+                background: #f8d7da;
+                color: #721c24;
+                border: 2px solid #dc3545;
+            }
+
+            @keyframes slideIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(-10px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        </style>
+
+        <h2>💡 Висновок:</h2>
+        <ul>
+            <li>✔ Форма не перезавантажує сторінку завдяки preventDefault().</li>
+            <li>✔ Перевірка полів відбувається на стороні клієнта.</li>
+            <li>✔ JavaScript допомагає створювати інтерактивний досвід для користувача.</li>
+        </ul>
+
+        <div class="comment-form">
+            <h2>Залиште коментар</h2>
+            {% if user.is_authenticated %}
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Відправити</button>
+            </form>
+            {% else %}
+            <p><strong>Щоб залишити коментар, необхідно <a href="{% url 'user_login' %}">увійти</a> в систему або <a href="{% url 'user_register' %}">зареєструватись</a></strong></p>
+            {% endif %}
+        </div>
+
+        <div class="comments-section">
+            <h2>Коментарі</h2>
+            {% for comment in comments %}
+                <div class="comment">
+                    <div>
+                        <strong>{{ comment.user.username }}</strong>
+                        <p>{{ comment.text }}</p>
+                    </div>
+                </div>
+            {% empty %}
+                <p>Поки немає коментарів.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/sidebar.js' %}"></script>
+    <script src="{% static 'js/anim.js' %}"></script>
+</body>
+</html>
